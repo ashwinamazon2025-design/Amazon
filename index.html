@@ -8,13 +8,22 @@
   <style>
     :root {
       --text: #24324a;
-      --muted: #5d6b82;
-      --card: rgba(255, 255, 255, 0.93);
-      --border: rgba(255, 255, 255, 0.85);
-      --accent: #6c4cff;
+      --muted: #5f6f8e;
+      --card: rgba(255, 255, 255, 0.90);
+      --card-border: rgba(91, 177, 255, 0.34);
+      --cyan: #5ff6ff;
+      --blue: #4f7cff;
+      --violet: #a06bff;
+      --pink: #ff63c8;
+      --orange: #ff9f43;
+      --yellow: #ffe66d;
+      --green: #62f5a6;
+      --deep: #030611;
     }
 
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -22,16 +31,11 @@
       overflow-x: hidden;
       font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
       color: var(--text);
-      background: linear-gradient(
-        135deg,
-        #b9f3ff 0%,
-        #d9c9ff 28%,
-        #ffd6e8 56%,
-        #fff0a8 78%,
-        #bff7d1 100%
-      );
-      background-size: 400% 400%;
-      animation: gradientMove 16s ease infinite;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(70, 170, 255, .34), transparent 30%),
+        radial-gradient(circle at 82% 16%, rgba(70, 120, 255, .24), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(70, 220, 255, .22), transparent 30%),
+        linear-gradient(180deg, #dff4ff 0%, #cfe8ff 48%, #bcdcff 100%);
     }
 
     .background {
@@ -42,51 +46,342 @@
       pointer-events: none;
     }
 
-    .bubble {
+    .aurora {
       position: absolute;
-      bottom: -140px;
-      border-radius: 50%;
-      opacity: 0.38;
-      filter: blur(1px);
-      animation: floatUp linear infinite;
+      inset: -25%;
+      background:
+        conic-gradient(
+          from 0deg at 50% 50%,
+          rgba(95,246,255,.18),
+          rgba(160,107,255,.18),
+          rgba(255,99,200,.20),
+          rgba(255,159,67,.16),
+          rgba(98,245,166,.17),
+          rgba(95,246,255,.18)
+        );
+      filter: blur(40px);
+      animation: auroraSpin 20s linear infinite;
     }
 
-    .bubble:nth-child(1) { left: 5%; width: 70px; height: 70px; background: #fff; animation-duration: 13s; animation-delay: -3s; }
-    .bubble:nth-child(2) { left: 18%; width: 42px; height: 42px; background: #ff7eb6; animation-duration: 10s; animation-delay: -7s; }
-    .bubble:nth-child(3) { left: 34%; width: 95px; height: 95px; background: #8be9fd; animation-duration: 17s; animation-delay: -10s; }
-    .bubble:nth-child(4) { left: 52%; width: 58px; height: 58px; background: #ffd866; animation-duration: 12s; animation-delay: -4s; }
-    .bubble:nth-child(5) { left: 68%; width: 110px; height: 110px; background: #c3a6ff; animation-duration: 19s; animation-delay: -12s; }
-    .bubble:nth-child(6) { left: 82%; width: 48px; height: 48px; background: #7cf0bd; animation-duration: 11s; animation-delay: -6s; }
-    .bubble:nth-child(7) { left: 92%; width: 78px; height: 78px; background: #fff; animation-duration: 15s; animation-delay: -9s; }
+    /* COLORFUL MANDALAS */
+    .mandala {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .62;
+      filter: drop-shadow(0 0 22px rgba(80,190,255,.38));
+      background:
+        radial-gradient(circle, transparent 0 10%, rgba(255,255,255,.08) 10% 11%, transparent 11% 20%),
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(35,205,255,.58) 0deg 5deg,
+          transparent 5deg 12deg,
+          rgba(255,72,190,.52) 12deg 16deg,
+          transparent 16deg 23deg,
+          rgba(255,198,50,.48) 23deg 27deg,
+          transparent 27deg 36deg
+        );
+      border: 1px solid rgba(120,230,255,.22);
+    }
 
+    .mandala::before,
+    .mandala::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      inset: 12%;
+      border: 2px dotted rgba(255,255,255,.18);
+      background:
+        repeating-conic-gradient(
+          rgba(54,220,140,.30) 0deg 4deg,
+          transparent 4deg 15deg,
+          rgba(145,85,255,.30) 15deg 18deg,
+          transparent 18deg 30deg
+        );
+    }
+
+    .mandala::after {
+      inset: 28%;
+      border-style: dashed;
+      border-color: rgba(255,159,67,.28);
+      box-shadow:
+        0 0 18px rgba(255,99,200,.12),
+        inset 0 0 18px rgba(95,246,255,.09);
+    }
+
+    .m1 {
+      width: 370px;
+      height: 370px;
+      left: -120px;
+      top: 4%;
+      animation: rotateCW 24s linear infinite, hueShift 12s linear infinite;
+    }
+
+    .m2 {
+      width: 470px;
+      height: 470px;
+      right: -170px;
+      top: 32%;
+      animation: rotateCCW 31s linear infinite, hueShift 15s linear infinite reverse;
+    }
+
+    .m3 {
+      width: 300px;
+      height: 300px;
+      left: 8%;
+      bottom: -110px;
+      animation: rotateCW 19s linear infinite, pulseMandala 5s ease-in-out infinite;
+    }
+
+    .m4 {
+      width: 220px;
+      height: 220px;
+      right: 20%;
+      bottom: 5%;
+      opacity: .25;
+      animation: rotateCCW 16s linear infinite, hueShift 10s linear infinite;
+    }
+
+    /* ROBOT / GEAR ELEMENTS */
+    .gear {
+      position: absolute;
+      border-radius: 50%;
+      border: 6px dotted rgba(30,190,255,.68);
+      box-shadow:
+        0 0 18px rgba(95,246,255,.18),
+        inset 0 0 12px rgba(160,107,255,.10);
+    }
+
+    .gear::before {
+      content: "";
+      position: absolute;
+      inset: 19%;
+      border-radius: 50%;
+      border: 3px solid rgba(255,65,185,.62);
+      box-shadow: 0 0 14px rgba(255,99,200,.14);
+    }
+
+    .gear::after {
+      content: "";
+      position: absolute;
+      inset: 39%;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 14px rgba(255,230,109,.75);
+    }
+
+    .g1 {
+      width: 88px;
+      height: 88px;
+      left: 5%;
+      top: 48%;
+      animation: rotateCW 11s linear infinite;
+    }
+
+    .g2 {
+      width: 120px;
+      height: 120px;
+      right: 6%;
+      top: 19%;
+      border-color: rgba(255,99,200,.35);
+      animation: rotateCCW 15s linear infinite;
+    }
+
+    .g3 {
+      width: 68px;
+      height: 68px;
+      left: 39%;
+      top: 12%;
+      border-color: rgba(98,245,166,.38);
+      animation: rotateCW 9s linear infinite;
+    }
+
+    /* CIRCUIT TRACES */
+    .circuit {
+      position: absolute;
+      height: 3px;
+      border-radius: 99px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--cyan),
+        var(--pink),
+        var(--yellow),
+        var(--green),
+        transparent
+      );
+      background-size: 250% 100%;
+      box-shadow: 0 0 18px rgba(35,190,255,.48);
+      opacity: .78;
+      transform-origin: left center;
+      animation: circuitFlow 3.5s linear infinite;
+    }
+
+    .circuit::before,
+    .circuit::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      box-shadow:
+        0 0 8px #fff,
+        0 0 16px currentColor;
+    }
+
+    .circuit::before { left: 12%; color: var(--cyan); }
+    .circuit::after { right: 14%; color: var(--pink); }
+
+    .c1 {
+      width: 320px;
+      top: 18%;
+      right: 8%;
+      transform: rotate(-15deg);
+    }
+
+    .c2 {
+      width: 260px;
+      top: 61%;
+      left: 3%;
+      transform: rotate(20deg);
+      animation-delay: .8s;
+    }
+
+    .c3 {
+      width: 230px;
+      right: 11%;
+      bottom: 10%;
+      transform: rotate(8deg);
+      animation-delay: 1.5s;
+    }
+
+    .c4 {
+      width: 190px;
+      left: 29%;
+      top: 34%;
+      transform: rotate(-28deg);
+      animation-delay: .3s;
+      opacity: .34;
+    }
+
+    /* ELECTRONIC PARTICLES */
+    .particle {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      box-shadow: 0 0 18px currentColor, 0 0 30px currentColor;
+      animation: floatParticle 6s ease-in-out infinite;
+    }
+
+    .p1 { left: 10%; top: 20%; color: var(--cyan); background: currentColor; }
+    .p2 { left: 27%; top: 40%; color: var(--pink); background: currentColor; animation-delay: .7s; }
+    .p3 { right: 18%; top: 12%; color: var(--yellow); background: currentColor; animation-delay: 1.4s; }
+    .p4 { right: 10%; top: 65%; color: var(--green); background: currentColor; animation-delay: 2s; }
+    .p5 { left: 52%; top: 78%; color: var(--violet); background: currentColor; animation-delay: 2.6s; }
+    .p6 { left: 62%; top: 26%; color: var(--orange); background: currentColor; animation-delay: 3.2s; }
+
+    /* ROBOT FACE */
+    .robot {
+      position: absolute;
+      width: 110px;
+      height: 84px;
+      border-radius: 22px;
+      border: 2px solid rgba(95,246,255,.35);
+      background: rgba(255,255,255,.38);
+      box-shadow: 0 0 18px rgba(95,246,255,.12);
+      opacity: .58;
+      animation: robotFloat 7s ease-in-out infinite;
+    }
+
+    .robot::before {
+      content: "●   ●";
+      position: absolute;
+      width: 100%;
+      top: 19px;
+      left: 0;
+      text-align: center;
+      color: var(--cyan);
+      font-size: 21px;
+      letter-spacing: 11px;
+      text-shadow: 0 0 10px var(--cyan);
+    }
+
+    .robot::after {
+      content: "▁▁▁";
+      position: absolute;
+      width: 100%;
+      bottom: 14px;
+      left: 0;
+      text-align: center;
+      color: var(--pink);
+      letter-spacing: 3px;
+    }
+
+    .r1 { right: 9%; top: 53%; }
+    .r2 { left: 7%; top: 76%; transform: scale(.75); animation-delay: 1.8s; }
+
+    /* STAR FIELD */
     .star {
       position: absolute;
-      font-size: 28px;
-      opacity: 0.55;
-      animation: twinkle 3s ease-in-out infinite alternate;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 7px rgba(255,255,255,.9);
+      animation: twinkle 2.5s ease-in-out infinite alternate;
     }
 
-    .star.s1 { top: 8%; left: 8%; }
-    .star.s2 { top: 15%; right: 10%; animation-delay: .7s; }
-    .star.s3 { top: 47%; left: 4%; animation-delay: 1.2s; }
-    .star.s4 { top: 70%; right: 6%; animation-delay: .3s; }
-    .star.s5 { top: 86%; left: 14%; animation-delay: 1.6s; }
+    .s1 { top: 7%; left: 17%; }
+    .s2 { top: 13%; left: 49%; animation-delay: .4s; }
+    .s3 { top: 9%; right: 16%; animation-delay: 1s; }
+    .s4 { top: 37%; left: 6%; animation-delay: .8s; }
+    .s5 { top: 44%; right: 13%; animation-delay: 1.4s; }
+    .s6 { top: 71%; left: 20%; animation-delay: .2s; }
+    .s7 { bottom: 9%; right: 8%; animation-delay: .9s; }
+    .s8 { top: 58%; left: 48%; animation-delay: 1.7s; }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes rotateCW {
+      to { transform: rotate(360deg); }
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(0) translateX(0) rotate(0deg); }
-      50% { transform: translateY(-55vh) translateX(35px) rotate(180deg); }
-      100% { transform: translateY(-120vh) translateX(-25px) rotate(360deg); }
+    @keyframes rotateCCW {
+      to { transform: rotate(-360deg); }
+    }
+
+    @keyframes hueShift {
+      to { filter: hue-rotate(360deg) drop-shadow(0 0 18px rgba(100,220,255,.22)); }
+    }
+
+    @keyframes pulseMandala {
+      0%, 100% { transform: scale(1); opacity: .28; }
+      50% { transform: scale(1.08); opacity: .48; }
+    }
+
+    @keyframes auroraSpin {
+      to { transform: rotate(360deg) scale(1.05); }
+    }
+
+    @keyframes circuitFlow {
+      from { background-position: 0% 50%; }
+      to { background-position: 250% 50%; }
+    }
+
+    @keyframes floatParticle {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(16px, -24px) scale(1.5); }
+    }
+
+    @keyframes robotFloat {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-18px) rotate(2deg); }
     }
 
     @keyframes twinkle {
-      from { transform: scale(0.85) rotate(-6deg); opacity: 0.3; }
-      to { transform: scale(1.2) rotate(6deg); opacity: 0.8; }
+      from { opacity: .18; transform: scale(.6); }
+      to { opacity: 1; transform: scale(1.6); }
     }
 
     .container {
@@ -97,19 +392,38 @@
     .header {
       text-align: center;
       margin-bottom: 24px;
-      padding: 24px 20px;
-      background: rgba(255, 255, 255, 0.68);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.8);
+      padding: 28px 20px;
+      background:
+        linear-gradient(180deg, rgba(14,26,56,.91), rgba(7,16,36,.86));
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(67,176,255,.34);
       border-radius: 24px;
-      box-shadow: 0 12px 30px rgba(80, 60, 150, 0.15);
+      box-shadow:
+        0 18px 44px rgba(74,110,160,.18),
+        inset 0 0 26px rgba(97,231,255,.04);
     }
 
     .header h1 {
       margin: 0 0 8px;
       font-size: clamp(2rem, 5vw, 3rem);
-      color: #5135c9;
-      text-shadow: 0 2px 0 #fff;
+      background: linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--violet),
+        var(--pink),
+        var(--yellow),
+        var(--green)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 250% auto;
+      animation: titleFlow 7s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(40,140,255,.22));
+    }
+
+    @keyframes titleFlow {
+      to { background-position: 250% center; }
     }
 
     .header p {
@@ -121,19 +435,28 @@
     .tabs {
       display: flex;
       justify-content: center;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .tab-button {
-      border: 0;
+      border: 1px solid rgba(117,228,255,.28);
       color: white;
-      background: linear-gradient(135deg, #7a5cff, #ff6fb5);
+      background:
+        linear-gradient(90deg, #27b7ff, #7d67ff, #ff5db1, #ffb13b);
+      background-size: 240% 100%;
       padding: 12px 22px;
       border-radius: 999px;
       font-size: 1rem;
       font-weight: 700;
       cursor: default;
-      box-shadow: 0 8px 20px rgba(108, 76, 255, 0.24);
+      box-shadow:
+        0 0 18px rgba(97,231,255,.16),
+        0 8px 22px rgba(0,0,0,.24);
+      animation: buttonGlow 6s linear infinite;
+    }
+
+    @keyframes buttonGlow {
+      to { background-position: 240% 50%; }
     }
 
     .video-grid {
@@ -144,65 +467,99 @@
     .card {
       position: relative;
       overflow: hidden;
-      background: var(--card);
-      border: 2px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.94), rgba(246,250,255,.92));
+      border: 1px solid var(--card-border);
       border-radius: 22px;
       padding: 20px;
-      box-shadow: 0 14px 30px rgba(64, 65, 120, 0.16);
-      backdrop-filter: blur(10px);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow:
+        0 18px 40px rgba(65,105,155,.16),
+        0 0 24px rgba(84,213,255,.04);
+      backdrop-filter: blur(12px);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 34px rgba(64, 65, 120, 0.22);
+      transform: translateY(-5px);
+      border-color: rgba(114,232,255,.44);
+      box-shadow:
+        0 24px 50px rgba(65,105,155,.22),
+        0 0 30px rgba(97,231,255,.08);
     }
 
     .card::before {
       content: "";
       position: absolute;
-      width: 120px;
-      height: 120px;
-      right: -45px;
-      top: -45px;
+      width: 160px;
+      height: 160px;
+      right: -55px;
+      top: -55px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ffe082, #ff9ecb);
-      opacity: 0.55;
+      background:
+        repeating-conic-gradient(
+          rgba(95,246,255,.14) 0deg 7deg,
+          transparent 7deg 15deg,
+          rgba(255,99,200,.12) 15deg 22deg,
+          transparent 22deg 30deg
+        );
+      animation: rotateCW 20s linear infinite;
     }
 
     .card h2 {
       position: relative;
+      z-index: 1;
       margin: 0 0 14px;
       font-size: 1.25rem;
-      color: #3d315e;
+      color: #2f3d5d;
     }
 
     video {
       position: relative;
+      z-index: 1;
       display: block;
       width: 100%;
       max-height: 560px;
       border-radius: 16px;
       background: #000;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+      border: 1px solid rgba(108,225,255,.16);
+      box-shadow:
+        0 8px 22px rgba(0,0,0,.30),
+        0 0 16px rgba(99,225,255,.03);
     }
 
     .footer-note {
       text-align: center;
-      margin-top: 26px;
-      color: #536078;
-      font-weight: 600;
+      margin-top: 28px;
+      color: #617496;
+      font-weight: 700;
+      letter-spacing: .4px;
     }
 
     @media (max-width: 600px) {
       .container { margin-top: 20px; }
       .header { border-radius: 18px; }
       .card { padding: 14px; border-radius: 18px; }
-      .star { font-size: 22px; }
+      .m1 { width: 260px; height: 260px; }
+      .m2 { width: 330px; height: 330px; }
+      .m3 { width: 230px; height: 230px; }
+      .robot { opacity: .20; }
+      .circuit { opacity: .32; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      body, .bubble, .star { animation: none !important; }
+      .aurora,
+      .mandala,
+      .gear,
+      .circuit,
+      .particle,
+      .robot,
+      .star,
+      .card::before,
+      .header h1,
+      .tab-button {
+        animation: none !important;
+      }
+
       .card { transition: none; }
     }
   </style>
@@ -210,25 +567,72 @@
 
 <body>
   <div class="background" aria-hidden="true">
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
+    <div class="aurora"></div>
 
-    <span class="star s1">★</span>
-    <span class="star s2">★</span>
-    <span class="star s3">★</span>
-    <span class="star s4">★</span>
-    <span class="star s5">★</span>
+    <div class="mandala m1"></div>
+    <div class="mandala m2"></div>
+    <div class="mandala m3"></div>
+    <div class="mandala m4"></div>
+
+    <div class="gear g1"></div>
+    <div class="gear g2"></div>
+    <div class="gear g3"></div>
+
+    <div class="circuit c1"></div>
+    <div class="circuit c2"></div>
+    <div class="circuit c3"></div>
+    <div class="circuit c4"></div>
+
+    <span class="particle p1"></span>
+    <span class="particle p2"></span>
+    <span class="particle p3"></span>
+    <span class="particle p4"></span>
+    <span class="particle p5"></span>
+    <span class="particle p6"></span>
+
+    <div class="robot r1"></div>
+    <div class="robot r2"></div>
+
+    <span class="star s1"></span>
+    <span class="star s2"></span>
+    <span class="star s3"></span>
+    <span class="star s4"></span>
+    <span class="star s5"></span>
+    <span class="star s6"></span>
+    <span class="star s7"></span>
+    <span class="star s8"></span>
+  </div>
+
+    <div class="mandala one"></div>
+    <div class="mandala two"></div>
+    <div class="mandala three"></div>
+
+    <div class="circuit c1"></div>
+    <div class="circuit c2"></div>
+    <div class="circuit c3"></div>
+
+    <span class="node n1"></span>
+    <span class="node n2"></span>
+    <span class="node n3"></span>
+    <span class="node n4"></span>
+    <span class="node n5"></span>
+
+    <span class="gear g1"></span>
+    <span class="gear g2"></span>
+
+    <span class="star s1"></span>
+    <span class="star s2"></span>
+    <span class="star s3"></span>
+    <span class="star s4"></span>
+    <span class="star s5"></span>
+    <span class="star s6"></span>
+    <span class="star s7"></span>
   </div>
 
   <main class="container">
     <header class="header">
       <h1>Instructions & Training</h1>
-      <p>Watch the instructional videos below and have fun learning!</p>
+      <p>Explore, build, create, and learn with these instructional videos!</p>
     </header>
 
     <div class="tabs">
@@ -261,7 +665,7 @@
       </article>
     </section>
 
-    <p class="footer-note">✨ Learn • Build • Create ✨</p>
+    <p class="footer-note">⚙️ Learn • Build • Create • Imagine ✨</p>
   </main>
 </body>
 </html>
