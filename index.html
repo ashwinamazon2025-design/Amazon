@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instructional Videos</title>
-
   <style>
     :root {
       --bg: #f6f8fa;
@@ -15,9 +14,7 @@
       --accent: #0969da;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -73,13 +70,8 @@
 
     .card h2 {
       margin-top: 0;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
       font-size: 1.2rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      margin-top: 0;
     }
 
     video {
@@ -87,41 +79,28 @@
       max-height: 560px;
       border-radius: 8px;
       background: #000;
-      margin-top: 10px;
     }
 
     @media (max-width: 600px) {
-      .container {
-        margin-top: 24px;
-      }
-
-      .header h1 {
-        font-size: 1.6rem;
-      }
+      .container { margin-top: 24px; }
+      .header h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
-
 <body>
   <main class="container">
-
     <header class="header">
       <h1>Instructions & Training</h1>
       <p>Watch the instructional videos below.</p>
     </header>
 
     <div class="tabs">
-      <button class="tab-button" type="button">
-        Instructional Videos
-      </button>
+      <button class="tab-button" type="button">Instructional Videos</button>
     </div>
 
     <section aria-label="Instructional Videos">
-
       <div class="card">
         <h2>Build Your Chassis — Step by Step</h2>
-        <p>Soft Piano</p>
-
         <video controls preload="metadata">
           <source
             src="./code/Build_Your_Chassis_Step_by_Step_Soft_Piano-Final.mp4"
@@ -133,8 +112,6 @@
 
       <div class="card">
         <h2>Caster Wheel Chassis — Step by Step</h2>
-        <p>Soft Guitar</p>
-
         <video controls preload="metadata">
           <source
             src="./code/Caster_Wheel_Chassis_Step_by_Step_Soft_Guitar-Final.mp4"
@@ -146,8 +123,6 @@
 
       <div class="card">
         <h2>Mandala Coaster — Child Painting</h2>
-        <p>Carnatic Music</p>
-
         <video controls preload="metadata">
           <source
             src="./code/Mandala_Coaster_Child_Painting_Video_Carnatic.mp4"
@@ -156,7 +131,6 @@
           Your browser does not support the HTML5 video element.
         </video>
       </div>
-
     </section>
   </main>
 </body>
