@@ -4,138 +4,264 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instructional Videos</title>
+
   <style>
     :root {
-      --bg: #f6f8fa;
-      --card: #ffffff;
-      --text: #1f2328;
-      --muted: #656d76;
-      --border: #d0d7de;
-      --accent: #0969da;
+      --text: #24324a;
+      --muted: #5d6b82;
+      --card: rgba(255, 255, 255, 0.93);
+      --border: rgba(255, 255, 255, 0.85);
+      --accent: #6c4cff;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
       color: var(--text);
+      background: linear-gradient(
+        135deg,
+        #b9f3ff 0%,
+        #d9c9ff 28%,
+        #ffd6e8 56%,
+        #fff0a8 78%,
+        #bff7d1 100%
+      );
+      background-size: 400% 400%;
+      animation: gradientMove 16s ease infinite;
+    }
+
+    .background {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -140px;
+      border-radius: 50%;
+      opacity: 0.38;
+      filter: blur(1px);
+      animation: floatUp linear infinite;
+    }
+
+    .bubble:nth-child(1) { left: 5%; width: 70px; height: 70px; background: #fff; animation-duration: 13s; animation-delay: -3s; }
+    .bubble:nth-child(2) { left: 18%; width: 42px; height: 42px; background: #ff7eb6; animation-duration: 10s; animation-delay: -7s; }
+    .bubble:nth-child(3) { left: 34%; width: 95px; height: 95px; background: #8be9fd; animation-duration: 17s; animation-delay: -10s; }
+    .bubble:nth-child(4) { left: 52%; width: 58px; height: 58px; background: #ffd866; animation-duration: 12s; animation-delay: -4s; }
+    .bubble:nth-child(5) { left: 68%; width: 110px; height: 110px; background: #c3a6ff; animation-duration: 19s; animation-delay: -12s; }
+    .bubble:nth-child(6) { left: 82%; width: 48px; height: 48px; background: #7cf0bd; animation-duration: 11s; animation-delay: -6s; }
+    .bubble:nth-child(7) { left: 92%; width: 78px; height: 78px; background: #fff; animation-duration: 15s; animation-delay: -9s; }
+
+    .star {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0.55;
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
+
+    .star.s1 { top: 8%; left: 8%; }
+    .star.s2 { top: 15%; right: 10%; animation-delay: .7s; }
+    .star.s3 { top: 47%; left: 4%; animation-delay: 1.2s; }
+    .star.s4 { top: 70%; right: 6%; animation-delay: .3s; }
+    .star.s5 { top: 86%; left: 14%; animation-delay: 1.6s; }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); }
+      50% { transform: translateY(-55vh) translateX(35px) rotate(180deg); }
+      100% { transform: translateY(-120vh) translateX(-25px) rotate(360deg); }
+    }
+
+    @keyframes twinkle {
+      from { transform: scale(0.85) rotate(-6deg); opacity: 0.3; }
+      to { transform: scale(1.2) rotate(6deg); opacity: 0.8; }
     }
 
     .container {
       width: min(1000px, calc(100% - 32px));
-      margin: 40px auto;
+      margin: 36px auto 56px;
     }
 
     .header {
+      text-align: center;
       margin-bottom: 24px;
+      padding: 24px 20px;
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(80, 60, 150, 0.15);
     }
 
     .header h1 {
       margin: 0 0 8px;
-      font-size: 2rem;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #5135c9;
+      text-shadow: 0 2px 0 #fff;
     }
 
     .header p {
       margin: 0;
       color: var(--muted);
+      font-size: 1.05rem;
     }
 
     .tabs {
       display: flex;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 20px;
+      justify-content: center;
+      margin-bottom: 22px;
     }
 
     .tab-button {
       border: 0;
-      border-bottom: 3px solid var(--accent);
-      background: transparent;
-      padding: 12px 16px;
+      color: white;
+      background: linear-gradient(135deg, #7a5cff, #ff6fb5);
+      padding: 12px 22px;
+      border-radius: 999px;
       font-size: 1rem;
-      font-weight: 600;
-      color: var(--accent);
+      font-weight: 700;
       cursor: default;
+      box-shadow: 0 8px 20px rgba(108, 76, 255, 0.24);
+    }
+
+    .video-grid {
+      display: grid;
+      gap: 22px;
     }
 
     .card {
+      position: relative;
+      overflow: hidden;
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      border: 2px solid var(--border);
+      border-radius: 22px;
       padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 2px rgba(31, 35, 40, 0.05);
+      box-shadow: 0 14px 30px rgba(64, 65, 120, 0.16);
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(64, 65, 120, 0.22);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -45px;
+      top: -45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffe082, #ff9ecb);
+      opacity: 0.55;
     }
 
     .card h2 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+      position: relative;
+      margin: 0 0 14px;
+      font-size: 1.25rem;
+      color: #3d315e;
     }
 
     video {
+      position: relative;
+      display: block;
       width: 100%;
       max-height: 560px;
-      border-radius: 8px;
+      border-radius: 16px;
       background: #000;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 26px;
+      color: #536078;
+      font-weight: 600;
     }
 
     @media (max-width: 600px) {
-      .container { margin-top: 24px; }
-      .header h1 { font-size: 1.6rem; }
+      .container { margin-top: 20px; }
+      .header { border-radius: 18px; }
+      .card { padding: 14px; border-radius: 18px; }
+      .star { font-size: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body, .bubble, .star { animation: none !important; }
+      .card { transition: none; }
     }
   </style>
 </head>
+
 <body>
+  <div class="background" aria-hidden="true">
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+    <span class="bubble"></span>
+
+    <span class="star s1">★</span>
+    <span class="star s2">★</span>
+    <span class="star s3">★</span>
+    <span class="star s4">★</span>
+    <span class="star s5">★</span>
+  </div>
+
   <main class="container">
     <header class="header">
       <h1>Instructions & Training</h1>
-      <p>Watch the instructional videos below.</p>
+      <p>Watch the instructional videos below and have fun learning!</p>
     </header>
 
     <div class="tabs">
-      <button class="tab-button" type="button">Instructional Videos</button>
+      <button class="tab-button" type="button">🎬 Instructional Videos</button>
     </div>
 
-    <section aria-label="Instructional Videos">
-        <div class="card">
-        <h2>Caster Wheel Chassis — Step by Step</h2>
+    <section class="video-grid" aria-label="Instructional Videos">
+      <article class="card">
+        <h2>🛞 Caster Wheel Chassis — Step by Step</h2>
         <video controls preload="metadata">
-          <source
-            src="./code/Caster_Wheel_Chassis_Step_by_Step_Soft_Guitar-Final.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the HTML5 video element.
-        </video> 
-      
-      
-      <div class="card">
-        <h2>How to Build Your Chassis — Step by Step</h2>
-        <video controls preload="metadata">
-          <source
-            src="./code/Build_Your_Chassis_Step_by_Step_Soft_Piano-Final.mp4"
-            type="video/mp4"
-          />
+          <source src="./code/Caster_Wheel_Chassis_Step_by_Step_Soft_Guitar-Final.mp4" type="video/mp4" />
           Your browser does not support the HTML5 video element.
         </video>
-      </div>
+      </article>
 
-        
-   
-      </div>
-
-      <div class="card">
-        <h2>Mandala Coaster — Child Painting</h2>
+      <article class="card">
+        <h2>🔧 How to Build Your Chassis — Step by Step</h2>
         <video controls preload="metadata">
-          <source
-            src="./code/Mandala_Coaster_Child_Painting_Video_Carnatic.mp4"
-            type="video/mp4"
-          />
+          <source src="./code/Build_Your_Chassis_Step_by_Step_Soft_Piano-Final.mp4" type="video/mp4" />
           Your browser does not support the HTML5 video element.
         </video>
-      </div>
+      </article>
+
+      <article class="card">
+        <h2>🎨 Mandala Coaster — Child Painting</h2>
+        <video controls preload="metadata">
+          <source src="./code/Mandala_Coaster_Child_Painting_Video_Carnatic.mp4" type="video/mp4" />
+          Your browser does not support the HTML5 video element.
+        </video>
+      </article>
     </section>
+
+    <p class="footer-note">✨ Learn • Build • Create ✨</p>
   </main>
 </body>
 </html>
