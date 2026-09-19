@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">NILDA maker background</title>
+  <desc id="desc">A decorative background combining mandala patterns, a robot, circuit traces, and electronic components.</desc>
+  <defs>
+    <linearGradient id="wash" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#0c6b79" stop-opacity=".14"/>
+      <stop offset=".52" stop-color="#f3b646" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#ef6e53" stop-opacity=".12"/>
+    </linearGradient>
+    <pattern id="dots" width="44" height="44" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#17324b" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wash)"/>
+  <rect width="1600" height="900" fill="url(#dots)" opacity=".25"/>
+  <g transform="translate(270 640)" fill="none" stroke="#0c6b79" stroke-width="5" opacity=".62">
+    <circle r="188"/>
+    <circle r="145"/>
+    <circle r="94"/>
+    <circle r="42"/>
+    <path d="M0-188v376M-188 0h376M-133-133l266 266M133-133L-133 133"/>
+    <path d="M0-228l28 40-28 40-28-40zM228 0l-40 28-40-28 40-28zM0 228l-28-40 28-40 28 40zM-228 0l40-28 40 28-40 28z"/>
+    <circle r="20" fill="#ef6e53" stroke="none"/>
+  </g>
+  <g transform="translate(1270 236)" fill="none" stroke="#17324b" stroke-width="8" opacity=".56" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-126" y="-75" width="252" height="170" rx="34" fill="#f7e3a5"/>
+    <circle cx="-48" cy="-12" r="24" fill="#0c6b79"/>
+    <circle cx="48" cy="-12" r="24" fill="#0c6b79"/>
+    <path d="M-47 44h94M0-75v-54M-16-129h32"/>
+    <path d="M-126-18h-66v77h66M126-18h66v77h-66"/>
+    <path d="M-70 95v58h-48M70 95v58h48"/>
+  </g>
+  <g fill="none" stroke="#0c6b79" stroke-width="5" opacity=".54" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 194h150v-70h130v76h120v-112h155"/>
+    <path d="M1470 600h-120v86h-145v-55h-120"/>
+    <path d="M1020 45v78h-120v98h-90"/>
+    <circle cx="150" cy="194" r="11" fill="#f3b646"/>
+    <circle cx="435" cy="100" r="11" fill="#ef6e53"/>
+    <circle cx="1350" cy="600" r="11" fill="#f3b646"/>
+  </g>
+  <g transform="translate(740 715)" opacity=".54" stroke="#17324b" stroke-width="7" stroke-linejoin="round">
+    <rect x="-140" y="-75" width="280" height="150" rx="15" fill="#0c6b79"/>
+    <rect x="-108" y="-40" width="77" height="48" fill="#f7e3a5"/>
+    <circle cx="22" cy="-14" r="24" fill="#ef6e53"/>
+    <path d="M-145-47h-35M-145-18h-35M-145 11h-35M145-47h35M145-18h35M145 11h35" fill="none"/>
+    <path d="M-66 75v32M-22 75v32M22 75v32M66 75v32" fill="none"/>
+  </g>
+  <g transform="translate(1090 535)" fill="none" stroke="#ef6e53" stroke-width="8" opacity=".52" stroke-linejoin="round">
+    <circle r="54" fill="#f3b646"/>
+    <circle r="21" fill="#0c6b79"/>
+    <path d="M0-54v-48M0 54v48M-54 0h-48M54 0h48"/>
+  </g>
+  <g transform="translate(500 210)" fill="none" stroke="#17324b" stroke-width="7" opacity=".5">
+    <path d="M0 20v-68M-18-48h36"/>
+    <circle cy="45" r="40" fill="#f3b646"/>
+    <path d="M-14 45h28M0 31v28"/>
+  </g>
+</svg>
