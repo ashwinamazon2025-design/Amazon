@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Robot on a colorful workbench</title>
+  <desc id="desc">A friendly illustrated robot standing on a workbench with tools and geometric shapes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#17324b"/>
+      <stop offset="1" stop-color="#0c6b79"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#f3b646"/>
+      <stop offset="1" stop-color="#ef6e53"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="620" fill="url(#bg)"/>
+  <circle cx="1020" cy="100" r="150" fill="#f3b646" opacity=".18"/>
+  <circle cx="150" cy="120" r="88" fill="#ef6e53" opacity=".22"/>
+  <path d="M0 500h1200v120H0z" fill="#edc86c"/>
+  <path d="M0 500h1200" stroke="#f7e3a5" stroke-width="10"/>
+  <g stroke="#17324b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M400 500V300h370v200" fill="#e9f0e7"/>
+    <rect x="360" y="245" width="450" height="72" rx="20" fill="url(#body)"/>
+    <path d="M585 245v-70" fill="none"/>
+    <circle cx="585" cy="155" r="19" fill="#f3b646"/>
+    <rect x="455" y="317" width="260" height="142" rx="30" fill="#0c6b79"/>
+    <circle cx="520" cy="370" r="25" fill="#f7e3a5"/>
+    <circle cx="650" cy="370" r="25" fill="#f7e3a5"/>
+    <path d="M535 422h100" fill="none"/>
+    <path d="M400 355h-75v100h75M770 355h75v100h-75" fill="none"/>
+    <path d="M470 459v41M700 459v41" fill="none"/>
+    <path d="M430 500v18h-70M740 500v18h70" fill="none"/>
+    <path d="M180 500V420h100l25 80M975 500v-95h80l-15 95" fill="#ef6e53"/>
+    <path d="M184 420l40-70M1050 405l45-70" fill="none"/>
+  </g>
+  <g fill="#f7e3a5">
+    <circle cx="140" cy="430" r="12"/>
+    <circle cx="1060" cy="245" r="10"/>
+    <circle cx="950" cy="160" r="8"/>
+  </g>
+  <path d="M90 555h1020" stroke="#17324b" stroke-width="5" stroke-dasharray="18 18" opacity=".35"/>
+</svg>
