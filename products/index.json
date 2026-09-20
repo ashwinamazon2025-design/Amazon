@@ -1,3 +1,9 @@
 {
-  "products": []
+  "products": [
+    {
+      "slug": "adlin",
+      "name": "Adlin",
+      "file": "products/adlin.json"
+    }
+  ]
 }
