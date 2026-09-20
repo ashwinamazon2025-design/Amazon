@@ -1,9 +1,7 @@
 {
-  "slug": "diy-robotics",
-  "fixedPage": "robotics",
   "name": "DIY Robotic & Electronic Kit",
   "pageTitle": "DIY Robotic & Electronic Kit",
-  "category": "Instruction Videos",
+  "category": "",
   "targetAge": "",
   "description": "Step-by-step instructional videos for assembling, connecting and testing robotics and electronics projects.",
   "extraNotes": "",
@@ -11,15 +9,18 @@
   "videos": [
     {
       "title": "Instruction Video 1",
-      "src": "videos/robotics-project-1.mp4"
+      "src": "videos/Build_Your_Chassis_Step_by_Step_Soft_Piano-Final.mp4"
     },
     {
       "title": "Instruction Video 2",
-      "src": "videos/robotics-project-2.mp4"
+      "src": "videos/Caster_Wheel_Chassis_Step_by_Step_Soft_Guitar-Final.mp4"
     },
     {
       "title": "Instruction Video 3",
-      "src": "videos/robotics-project-3.mp4"
+      "src": "videos/c.mp4"
     }
-  ]
+  ],
+  "slug": "diy-robotics",
+  "fixedPage": "robotics",
+  "updatedAt": "2026-09-20T16:55:22.399Z"
 }
