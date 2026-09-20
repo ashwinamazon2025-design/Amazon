@@ -4,11 +4,6 @@
       "slug": "adlin",
       "name": "Adlin",
       "file": "products/adlin.json"
-    },
-    {
-      "slug": "ashwin",
-      "name": "Ashwin",
-      "file": "products/ashwin.json"
     }
   ]
 }
