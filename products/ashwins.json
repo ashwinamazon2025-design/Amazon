@@ -1,0 +1,25 @@
+{
+  "name": "AshwinS",
+  "pageTitle": "AshwinS",
+  "category": "Robotics",
+  "targetAge": "11",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "s",
+      "src": "videos/Caster_Wheel_Chassis_Step_by_Step_Soft_Guitar-Final.mp4"
+    },
+    {
+      "title": "b",
+      "src": "videos/Build_Your_Chassis_Step_by_Step_Soft_Piano-Final.mp4"
+    },
+    {
+      "title": "c",
+      "src": "videos/c.mp4"
+    }
+  ],
+  "slug": "ashwins",
+  "updatedAt": "2026-09-20T16:20:32.931Z"
+}
