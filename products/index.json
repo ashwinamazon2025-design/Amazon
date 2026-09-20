@@ -1,0 +1,9 @@
+{
+  "products": [
+    {
+      "slug": "donkey",
+      "name": "Donkey",
+      "file": "products/donkey.json"
+    }
+  ]
+}
