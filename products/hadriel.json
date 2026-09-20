@@ -1,0 +1,17 @@
+{
+  "name": "Hadriel",
+  "pageTitle": "Hadriel",
+  "category": "Robotics",
+  "targetAge": "1-2",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "1",
+      "src": "videos/c.mp4"
+    }
+  ],
+  "slug": "hadriel",
+  "updatedAt": "2026-09-20T16:57:36.020Z"
+}
