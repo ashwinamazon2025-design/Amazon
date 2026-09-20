@@ -9,11 +9,11 @@
   "videos": [
     {
       "title": "aa",
-      "src": "videos/a.mp4"
+      "src": "videos/Build_Your_Chassis_Step_by_Step_Soft_Piano-Final.mp4"
     },
     {
       "title": "bb",
-      "src": "videos/b.mp4"
+      "src": "videos/Caster_Wheel_Chassis_Step_by_Step_Soft_Guitar-Final.mp4"
     },
     {
       "title": "cc",
@@ -21,5 +21,5 @@
     }
   ],
   "slug": "ashwin",
-  "updatedAt": "2026-09-20T16:00:45.922Z"
+  "updatedAt": "2026-09-20T16:08:21.380Z"
 }
