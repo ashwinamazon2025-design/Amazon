@@ -13,11 +13,6 @@
       "fixedPage": "mandala"
     },
     {
-      "slug": "adlin",
-      "name": "ADLIN",
-      "file": "products/adlin.json"
-    },
-    {
       "slug": "hadriel",
       "name": "Hadriel",
       "file": "products/hadriel.json"
