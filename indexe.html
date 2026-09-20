@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NILDA Instruction Hub</title>
+  <style>
+    :root{
+      --bg:#050505; --panel:#111; --text:#f5f5f5; --muted:#aaa;
+      --line:#2a2a2a; --accent:#00d4ff; --accent2:#8cff3f;
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;color:var(--text);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(0,212,255,.10),transparent 28%),
+        radial-gradient(circle at top right,rgba(140,255,63,.06),transparent 24%),
+        var(--bg);
+    }
+    header{
+      position:sticky;top:0;z-index:50;background:rgba(5,5,5,.90);
+      backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+    }
+    .topbar{
+      max-width:1250px;margin:auto;padding:18px 22px;
+      display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    }
+    .brand{font-size:1.35rem;font-weight:900;letter-spacing:.07em}
+    .brand span{color:var(--accent)}
+    nav{display:flex;gap:9px;flex-wrap:wrap}
+    .tab-btn{
+      border:1px solid var(--line);background:#0a0a0a;color:#fff;
+      padding:11px 14px;border-radius:12px;cursor:pointer;font-weight:800;
+    }
+    .tab-btn:hover,.tab-btn.active{
+      color:var(--accent);border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(0,212,255,.08);
+    }
+    main{max-width:1250px;margin:auto;padding:34px 22px 70px}
+    .page{display:none}
+    .page.active{display:block}
+    .hero{
+      padding:34px;margin-bottom:25px;border:1px solid var(--line);
+      border-radius:24px;background:linear-gradient(135deg,#0d0d0d,#171717);
+      box-shadow:var(--shadow);
+    }
+    .eyebrow{
+      color:var(--accent);text-transform:uppercase;letter-spacing:.15em;
+      font-size:.78rem;font-weight:900;
+    }
+    h1{font-size:clamp(2rem,4vw,4rem);line-height:1.02;margin:.22em 0 .2em}
+    h3{margin:13px 0 6px}
+    p{color:var(--muted);line-height:1.65}
+    .video-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;
+    }
+    .video-card{
+      padding:16px;background:var(--panel);border:1px solid var(--line);
+      border-radius:18px;box-shadow:var(--shadow);
+    }
+    .video-frame{
+      aspect-ratio:16/9;border:1px dashed #393939;border-radius:14px;
+      overflow:hidden;background:#080808;display:grid;place-items:center;color:#777;
+    }
+    video,iframe{width:100%;height:100%;border:0;background:#000}
+    .tag{
+      display:inline-block;margin-top:8px;padding:6px 9px;border-radius:999px;
+      color:var(--accent);border:1px solid #17353c;background:#0d2024;
+      font-size:.75rem;font-weight:900;
+    }
+    .notice{
+      padding:15px;border:1px solid #3b3b3b;border-radius:14px;background:#101010;color:#bbb
+    }
+    footer{
+      border-top:1px solid var(--line);padding:24px;text-align:center;color:#777;background:#070707;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand">NILDA <span>Instruction Hub</span></div>
+    <nav id="mainNav">
+      <button class="tab-btn active" data-page="robotics">DIY Robotics Kit</button>
+      <button class="tab-btn" data-page="mandala">Mandala Coaster Art</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="robotics" class="page active">
+    <div class="hero">
+      <div class="eyebrow">Instruction Videos</div>
+      <h1>DIY Robotic & Electronic Kit</h1>
+      <p>
+        Step-by-step instructional videos for assembling, connecting and testing
+        robotics and electronics projects.
+      </p>
+    </div>
+
+    <div class="video-grid">
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls preload="metadata">
+            <source src="videos/robotics-project-1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="tag">Project 1</span>
+        <h3>Instruction Video 1</h3>
+        <p>Replace this path with your actual MP4 file.</p>
+      </article>
+
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls preload="metadata">
+            <source src="videos/robotics-project-2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="tag">Project 2</span>
+        <h3>Instruction Video 2</h3>
+        <p>Add your second project instruction video here.</p>
+      </article>
+
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls preload="metadata">
+            <source src="videos/robotics-project-3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="tag">Project 3</span>
+        <h3>Instruction Video 3</h3>
+        <p>Add your third project instruction video here.</p>
+      </article>
+    </div>
+  </section>
+
+
+  <section id="mandala" class="page">
+    <div class="hero">
+      <div class="eyebrow">Art Instruction Videos</div>
+      <h1>Mandala Coaster Art</h1>
+      <p>Follow the videos to create Mandala coaster artwork step by step.</p>
+    </div>
+
+    <div class="video-grid">
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls preload="metadata">
+            <source src="videos/mandala-step-1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="tag">Step 1</span>
+        <h3>Getting Started</h3>
+        <p>Introduce the coaster, materials and design.</p>
+      </article>
+
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls preload="metadata">
+            <source src="videos/mandala-step-2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="tag">Step 2</span>
+        <h3>Create the Pattern</h3>
+        <p>Show the Mandala pattern-making process.</p>
+      </article>
+
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls preload="metadata">
+            <source src="videos/mandala-step-3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="tag">Step 3</span>
+        <h3>Finish the Coaster</h3>
+        <p>Complete the artwork and final finishing steps.</p>
+      </article>
+    </div>
+  </section>
+
+  <div id="dynamicPages"></div>
+
+  <div id="loadNotice" class="notice" style="display:none;margin-top:20px"></div>
+</main>
+
+<footer>© <span id="year"></span> NILDA Instruction Hub</footer>
+
+<script>
+const nav = document.getElementById("mainNav");
+const dynamicPages = document.getElementById("dynamicPages");
+const loadNotice = document.getElementById("loadNotice");
+
+function escapeHtml(value=""){
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function slugify(text){
+  return String(text || "product")
+    .toLowerCase().trim()
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/^-+|-+$/g,"");
+}
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+  document.getElementById(id)?.classList.add("active");
+  document.querySelector(`.tab-btn[data-page="${id}"]`)?.classList.add("active");
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+nav.addEventListener("click", e => {
+  if(e.target.matches(".tab-btn")) showPage(e.target.dataset.page);
+});
+
+function makeVideoCard(video,index){
+  const src = video?.src || "";
+  const title = video?.title || `Instruction Video ${index+1}`;
+  let player = `<span>Video ${index+1}</span>`;
+
+  if(src){
+    if(src.includes("youtube.com") || src.includes("youtu.be")){
+      let embed = src;
+
+      if(src.includes("watch?v=")){
+        const id = new URL(src).searchParams.get("v");
+        if(id) embed = `https://www.youtube.com/embed/${id}`;
+      }else if(src.includes("youtu.be/")){
+        const id = src.split("youtu.be/")[1]?.split(/[?&]/)[0];
+        if(id) embed = `https://www.youtube.com/embed/${id}`;
+      }
+
+      player = `<iframe src="${escapeHtml(embed)}" allowfullscreen></iframe>`;
+    }else{
+      player = `
+        <video controls preload="metadata">
+          <source src="${escapeHtml(src)}" type="video/mp4">
+        </video>`;
+    }
+  }
+
+  return `
+    <article class="video-card">
+      <div class="video-frame">${player}</div>
+      <span class="tag">Video ${index+1}</span>
+      <h3>${escapeHtml(title)}</h3>
+    </article>`;
+}
+
+function renderProducts(products){
+  document.querySelectorAll(".dynamic-tab").forEach(x => x.remove());
+  dynamicPages.innerHTML = "";
+
+  products.forEach(product => {
+    const slug = product.slug || slugify(product.name);
+    const id = `product-${slug}`;
+
+    const tab = document.createElement("button");
+    tab.className = "tab-btn dynamic-tab";
+    tab.dataset.page = id;
+    tab.textContent = product.name;
+    nav.appendChild(tab);
+
+    const section = document.createElement("section");
+    section.id = id;
+    section.className = "page";
+
+    const videos = Array.isArray(product.videos) ? product.videos : [];
+    const gridClass = product.layout === "single" ? "" : "video-grid";
+    const singleStyle = product.layout === "single"
+      ? 'style="display:grid;gap:18px;max-width:900px"'
+      : "";
+
+    section.innerHTML = `
+      <div class="hero">
+        <div class="eyebrow">${escapeHtml(product.category || "Instruction Page")}</div>
+        <h1>${escapeHtml(product.pageTitle || product.name)}</h1>
+        ${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}
+        ${product.targetAge ? `<p><strong>Suggested age:</strong> ${escapeHtml(product.targetAge)}</p>` : ""}
+        ${product.extraNotes ? `<p><strong>Additional notes:</strong> ${escapeHtml(product.extraNotes)}</p>` : ""}
+      </div>
+
+      <div class="${gridClass}" ${singleStyle}>
+        ${videos.map(makeVideoCard).join("")}
+      </div>`;
+
+    dynamicPages.appendChild(section);
+  });
+}
+
+async function loadProducts(){
+  try{
+    const response = await fetch(`products/index.json?ts=${Date.now()}`,{cache:"no-store"});
+
+    if(!response.ok){
+      if(response.status === 404){
+        renderProducts([]);
+        return;
+      }
+      throw new Error(`Could not load product index (${response.status})`);
+    }
+
+    const manifest = await response.json();
+    const entries = Array.isArray(manifest.products) ? manifest.products : [];
+
+    const products = await Promise.all(entries.map(async item => {
+      try{
+        const fileResponse = await fetch(`${item.file}?ts=${Date.now()}`,{cache:"no-store"});
+        if(!fileResponse.ok) return null;
+        const product = await fileResponse.json();
+        return {...product,slug:item.slug};
+      }catch{
+        return null;
+      }
+    }));
+
+    renderProducts(products.filter(Boolean));
+  }catch(err){
+    loadNotice.style.display = "block";
+    loadNotice.textContent = "Additional product pages could not be loaded right now.";
+    console.error(err);
+  }
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+loadProducts();
+</script>
+
+</body>
+</html>
