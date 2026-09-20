@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Maker table with craft tools</title>
+  <desc id="desc">An illustrated maker table with scissors, a ruler, a pencil, and project pieces.</desc>
+  <rect width="1200" height="620" fill="#e9f0e7"/>
+  <circle cx="1050" cy="90" r="190" fill="#0c6b79" opacity=".16"/>
+  <circle cx="160" cy="530" r="230" fill="#ef6e53" opacity=".15"/>
+  <path d="M0 438h1200v182H0z" fill="#f3b646"/>
+  <path d="M0 438h1200" stroke="#17324b" stroke-width="10"/>
+  <g stroke="#17324b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M170 180h260v190H170z" fill="#f7e3a5" transform="rotate(-11 300 275)"/>
+    <path d="M227 225l140 112M352 210L220 350" stroke="#ef6e53" stroke-width="18"/>
+    <path d="M520 138h300v78H520z" fill="#0c6b79"/>
+    <path d="M550 177h240" stroke="#f7e3a5" stroke-width="8" stroke-dasharray="22 18"/>
+    <path d="M610 215v150M742 215v150" fill="none"/>
+    <path d="M575 365h205" fill="none"/>
+    <path d="M890 130l72 40-178 312-72-40z" fill="#ef6e53"/>
+    <path d="M884 132l72 40-22-73z" fill="#f7e3a5"/>
+    <path d="M848 195l72 40" />
+    <circle cx="1000" cy="438" r="70" fill="#f7e3a5"/>
+    <circle cx="1000" cy="438" r="40" fill="#ef6e53"/>
+    <circle cx="1000" cy="438" r="15" fill="#0c6b79"/>
+    <path d="M350 480h250" stroke="#0c6b79" stroke-width="22"/>
+    <path d="M400 478l65-56M560 478l-65-56" fill="none" stroke-width="16"/>
+  </g>
+  <g fill="#17324b">
+    <circle cx="100" cy="100" r="10"/><circle cx="1080" cy="280" r="12"/><circle cx="410" cy="115" r="8"/>
+  </g>
+</svg>
