@@ -1,0 +1,25 @@
+{
+  "name": "Ashwin",
+  "pageTitle": "Ashwin",
+  "category": "Robotics",
+  "targetAge": "1",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "aa",
+      "src": "videos/a.mp4"
+    },
+    {
+      "title": "bb",
+      "src": "videos/b.mp4"
+    },
+    {
+      "title": "cc",
+      "src": "videos/c.mp4"
+    }
+  ],
+  "slug": "ashwin",
+  "updatedAt": "2026-09-20T16:00:45.922Z"
+}
