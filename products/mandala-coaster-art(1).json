@@ -1,0 +1,25 @@
+{
+  "slug": "mandala-coaster-art",
+  "fixedPage": "mandala",
+  "name": "Mandala Coaster Art",
+  "pageTitle": "Mandala Coaster Art",
+  "category": "Art Instruction Videos",
+  "targetAge": "",
+  "description": "Follow the videos to create Mandala coaster artwork step by step.",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Getting Started",
+      "src": "videos/mandala-step-1.mp4"
+    },
+    {
+      "title": "Create the Pattern",
+      "src": "videos/mandala-step-2.mp4"
+    },
+    {
+      "title": "Finish the Coaster",
+      "src": "videos/mandala-step-3.mp4"
+    }
+  ]
+}

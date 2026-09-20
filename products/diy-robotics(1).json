@@ -1,0 +1,25 @@
+{
+  "slug": "diy-robotics",
+  "fixedPage": "robotics",
+  "name": "DIY Robotic & Electronic Kit",
+  "pageTitle": "DIY Robotic & Electronic Kit",
+  "category": "Instruction Videos",
+  "targetAge": "",
+  "description": "Step-by-step instructional videos for assembling, connecting and testing robotics and electronics projects.",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Instruction Video 1",
+      "src": "videos/robotics-project-1.mp4"
+    },
+    {
+      "title": "Instruction Video 2",
+      "src": "videos/robotics-project-2.mp4"
+    },
+    {
+      "title": "Instruction Video 3",
+      "src": "videos/robotics-project-3.mp4"
+    }
+  ]
+}

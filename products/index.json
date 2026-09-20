@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "slug": "diy-robotics",
+      "name": "DIY Robotic & Electronic Kit",
+      "file": "products/diy-robotics.json",
+      "fixedPage": "robotics"
+    },
+    {
+      "slug": "mandala-coaster-art",
+      "name": "Mandala Coaster Art",
+      "file": "products/mandala-coaster-art.json",
+      "fixedPage": "mandala"
+    }
+  ]
+}
