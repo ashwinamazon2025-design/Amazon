@@ -1,9 +1,3 @@
 {
-  "products": [
-    {
-      "slug": "111",
-      "name": "111",
-      "file": "products/111.json"
-    }
-  ]
+  "products": []
 }
