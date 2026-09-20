@@ -11,6 +11,11 @@
       "name": "Mandala Coaster Art",
       "file": "products/mandala-coaster-art.json",
       "fixedPage": "mandala"
+    },
+    {
+      "slug": "hadriel",
+      "name": "Hadriel",
+      "file": "products/hadriel.json"
     }
   ]
 }
