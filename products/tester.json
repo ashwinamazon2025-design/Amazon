@@ -1,0 +1,17 @@
+{
+  "name": "TEster",
+  "pageTitle": "Ashwin",
+  "category": "Robotics",
+  "targetAge": "1-2",
+  "description": "This is a video where it is written short description",
+  "extraNotes": "This is additional notes area",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "This is for Video Title",
+      "src": "videos/c.mp4"
+    }
+  ],
+  "slug": "tester",
+  "updatedAt": "2026-09-21T17:27:38.123Z"
+}
