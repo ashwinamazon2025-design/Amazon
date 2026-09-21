@@ -1,0 +1,25 @@
+{
+  "name": "c",
+  "pageTitle": "ccc",
+  "category": "Robotics",
+  "targetAge": "",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Instruction Video 1",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 2",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 3",
+      "src": ""
+    }
+  ],
+  "slug": "c",
+  "updatedAt": "2026-09-21T17:29:49.764Z"
+}
