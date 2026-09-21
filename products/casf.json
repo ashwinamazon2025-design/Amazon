@@ -1,0 +1,25 @@
+{
+  "name": "casf",
+  "pageTitle": "cccasf",
+  "category": "Robotics",
+  "targetAge": "",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Instruction Video 1",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 2",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 3",
+      "src": ""
+    }
+  ],
+  "slug": "casf",
+  "updatedAt": "2026-09-21T17:30:02.087Z"
+}
