@@ -38,6 +38,11 @@
       "file": "products/666.json"
     },
     {
+      "slug": "777",
+      "name": "777",
+      "file": "products/777.json"
+    },
+    {
       "slug": "aa",
       "name": "Automation",
       "file": "products/aa.json"
