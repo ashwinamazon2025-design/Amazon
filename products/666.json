@@ -1,0 +1,25 @@
+{
+  "name": "666",
+  "pageTitle": "666",
+  "category": "Robotics",
+  "targetAge": "",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Instruction Video 1",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 2",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 3",
+      "src": ""
+    }
+  ],
+  "slug": "666",
+  "updatedAt": "2026-09-22T07:03:57.829Z"
+}
