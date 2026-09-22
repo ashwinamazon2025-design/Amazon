@@ -1,0 +1,3232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NILDA™ Instruction Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root{
+      --bg:#050505;
+      --panel:#111111;
+      --panel2:#171717;
+      --text:#f5f5f5;
+      --muted:#aaaaaa;
+      --line:#2a2a2a;
+      --accent:#00d4ff;
+      --accent2:#8cff3f;
+      --gold:#d8a94a;
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+
+      background:
+        radial-gradient(circle at top left,rgba(0,212,255,.09),transparent 28%),
+        radial-gradient(circle at top right,rgba(216,169,74,.07),transparent 25%),
+        var(--bg);
+    }
+
+
+    /* ========================================================
+       HEADER
+       ======================================================== */
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+
+      background:rgba(5,5,5,.93);
+      backdrop-filter:blur(14px);
+
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar{
+      max-width:1250px;
+      margin:auto;
+
+      padding:12px 22px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .brand-wrap{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .site-logo{
+      width:76px;
+      height:76px;
+
+      object-fit:contain;
+      display:block;
+    }
+
+    .brand{
+      font-size:1.35rem;
+      font-weight:900;
+      letter-spacing:.07em;
+      white-space:nowrap;
+    }
+
+    .brand span{
+      color:var(--gold);
+    }
+
+    nav{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .tab-btn{
+      border:1px solid var(--line);
+      background:#0a0a0a;
+      color:#fff;
+
+      padding:11px 14px;
+
+      border-radius:12px;
+
+      cursor:pointer;
+
+      font-weight:800;
+
+      transition:.18s ease;
+    }
+
+    .tab-btn:hover,
+    .tab-btn.active{
+      color:var(--accent);
+      border-color:var(--accent);
+
+      box-shadow:
+        0 0 0 3px rgba(0,212,255,.08);
+    }
+
+
+    /* ========================================================
+       GENERAL PAGE
+       ======================================================== */
+
+    main{
+      max-width:1250px;
+      margin:auto;
+
+      padding:34px 22px 70px;
+    }
+
+    .page{
+      display:none;
+    }
+
+    .page.active{
+      display:block;
+    }
+
+    .hero{
+      padding:34px;
+
+      margin-bottom:25px;
+
+      border:1px solid var(--line);
+      border-radius:24px;
+
+      background:
+        linear-gradient(135deg,#0d0d0d,#171717);
+
+      box-shadow:var(--shadow);
+    }
+
+    .eyebrow{
+      color:var(--accent);
+
+      text-transform:uppercase;
+
+      letter-spacing:.15em;
+
+      font-size:.78rem;
+
+      font-weight:900;
+    }
+
+    h1{
+      font-size:clamp(2rem,4vw,4rem);
+
+      line-height:1.02;
+
+      margin:.22em 0 .2em;
+    }
+
+    h2{
+      margin:0 0 12px;
+    }
+
+    h3{
+      margin:13px 0 6px;
+    }
+
+    p{
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+
+    /* ========================================================
+       LANDING PAGE
+       ======================================================== */
+
+    .landing-title{
+      text-align:center;
+      margin-top:-22px;
+      margin-bottom:12px;
+    }
+
+    .landing-title h1{
+      margin-bottom:8px;
+    }
+
+    .landing-layout{
+      display:grid;
+
+      /*
+        The carousel column stays deliberately narrow.
+        Everything from its right edge to the right side of the
+        page is given to the product-button grid.
+      */
+      grid-template-columns:clamp(420px,42vw,620px) minmax(0,1fr);
+
+      gap:24px;
+
+      align-items:stretch;
+    }
+
+
+    /*
+      Left side keeps the same total height as before.
+      A compact text carousel now sits above the picture carousel.
+    */
+    .landing-left{
+      height:520px;
+      min-height:520px;
+
+      display:grid;
+      grid-template-rows:128px minmax(0,1fr);
+
+      gap:14px;
+    }
+
+    .text-carousel{
+      position:relative;
+
+      overflow:hidden;
+
+      border-radius:18px;
+
+      border:1px solid var(--line);
+
+      background:
+        radial-gradient(circle at top right,rgba(216,169,74,.14),transparent 42%),
+        linear-gradient(135deg,#101010,#171717);
+
+      box-shadow:var(--shadow);
+
+      min-height:128px;
+    }
+
+    .text-carousel-stage{
+      height:100%;
+
+      padding:18px 58px;
+
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+
+      text-align:center;
+    }
+
+    .text-carousel-title{
+      margin:0;
+
+      color:#e3bf69;
+
+      font-family:"Playfair Display", Georgia, serif;
+      font-size:clamp(1.15rem,1.65vw,1.55rem);
+      font-weight:700;
+
+      letter-spacing:.02em;
+      line-height:1.12;
+    }
+
+    .text-carousel-message{
+      margin:7px 0 0;
+
+      color:#b7d0d8;
+
+      font-family:"Inter",Segoe UI,Arial,sans-serif;
+      font-size:.95rem;
+      font-weight:500;
+
+      line-height:1.45;
+    }
+
+    .text-carousel-arrow{
+      position:absolute;
+
+      top:50%;
+
+      transform:translateY(-50%);
+
+      width:34px;
+      height:34px;
+
+      border-radius:50%;
+
+      border:1px solid rgba(255,255,255,.18);
+
+      background:rgba(0,0,0,.46);
+
+      color:#ffffff;
+
+      font-size:1.15rem;
+
+      cursor:pointer;
+
+      display:grid;
+      place-items:center;
+
+      z-index:4;
+    }
+
+    .text-carousel-arrow:hover{
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+
+    .text-carousel-prev{
+      left:10px;
+    }
+
+    .text-carousel-next{
+      right:10px;
+    }
+
+    .text-carousel-indicator{
+      position:absolute;
+
+      right:10px;
+      bottom:7px;
+
+      color:#777;
+
+      font-size:.68rem;
+      font-weight:800;
+    }
+
+    /*
+      The existing image carousel now fills the remainder of
+      the original 520px left-column height.
+    */
+    .landing-left .carousel-card{
+      height:100%;
+      min-height:0;
+    }
+
+    .landing-left .carousel-stage,
+    .landing-left .carousel-image{
+      height:100%;
+      min-height:0;
+    }
+
+
+    /* ========================================================
+       CAROUSEL
+       ======================================================== */
+
+    .carousel-card{
+      position:relative;
+
+      overflow:hidden;
+
+      min-height:520px;
+
+      border-radius:24px;
+
+      border:1px solid var(--line);
+
+      background:#0b0b0b;
+
+      box-shadow:var(--shadow);
+    }
+
+    .carousel-stage{
+      width:100%;
+      height:100%;
+      min-height:520px;
+
+      position:relative;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      overflow:hidden;
+    }
+
+    .carousel-image{
+      width:100%;
+      height:100%;
+
+      min-height:520px;
+
+      /*
+        Show the complete picture inside the carousel.
+        Images are scaled proportionally and are never cropped.
+      */
+      object-fit:contain;
+      object-position:center;
+
+      background:#0b0b0b;
+
+      display:block;
+    }
+
+    .carousel-empty{
+      padding:35px;
+      text-align:center;
+      color:#888;
+      max-width:650px;
+    }
+
+    .carousel-empty strong{
+      color:var(--accent);
+    }
+
+    .carousel-arrow{
+      position:absolute;
+
+      top:50%;
+
+      transform:translateY(-50%);
+
+      width:48px;
+      height:48px;
+
+      border-radius:50%;
+
+      border:1px solid rgba(255,255,255,.25);
+
+      background:rgba(0,0,0,.58);
+
+      color:white;
+
+      font-size:1.6rem;
+
+      cursor:pointer;
+
+      display:grid;
+      place-items:center;
+
+      z-index:5;
+    }
+
+    .carousel-arrow:hover{
+      background:rgba(0,0,0,.82);
+      border-color:var(--accent);
+    }
+
+    .carousel-prev{
+      left:16px;
+    }
+
+    .carousel-next{
+      right:16px;
+    }
+
+    .carousel-dots{
+      position:absolute;
+
+      left:0;
+      right:0;
+      bottom:16px;
+
+      display:flex;
+      justify-content:center;
+
+      gap:8px;
+
+      z-index:5;
+    }
+
+    .carousel-dot{
+      width:10px;
+      height:10px;
+
+      border-radius:50%;
+
+      border:0;
+
+      padding:0;
+
+      background:rgba(255,255,255,.45);
+
+      cursor:pointer;
+    }
+
+    .carousel-dot.active{
+      background:white;
+      transform:scale(1.25);
+    }
+
+    .carousel-counter{
+      position:absolute;
+
+      top:16px;
+      right:16px;
+
+      padding:7px 10px;
+
+      border-radius:999px;
+
+      background:rgba(0,0,0,.6);
+
+      border:1px solid rgba(255,255,255,.18);
+
+      color:white;
+
+      font-size:.8rem;
+      font-weight:800;
+
+      z-index:5;
+    }
+
+
+    /* ========================================================
+       LANDING PRODUCT BUTTONS
+       ======================================================== */
+
+    .landing-actions{
+      display:grid;
+
+      /*
+        JavaScript automatically changes the number of columns
+        and rows according to how many products are present.
+        The complete 520px area is always used — no scrollbar.
+      */
+      grid-template-columns:minmax(0,1fr);
+      grid-template-rows:repeat(2,minmax(0,1fr));
+
+      gap:18px;
+
+      width:100%;
+      height:520px;
+      min-height:520px;
+
+      align-self:stretch;
+      justify-self:stretch;
+
+      overflow:hidden;
+    }
+
+    .product-launch{
+      min-height:0;
+      height:100%;
+
+      border-radius:24px;
+
+      border:1px solid var(--line);
+
+      padding:28px;
+
+      cursor:pointer;
+
+      color:white;
+
+      text-align:left;
+
+      background:
+        linear-gradient(145deg,#111,#1a1a1a);
+
+      box-shadow:var(--shadow);
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .product-launch:hover{
+      transform:translateY(-4px);
+
+      border-color:var(--accent);
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.52),
+        0 0 0 3px rgba(0,212,255,.07);
+    }
+
+    .product-launch .small{
+      display:block;
+
+      margin-bottom:10px;
+
+      color:var(--accent);
+
+      text-transform:uppercase;
+
+      font-size:.76rem;
+      letter-spacing:.12em;
+      font-weight:900;
+    }
+
+    .product-launch .big{
+      display:block;
+
+      font-size:clamp(1.4rem,2vw,2rem);
+
+      line-height:1.12;
+
+      font-weight:900;
+    }
+
+    .product-launch .desc{
+      display:block;
+
+      margin-top:12px;
+
+      color:#aaa;
+
+      line-height:1.5;
+
+      font-weight:500;
+    }
+
+    .product-launch.mandala{
+      background:
+        radial-gradient(circle at top right,rgba(216,169,74,.15),transparent 40%),
+        linear-gradient(145deg,#111,#19140c);
+    }
+
+
+    /*
+      Product-button grid density.
+      As more products are added, the buttons use additional
+      columns and automatically reduce padding and font sizes.
+    */
+
+    .landing-actions .product-launch{
+      overflow:hidden;
+    }
+
+    .landing-actions .product-launch .big,
+    .landing-actions .product-launch .small,
+    .landing-actions .product-launch .desc{
+      overflow-wrap:anywhere;
+    }
+
+    .landing-actions.grid-2col{
+      gap:14px;
+    }
+
+    .landing-actions.grid-2col .product-launch{
+      padding:18px;
+      border-radius:20px;
+    }
+
+    .landing-actions.grid-2col .product-launch .small{
+      margin-bottom:6px;
+      font-size:.66rem;
+      letter-spacing:.09em;
+    }
+
+    .landing-actions.grid-2col .product-launch .big{
+      font-size:clamp(1rem,1.35vw,1.28rem);
+      line-height:1.08;
+    }
+
+    .landing-actions.grid-2col .product-launch .desc{
+      margin-top:7px;
+      font-size:.82rem;
+      line-height:1.28;
+
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+
+    .landing-actions.grid-3col{
+      gap:11px;
+    }
+
+    .landing-actions.grid-3col .product-launch{
+      padding:13px 14px;
+      border-radius:17px;
+    }
+
+    .landing-actions.grid-3col .product-launch .small{
+      margin-bottom:4px;
+      font-size:.58rem;
+      letter-spacing:.07em;
+    }
+
+    .landing-actions.grid-3col .product-launch .big{
+      font-size:clamp(.82rem,1.05vw,1.02rem);
+      line-height:1.05;
+    }
+
+    .landing-actions.grid-3col .product-launch .desc{
+      margin-top:5px;
+      font-size:.7rem;
+      line-height:1.2;
+
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+
+    .landing-actions.grid-4col{
+      gap:8px;
+    }
+
+    .landing-actions.grid-4col .product-launch{
+      padding:9px 10px;
+      border-radius:14px;
+    }
+
+    .landing-actions.grid-4col .product-launch .small{
+      margin-bottom:3px;
+      font-size:.49rem;
+      letter-spacing:.05em;
+    }
+
+    .landing-actions.grid-4col .product-launch .big{
+      font-size:clamp(.68rem,.82vw,.85rem);
+      line-height:1.03;
+    }
+
+    .landing-actions.grid-4col .product-launch .desc{
+      margin-top:4px;
+      font-size:.6rem;
+      line-height:1.15;
+
+      display:-webkit-box;
+      -webkit-line-clamp:1;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+
+    .landing-actions.grid-5col{
+      gap:6px;
+    }
+
+    .landing-actions.grid-5col .product-launch{
+      padding:7px 8px;
+      border-radius:12px;
+    }
+
+    .landing-actions.grid-5col .product-launch .small{
+      margin-bottom:2px;
+      font-size:.44rem;
+      letter-spacing:.04em;
+    }
+
+    .landing-actions.grid-5col .product-launch .big{
+      font-size:clamp(.58rem,.7vw,.72rem);
+      line-height:1.02;
+    }
+
+    .landing-actions.grid-5col .product-launch .desc{
+      display:none;
+    }
+
+    .product-launch.dynamic-product{
+      background:
+        radial-gradient(circle at top right,rgba(0,212,255,.11),transparent 42%),
+        linear-gradient(145deg,#101010,#14191a);
+    }
+
+
+    /* ========================================================
+       VIDEO CARDS
+       ======================================================== */
+
+    .video-grid{
+      display:grid;
+
+      grid-template-columns:
+        repeat(auto-fit,minmax(270px,1fr));
+
+      gap:18px;
+    }
+
+    .video-card{
+      padding:16px;
+
+      background:var(--panel);
+
+      border:1px solid var(--line);
+
+      border-radius:18px;
+
+      box-shadow:var(--shadow);
+    }
+
+    .video-frame{
+      aspect-ratio:16/9;
+
+      border:1px dashed #393939;
+
+      border-radius:14px;
+
+      overflow:hidden;
+
+      background:#080808;
+
+      display:grid;
+
+      place-items:center;
+
+      color:#777;
+    }
+
+    video,
+    iframe{
+      width:100%;
+      height:100%;
+
+      border:0;
+
+      background:#000;
+    }
+
+    /*
+      Video previews are intentionally non-interactive.
+      Users open the actual video with the WATCH VIDEO link below.
+      This is much more reliable on mobile browsers than window.open().
+    */
+    .video-frame video,
+    .video-frame iframe{
+      pointer-events:none;
+    }
+
+    .watch-video-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      width:100%;
+
+      margin-top:12px;
+      padding:11px 14px;
+
+      border:1px solid rgba(216,169,74,.65);
+      border-radius:12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(216,169,74,.18),
+          rgba(216,169,74,.07)
+        );
+
+      color:#e3bf69;
+
+      text-decoration:none;
+
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.07em;
+
+      transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+    }
+
+    .watch-video-btn:hover{
+      transform:translateY(-1px);
+
+      border-color:#e3bf69;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(216,169,74,.27),
+          rgba(216,169,74,.11)
+        );
+    }
+
+    .watch-video-btn:focus-visible{
+      outline:2px solid #e3bf69;
+      outline-offset:3px;
+    }
+
+    .product-subcategory{
+      margin-top:6px;
+
+      color:#b7d0d8;
+
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .button-subcategory{
+      display:block;
+
+      margin-top:3px;
+
+      color:#b7d0d8;
+
+      font-size:.78em;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:none;
+    }
+
+
+    .tag{
+      display:inline-block;
+
+      margin-top:8px;
+
+      padding:6px 9px;
+
+      border-radius:999px;
+
+      color:var(--accent);
+
+      border:1px solid #17353c;
+
+      background:#0d2024;
+
+      font-size:.75rem;
+
+      font-weight:900;
+    }
+
+    .back-row{
+      margin-bottom:20px;
+    }
+
+    .back-btn{
+      border:1px solid var(--line);
+
+      background:#111;
+
+      color:white;
+
+      padding:10px 14px;
+
+      border-radius:11px;
+
+      cursor:pointer;
+
+      font-weight:800;
+    }
+
+    .back-btn:hover{
+      color:var(--accent);
+      border-color:var(--accent);
+    }
+
+    .notice{
+      padding:15px;
+
+      border:1px solid #3b3b3b;
+
+      border-radius:14px;
+
+      background:#101010;
+
+      color:#bbb;
+    }
+
+
+    footer{
+      border-top:1px solid var(--line);
+
+      padding:24px;
+
+      text-align:center;
+
+      color:#777;
+
+      background:#070707;
+    }
+
+
+    /* ========================================================
+       MOBILE
+       ======================================================== */
+
+    /* =========================================================
+       HOME CAROUSEL WIDTH / LEFT ALIGNMENT
+       Both the small text carousel and the large picture carousel
+       live inside .landing-left. On desktop this wrapper is 75%
+       of its former width, reducing both carousels by 25%.
+       JavaScript below moves the wrapper close to the left edge
+       of the browser window.
+       ========================================================= */
+
+    @media(min-width:901px){
+
+      .landing-left{
+        width:100%;
+        justify-self:stretch;
+      }
+
+      .landing-actions{
+        width:100%;
+        justify-self:stretch;
+      }
+
+    }
+
+
+    @media(max-width:900px){
+
+      .landing-layout{
+        grid-template-columns:1fr;
+      }
+
+      .landing-left{
+        height:auto;
+        min-height:0;
+        grid-template-rows:132px 408px;
+      }
+
+      .landing-actions{
+        height:auto;
+        min-height:auto;
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr !important;
+        grid-template-rows:none !important;
+        grid-auto-rows:minmax(150px,auto) !important;
+
+        gap:14px;
+
+        overflow:visible;
+      }
+
+      .landing-actions .product-launch{
+        padding:18px;
+      }
+
+      .landing-actions .product-launch .small{
+        font-size:.66rem;
+      }
+
+      .landing-actions .product-launch .big{
+        font-size:1.12rem;
+      }
+
+      .landing-actions .product-launch .desc{
+        display:block;
+        margin-top:7px;
+        font-size:.82rem;
+        line-height:1.3;
+      }
+
+      .product-launch{
+        min-height:150px;
+      }
+
+    }
+
+
+    @media(max-width:650px){
+
+      .site-logo{
+        width:60px;
+        height:60px;
+      }
+
+      .brand{
+        font-size:1rem;
+        white-space:normal;
+      }
+
+      .landing-actions{
+        grid-template-columns:1fr !important;
+        grid-template-rows:none !important;
+        grid-auto-rows:minmax(135px,auto) !important;
+
+        gap:12px;
+      }
+
+      .landing-actions .product-launch{
+        padding:15px 16px;
+      }
+
+      .landing-actions .product-launch .big{
+        font-size:1.02rem;
+      }
+
+      .landing-actions .product-launch .desc{
+        font-size:.78rem;
+      }
+
+      .carousel-card,
+      .carousel-stage,
+      .carousel-image{
+        min-height:340px;
+      }
+
+      .landing-left{
+        grid-template-rows:136px 340px;
+      }
+
+      .text-carousel-stage{
+        padding:16px 46px;
+      }
+
+      .text-carousel-title{
+        font-size:1.2rem;
+      }
+
+      .text-carousel-message{
+        font-size:.86rem;
+      }
+
+      .product-launch{
+        min-height:135px;
+      }
+
+      main{
+        padding-left:14px;
+        padding-right:14px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="topbar">
+
+    <div class="brand-wrap">
+
+      <!-- Logo now lives in its own GitHub folder -->
+      <img
+        class="site-logo"
+        src="assets/logo/nilda-logo.png"
+        alt="NILDA logo"
+      >
+
+      <div class="brand">
+        NILDA™ <span>Instruction Hub</span>
+      </div>
+
+    </div>
+
+
+    <nav id="mainNav">
+
+      <button
+        class="tab-btn active"
+        data-page="home"
+      >
+        Home
+      </button>
+
+      <!-- Dynamically created product tabs are added here -->
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+
+  <!-- ======================================================
+       LANDING PAGE
+       ====================================================== -->
+
+  <section
+    id="home"
+    class="page active"
+  >
+
+    <div class="landing-title">
+
+      <div class="eyebrow">
+        Explore • Learn • Create
+      </div>
+
+      <h1>
+        Welcome to NILDA™
+      </h1>
+
+      <p>
+        Choose a project or explore the latest pictures.
+      </p>
+
+    </div>
+
+
+    <div class="landing-layout">
+
+
+      <!-- LEFT SIDE: TEXT CAROUSEL + PICTURE CAROUSEL -->
+
+      <div class="landing-left">
+
+        <!-- TEXT CAROUSEL - content comes from content/home-text-carousel.json -->
+        <div class="text-carousel">
+
+          <div
+            id="textCarouselStage"
+            class="text-carousel-stage"
+          >
+            <div>
+              <h2 class="text-carousel-title">
+                Loading...
+              </h2>
+            </div>
+          </div>
+
+          <button
+            id="textCarouselPrev"
+            class="text-carousel-arrow text-carousel-prev"
+            aria-label="Previous text"
+          >
+            ‹
+          </button>
+
+          <button
+            id="textCarouselNext"
+            class="text-carousel-arrow text-carousel-next"
+            aria-label="Next text"
+          >
+            ›
+          </button>
+
+          <div
+            id="textCarouselIndicator"
+            class="text-carousel-indicator"
+          ></div>
+
+        </div>
+
+        <!-- PICTURE CAROUSEL -->
+        <div class="carousel-card">
+
+        <div
+          id="carouselStage"
+          class="carousel-stage"
+        >
+
+          <div class="carousel-empty">
+
+            <strong>Loading pictures...</strong>
+
+            <br><br>
+
+            Images uploaded to the GitHub
+            <code>pictures/</code> folder will appear here automatically.
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="carouselPrev"
+          class="carousel-arrow carousel-prev"
+          aria-label="Previous image"
+        >
+          ‹
+        </button>
+
+
+        <button
+          id="carouselNext"
+          class="carousel-arrow carousel-next"
+          aria-label="Next image"
+        >
+          ›
+        </button>
+
+
+        <div
+          id="carouselCounter"
+          class="carousel-counter"
+          style="display:none"
+        ></div>
+
+
+        <div
+          id="carouselDots"
+          class="carousel-dots"
+        ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- BUTTONS RIGHT -->
+
+      <div id="landingActions" class="landing-actions">
+
+
+        <button
+          class="product-launch"
+          data-open-page="robotics"
+        >
+
+          <span class="small">
+            Instruction Videos
+          </span>
+
+          <span class="big">
+            DIY Robotic & Electronic Kit
+          </span>
+
+          <span class="desc">
+            Open the robotics and electronics project instructions.
+          </span>
+
+        </button>
+
+
+        <button
+          class="product-launch mandala"
+          data-open-page="mandala"
+        >
+
+          <span class="small">
+            Art Instructions
+          </span>
+
+          <span class="big">
+            Mandala Coaster Art
+          </span>
+
+          <span class="desc">
+            Open the step-by-step Mandala coaster art instructions.
+          </span>
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="carouselNotice"
+      class="notice"
+      style="display:none;margin-top:18px"
+    ></div>
+
+  </section>
+
+
+
+  <!-- ======================================================
+       DIY ROBOTICS PAGE
+       Content is loaded from products/diy-robotics.json
+       ====================================================== -->
+
+  <section id="robotics" class="page">
+    <div class="back-row">
+      <button class="back-btn" data-open-page="home">← Back to Home</button>
+    </div>
+    <div id="roboticsContent" class="notice">
+      Loading DIY Robotic &amp; Electronic Kit...
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       MANDALA PAGE
+       Content is loaded from products/mandala-coaster-art.json
+       ====================================================== -->
+
+  <section id="mandala" class="page">
+    <div class="back-row">
+      <button class="back-btn" data-open-page="home">← Back to Home</button>
+    </div>
+    <div id="mandalaContent" class="notice">
+      Loading Mandala Coaster Art...
+    </div>
+  </section>
+
+
+  <!-- Dynamic product pages are inserted here -->
+
+  <div id="dynamicPages"></div>
+
+
+  <div
+    id="loadNotice"
+    class="notice"
+    style="display:none;margin-top:20px"
+  ></div>
+
+
+</main>
+
+
+<footer>
+
+  © <span id="year"></span>
+  NILDA™ Instruction Hub
+
+</footer>
+
+
+
+<script>
+
+/* ============================================================
+   PUBLIC GITHUB REPOSITORY SETTINGS
+
+   The carousel needs the repository identity so it can list
+   files inside /pictures automatically.
+
+   If this website runs at:
+   https://USERNAME.github.io/REPOSITORY/
+
+   the script will normally detect the username and repository.
+
+   IMPORTANT:
+   If you use a CUSTOM DOMAIN (for example your GoDaddy domain),
+   enter the GitHub owner and repository name below.
+   ============================================================ */
+
+const GITHUB_OWNER = "ashwinamazon2025-design";
+const GITHUB_REPOSITORY = "Amazon";
+const GITHUB_BRANCH = "main";
+
+
+/* ============================================================
+   PAGE NAVIGATION
+   ============================================================ */
+
+const nav = document.getElementById("mainNav");
+const dynamicPages = document.getElementById("dynamicPages");
+const loadNotice = document.getElementById("loadNotice");
+const landingActions = document.getElementById("landingActions");
+
+
+function showPage(id){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(page => page.classList.remove("active"));
+
+
+  document
+    .querySelectorAll(".tab-btn")
+    .forEach(button => button.classList.remove("active"));
+
+
+  document
+    .getElementById(id)
+    ?.classList.add("active");
+
+
+  document
+    .querySelector(`.tab-btn[data-page="${id}"]`)
+    ?.classList.add("active");
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+document.addEventListener("click",event=>{
+
+  const pageButton =
+    event.target.closest("[data-open-page]");
+
+
+  if(pageButton){
+
+    showPage(
+      pageButton.dataset.openPage
+    );
+
+    return;
+  }
+
+
+  if(
+    event.target.matches(".tab-btn")
+  ){
+
+    showPage(
+      event.target.dataset.page
+    );
+
+  }
+
+});
+
+
+nav.addEventListener("click",event=>{
+
+  if(
+    event.target.matches(".tab-btn")
+  ){
+
+    showPage(
+      event.target.dataset.page
+    );
+
+  }
+
+});
+
+
+
+/* ============================================================
+   HOME LAYOUT EDGE-TO-EDGE ALIGNMENT
+
+   On desktop, the Home carousel/button grid starts close to the
+   left edge and extends close to the right edge of the browser.
+   The carousel keeps its narrower width; the product grid receives
+   every remaining pixel to its right.
+   ============================================================ */
+
+function alignHomeLayoutToEdges(){
+
+  const homeLayout =
+    document.querySelector(
+      "#home .landing-layout"
+    );
+
+  if(!homeLayout){
+    return;
+  }
+
+  if(
+    window.matchMedia(
+      "(max-width: 900px)"
+    ).matches
+  ){
+
+    homeLayout.style.marginLeft =
+      "0px";
+
+    homeLayout.style.width =
+      "100%";
+
+    return;
+  }
+
+  /*
+    First reset so the natural position can be measured.
+  */
+  homeLayout.style.marginLeft =
+    "0px";
+
+  homeLayout.style.width =
+    "100%";
+
+  const naturalLeft =
+    homeLayout
+      .getBoundingClientRect()
+      .left;
+
+  const edgeGap = 12;
+
+  const pullLeft =
+    Math.max(
+      0,
+      naturalLeft - edgeGap
+    );
+
+  /*
+    Move the entire Home grid to the left edge and set its total
+    width from that point to the right edge of the viewport.
+    This makes the product-button grid use all available room.
+  */
+  homeLayout.style.marginLeft =
+    `-${pullLeft}px`;
+
+  homeLayout.style.width =
+    `calc(100vw - ${edgeGap * 2}px)`;
+}
+
+
+window.addEventListener(
+  "load",
+  alignHomeLayoutToEdges
+);
+
+
+window.addEventListener(
+  "resize",
+  alignHomeLayoutToEdges
+);
+
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    const homeTrigger =
+      event.target.closest(
+        '[data-page="home"]'
+      );
+
+    if(homeTrigger){
+
+      requestAnimationFrame(
+        alignHomeLayoutToEdges
+      );
+
+    }
+
+  }
+);
+
+
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+
+function escapeHtml(value=""){
+
+  return String(value)
+    .replace(/[&<>"']/g,char=>({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+
+    }[char]));
+
+}
+
+
+function slugify(text){
+
+  return String(text || "product")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/^-+|-+$/g,"");
+
+}
+
+
+
+/* ============================================================
+   LANDING PAGE CAROUSEL
+   ============================================================ */
+
+const carouselStage =
+  document.getElementById("carouselStage");
+
+const carouselDots =
+  document.getElementById("carouselDots");
+
+const carouselCounter =
+  document.getElementById("carouselCounter");
+
+const carouselNotice =
+  document.getElementById("carouselNotice");
+
+
+const textCarouselStage =
+  document.getElementById("textCarouselStage");
+
+const textCarouselPrev =
+  document.getElementById("textCarouselPrev");
+
+const textCarouselNext =
+  document.getElementById("textCarouselNext");
+
+const textCarouselIndicator =
+  document.getElementById("textCarouselIndicator");
+
+let homeTextSlides = [];
+let homeTextIndex = 0;
+let homeTextTimer = null;
+
+
+let carouselImages = [];
+let carouselIndex = 0;
+let carouselTimer = null;
+
+
+
+
+/* ============================================================
+   HOME TEXT CAROUSEL
+   Content is edited from the Developer Console and saved to:
+   content/home-text-carousel.json
+   ============================================================ */
+
+async function loadHomeTextCarousel(){
+
+  homeTextSlides = [];
+
+  /*
+    Preferred source:
+    content/home-text-carousel.json
+
+    This is the file managed by the Developer Console.
+  */
+  try{
+
+    const response =
+      await fetch(
+        `content/home-text-carousel.json?ts=${Date.now()}`,
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(response.ok){
+
+      const data =
+        await response.json();
+
+      if(Array.isArray(data.slides)){
+
+        homeTextSlides =
+          data.slides.filter(
+            slide =>
+              String(slide?.title || "").trim() ||
+              String(slide?.text || "").trim()
+          );
+
+      }
+
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Could not load home-text-carousel.json:",
+      error
+    );
+
+  }
+
+
+  /*
+    Alternative source:
+    simple .txt or .md files inside content/
+
+    If home-text-carousel.json is missing or empty,
+    the page automatically lists the content folder
+    in the Amazon GitHub repository and uses each
+    text/markdown file as one small-carousel slide.
+
+    Example:
+      content/01-welcome.txt
+      content/02-robotics.txt
+      content/03-mandala.txt
+
+    First non-empty line = slide heading.
+    Remaining non-empty lines = slide message.
+  */
+  if(!homeTextSlides.length){
+
+    try{
+
+      const repo =
+        detectGitHubRepository();
+
+      if(!repo.owner || !repo.repo){
+
+        throw new Error(
+          "Content repository is not configured."
+        );
+
+      }
+
+      const apiUrl =
+        `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/content?ref=${encodeURIComponent(repo.branch)}`;
+
+      const listResponse =
+        await fetch(
+          apiUrl,
+          {
+            headers:{
+              "Accept":"application/vnd.github+json"
+            },
+            cache:"no-store"
+          }
+        );
+
+      if(!listResponse.ok){
+
+        throw new Error(
+          `Content folder returned ${listResponse.status}`
+        );
+
+      }
+
+      const files =
+        await listResponse.json();
+
+      const textFiles =
+        Array.isArray(files)
+          ? files
+              .filter(
+                item =>
+                  item.type === "file" &&
+                  /\.(txt|md)$/i.test(item.name)
+              )
+              .sort(
+                (a,b)=>
+                  a.name.localeCompare(
+                    b.name,
+                    undefined,
+                    {
+                      numeric:true,
+                      sensitivity:"base"
+                    }
+                  )
+              )
+          : [];
+
+      const loadedSlides = [];
+
+      for(const file of textFiles){
+
+        try{
+
+          const fileResponse =
+            await fetch(
+              `${file.download_url}?ts=${Date.now()}`,
+              {
+                cache:"no-store"
+              }
+            );
+
+          if(!fileResponse.ok){
+            continue;
+          }
+
+          const rawText =
+            (await fileResponse.text()).trim();
+
+          if(!rawText){
+            continue;
+          }
+
+          const lines =
+            rawText
+              .split(/\r?\n/)
+              .map(line=>line.trim());
+
+          const firstNonEmpty =
+            lines.findIndex(Boolean);
+
+          if(firstNonEmpty === -1){
+            continue;
+          }
+
+          const title =
+            lines[firstNonEmpty]
+              .replace(/^#+\s*/, "")
+              .trim();
+
+          const message =
+            lines
+              .slice(firstNonEmpty + 1)
+              .filter(Boolean)
+              .join(" ")
+              .trim();
+
+          loadedSlides.push({
+            title,
+            text:message
+          });
+
+        }catch(fileError){
+
+          console.warn(
+            `Could not load ${file.name}:`,
+            fileError
+          );
+
+        }
+
+      }
+
+      homeTextSlides =
+        loadedSlides;
+
+    }catch(error){
+
+      console.warn(
+        "Could not load text files from content folder:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /*
+    Final fallback so the small carousel never appears empty.
+  */
+  if(!homeTextSlides.length){
+
+    homeTextSlides = [
+      {
+        title:"Welcome to NILDA™",
+        text:"Explore, learn and create."
+      }
+    ];
+
+  }
+
+  homeTextIndex = 0;
+
+  renderHomeTextCarousel();
+
+  startHomeTextCarousel();
+}
+
+
+function renderHomeTextCarousel(){
+
+  if(!homeTextSlides.length){
+
+    textCarouselStage.innerHTML = `
+      <div>
+        <h2 class="text-carousel-title">
+          Welcome to NILDA™
+        </h2>
+      </div>
+    `;
+
+    textCarouselPrev.style.display =
+      "none";
+
+    textCarouselNext.style.display =
+      "none";
+
+    textCarouselIndicator.textContent =
+      "";
+
+    return;
+  }
+
+  const slide =
+    homeTextSlides[homeTextIndex];
+
+  textCarouselStage.innerHTML = `
+    <div>
+      ${
+        slide.title
+          ? `<h2 class="text-carousel-title">${escapeHtml(slide.title)}</h2>`
+          : ""
+      }
+
+      ${
+        slide.text
+          ? `<p class="text-carousel-message">${escapeHtml(slide.text)}</p>`
+          : ""
+      }
+    </div>
+  `;
+
+  const multiple =
+    homeTextSlides.length > 1;
+
+  textCarouselPrev.style.display =
+    multiple ? "grid" : "none";
+
+  textCarouselNext.style.display =
+    multiple ? "grid" : "none";
+
+  textCarouselIndicator.textContent =
+    multiple
+      ? `${homeTextIndex + 1} / ${homeTextSlides.length}`
+      : "";
+}
+
+
+function showPreviousHomeText(){
+
+  if(homeTextSlides.length < 2){
+    return;
+  }
+
+  homeTextIndex =
+    (
+      homeTextIndex - 1 +
+      homeTextSlides.length
+    ) %
+    homeTextSlides.length;
+
+  renderHomeTextCarousel();
+
+  restartHomeTextCarousel();
+}
+
+
+function showNextHomeText(){
+
+  if(homeTextSlides.length < 2){
+    return;
+  }
+
+  homeTextIndex =
+    (
+      homeTextIndex + 1
+    ) %
+    homeTextSlides.length;
+
+  renderHomeTextCarousel();
+
+  restartHomeTextCarousel();
+}
+
+
+function startHomeTextCarousel(){
+
+  clearInterval(
+    homeTextTimer
+  );
+
+  if(homeTextSlides.length > 1){
+
+    homeTextTimer =
+      setInterval(
+        ()=>{
+
+          homeTextIndex =
+            (
+              homeTextIndex + 1
+            ) %
+            homeTextSlides.length;
+
+          renderHomeTextCarousel();
+
+        },
+        5000
+      );
+
+  }
+}
+
+
+function restartHomeTextCarousel(){
+
+  startHomeTextCarousel();
+
+}
+
+
+textCarouselPrev.addEventListener(
+  "click",
+  showPreviousHomeText
+);
+
+
+textCarouselNext.addEventListener(
+  "click",
+  showNextHomeText
+);
+
+
+
+function detectGitHubRepository(){
+
+  let owner =
+    GITHUB_OWNER.trim();
+
+  let repo =
+    GITHUB_REPOSITORY.trim();
+
+
+  /*
+    Automatic detection for standard GitHub Pages project URLs:
+    https://username.github.io/repository/
+  */
+
+  if(
+    (!owner || !repo) &&
+    location.hostname.endsWith(".github.io")
+  ){
+
+    owner =
+      location.hostname
+        .replace(".github.io","");
+
+
+    const pathParts =
+      location.pathname
+        .split("/")
+        .filter(Boolean);
+
+
+    /*
+      username.github.io repository sites use the first
+      path segment as the repository name.
+
+      For a user-site repository (username.github.io),
+      use username.github.io as the repository name.
+    */
+
+    if(pathParts.length){
+
+      repo = pathParts[0];
+
+    }else{
+
+      repo =
+        owner + ".github.io";
+
+    }
+
+  }
+
+
+  return {
+    owner,
+    repo,
+    branch:GITHUB_BRANCH || "main"
+  };
+
+}
+
+
+
+function isImageFile(name){
+
+  return /\.(jpg|jpeg|png|webp|gif)$/i
+    .test(name || "");
+
+}
+
+
+
+async function loadCarouselPictures(){
+
+  const config =
+    detectGitHubRepository();
+
+
+  if(
+    !config.owner ||
+    !config.repo
+  ){
+
+    carouselStage.innerHTML = `
+
+      <div class="carousel-empty">
+
+        <strong>
+          Carousel repository needs to be configured.
+        </strong>
+
+        <br><br>
+
+        If this site uses a custom domain,
+        edit the three GitHub repository settings
+        near the top of the JavaScript section
+        in <code>index.html</code>.
+
+      </div>
+    `;
+
+
+    carouselNotice.style.display =
+      "block";
+
+
+    carouselNotice.innerHTML = `
+
+      For automatic carousel updates on a custom domain,
+      set <code>GITHUB_OWNER</code> and
+      <code>GITHUB_REPOSITORY</code> once in this file.
+
+    `;
+
+
+    hideCarouselControls();
+
+    return;
+  }
+
+
+  try{
+
+    /*
+      GitHub Contents API:
+      Lists every file in the pictures folder.
+      No token is required for a public repository.
+    */
+
+    const apiUrl =
+      `https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repo)}/contents/pictures?ref=${encodeURIComponent(config.branch)}`;
+
+
+    const response =
+      await fetch(
+        apiUrl,
+        {
+          headers:{
+            "Accept":"application/vnd.github+json"
+          }
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        `GitHub returned ${response.status}`
+      );
+
+    }
+
+
+    const files =
+      await response.json();
+
+
+    carouselImages =
+      (Array.isArray(files) ? files : [])
+
+        .filter(file =>
+          file.type === "file" &&
+          isImageFile(file.name)
+        )
+
+        .sort((a,b) =>
+          a.name.localeCompare(
+            b.name,
+            undefined,
+            {
+              numeric:true,
+              sensitivity:"base"
+            }
+          )
+        )
+
+        .map(file => ({
+
+          name:file.name,
+
+          /*
+            download_url points directly to the image file
+            in the public repository.
+          */
+
+          url:file.download_url
+
+        }));
+
+
+    if(!carouselImages.length){
+
+      carouselStage.innerHTML = `
+
+        <div class="carousel-empty">
+
+          <strong>
+            No pictures have been added yet.
+          </strong>
+
+          <br><br>
+
+          Upload JPG, JPEG, PNG, WEBP or GIF files
+          to the GitHub <code>pictures/</code> folder.
+
+          <br><br>
+
+          They will appear here automatically.
+
+        </div>
+      `;
+
+
+      hideCarouselControls();
+
+      return;
+    }
+
+
+    carouselIndex = 0;
+
+    renderCarousel();
+
+    startCarousel();
+
+
+  }catch(error){
+
+    console.error(
+      "Carousel error:",
+      error
+    );
+
+
+    carouselStage.innerHTML = `
+
+      <div class="carousel-empty">
+
+        <strong>
+          Pictures could not be loaded.
+        </strong>
+
+        <br><br>
+
+        Check the GitHub repository settings and make
+        sure the repository is public and contains a
+        <code>pictures</code> folder.
+
+      </div>
+    `;
+
+
+    carouselNotice.style.display =
+      "block";
+
+
+    carouselNotice.textContent =
+      "The rest of the website will continue to work even if the carousel cannot load.";
+
+
+    hideCarouselControls();
+
+  }
+
+}
+
+
+
+function hideCarouselControls(){
+
+  document
+    .getElementById("carouselPrev")
+    .style.display = "none";
+
+
+  document
+    .getElementById("carouselNext")
+    .style.display = "none";
+
+
+  carouselCounter.style.display =
+    "none";
+
+
+  carouselDots.innerHTML =
+    "";
+
+}
+
+
+
+function renderCarousel(){
+
+  if(
+    !carouselImages.length
+  ){
+
+    return;
+  }
+
+
+  const image =
+    carouselImages[carouselIndex];
+
+
+  carouselStage.innerHTML = `
+
+    <img
+      class="carousel-image"
+      src="${escapeHtml(image.url)}"
+      alt="${escapeHtml(image.name)}"
+    >
+
+  `;
+
+
+  carouselDots.innerHTML =
+    "";
+
+
+  carouselImages
+    .forEach((_,index)=>{
+
+      const dot =
+        document.createElement("button");
+
+
+      dot.className =
+        "carousel-dot" +
+        (
+          index === carouselIndex
+            ? " active"
+            : ""
+        );
+
+
+      dot.setAttribute(
+        "aria-label",
+        `Show image ${index + 1}`
+      );
+
+
+      dot.addEventListener(
+        "click",
+        ()=>{
+
+          carouselIndex =
+            index;
+
+
+          renderCarousel();
+
+          restartCarousel();
+
+        }
+      );
+
+
+      carouselDots
+        .appendChild(dot);
+
+    });
+
+
+  carouselCounter.style.display =
+    "block";
+
+
+  carouselCounter.textContent =
+    `${carouselIndex + 1} / ${carouselImages.length}`;
+
+
+  const showArrows =
+    carouselImages.length > 1;
+
+
+  document
+    .getElementById("carouselPrev")
+    .style.display =
+      showArrows ? "grid" : "none";
+
+
+  document
+    .getElementById("carouselNext")
+    .style.display =
+      showArrows ? "grid" : "none";
+
+}
+
+
+
+function previousCarouselImage(){
+
+  if(
+    carouselImages.length < 2
+  ){
+
+    return;
+  }
+
+
+  carouselIndex =
+    (
+      carouselIndex - 1 +
+      carouselImages.length
+    ) %
+    carouselImages.length;
+
+
+  renderCarousel();
+
+  restartCarousel();
+
+}
+
+
+
+function nextCarouselImage(){
+
+  if(
+    carouselImages.length < 2
+  ){
+
+    return;
+  }
+
+
+  carouselIndex =
+    (
+      carouselIndex + 1
+    ) %
+    carouselImages.length;
+
+
+  renderCarousel();
+
+  restartCarousel();
+
+}
+
+
+
+function startCarousel(){
+
+  clearInterval(
+    carouselTimer
+  );
+
+
+  if(
+    carouselImages.length > 1
+  ){
+
+    carouselTimer =
+      setInterval(
+        ()=>{
+
+          carouselIndex =
+            (
+              carouselIndex + 1
+            ) %
+            carouselImages.length;
+
+
+          renderCarousel();
+
+        },
+        5000
+      );
+
+  }
+
+}
+
+
+
+function restartCarousel(){
+
+  startCarousel();
+
+}
+
+
+
+document
+  .getElementById("carouselPrev")
+  .addEventListener(
+    "click",
+    previousCarouselImage
+  );
+
+
+document
+  .getElementById("carouselNext")
+  .addEventListener(
+    "click",
+    nextCarouselImage
+  );
+
+
+
+/* ============================================================
+   DYNAMIC PRODUCT PAGES
+   ============================================================ */
+
+function makeVideoCard(video,index){
+
+  const src =
+    video?.src || "";
+
+  const title =
+    video?.title ||
+    `Instruction Video ${index+1}`;
+
+  /*
+    The direct source URL is used in a normal <a target="_blank">
+    link. This works much more reliably on mobile browsers than
+    attempting to create a popup window with JavaScript.
+  */
+  const watchLink =
+    src
+      ? `
+        <a
+          class="watch-video-btn"
+          href="${escapeHtml(src)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ▶ WATCH VIDEO
+        </a>
+      `
+      : "";
+
+
+  let player =
+    `<span>Video ${index+1}</span>`;
+
+
+  if(src){
+
+    if(
+      src.includes("youtube.com") ||
+      src.includes("youtu.be")
+    ){
+
+      let embed = src;
+
+
+      try{
+
+        if(
+          src.includes("watch?v=")
+        ){
+
+          const id =
+            new URL(src)
+              .searchParams
+              .get("v");
+
+
+          if(id){
+
+            embed =
+              `https://www.youtube.com/embed/${id}`;
+
+          }
+
+        }else if(
+          src.includes("youtu.be/")
+        ){
+
+          const id =
+            src
+              .split("youtu.be/")[1]
+              ?.split(/[?&]/)[0];
+
+
+          if(id){
+
+            embed =
+              `https://www.youtube.com/embed/${id}`;
+
+          }
+
+        }
+
+      }catch{}
+
+
+      player = `
+
+        <iframe
+          src="${escapeHtml(embed)}"
+          tabindex="-1"
+          aria-hidden="true"
+        ></iframe>
+
+      `;
+
+    }else{
+
+      player = `
+
+        <video
+          preload="metadata"
+          muted
+          playsinline
+          aria-hidden="true"
+        >
+
+          <source
+            src="${escapeHtml(src)}"
+            type="video/mp4"
+          >
+
+        </video>
+
+      `;
+
+    }
+
+  }
+
+
+  return `
+
+    <article class="video-card">
+
+      <div class="video-frame">
+        ${player}
+      </div>
+
+      ${watchLink}
+
+      <span class="tag">
+        Video ${index+1}
+      </span>
+
+      <h3>
+        ${escapeHtml(title)}
+      </h3>
+
+    </article>
+
+  `;
+
+}
+
+
+
+function productContentMarkup(product){
+
+  const videos = Array.isArray(product.videos) ? product.videos : [];
+  const gridClass = product.layout === "single" ? "" : "video-grid";
+  const singleStyle = product.layout === "single"
+    ? 'style="display:grid;gap:18px;max-width:900px"'
+    : "";
+
+  return `
+    <div class="hero">
+      <div class="eyebrow">${escapeHtml(product.category || "Instruction Page")}</div>
+      ${
+        product.subcategory
+          ? `<div class="product-subcategory">${escapeHtml(product.subcategory)}</div>`
+          : ""
+      }
+      <h1>${escapeHtml(product.pageTitle || product.name)}</h1>
+      ${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}
+      ${product.targetAge ? `<p><strong>Suggested age:</strong> ${escapeHtml(product.targetAge)}</p>` : ""}
+      ${product.extraNotes ? `<p><strong>Additional notes:</strong> ${escapeHtml(product.extraNotes)}</p>` : ""}
+    </div>
+
+    <div class="${gridClass}" ${singleStyle}>
+      ${videos.map(makeVideoCard).join("")}
+    </div>
+  `;
+}
+
+function balanceLandingButtons(){
+
+  const buttons =
+    [...landingActions.querySelectorAll(".product-launch")];
+
+  const count =
+    Math.max(1,buttons.length);
+
+  /*
+    Desktop grid strategy:
+      1–2 products   = 1 column
+      3–6 products   = 2 columns
+      7–12 products  = 3 columns
+      13–20 products = 4 columns
+      21+ products   = 5 columns
+
+    Rows are calculated automatically so all buttons fit inside
+    the fixed area beside the carousel without a scrollbar.
+  */
+  let columns = 1;
+
+  if(count >= 3 && count <= 6){
+    columns = 2;
+  }else if(count >= 7 && count <= 12){
+    columns = 3;
+  }else if(count >= 13 && count <= 20){
+    columns = 4;
+  }else if(count >= 21){
+    columns = 5;
+  }
+
+  const rows =
+    Math.ceil(
+      count / columns
+    );
+
+  landingActions.style.gridTemplateColumns =
+    `repeat(${columns},minmax(0,1fr))`;
+
+  landingActions.style.gridTemplateRows =
+    `repeat(${rows},minmax(0,1fr))`;
+
+  landingActions.style.gridAutoRows =
+    "minmax(0,1fr)";
+
+  landingActions.classList.remove(
+    "grid-2col",
+    "grid-3col",
+    "grid-4col",
+    "grid-5col"
+  );
+
+  if(columns === 2){
+    landingActions.classList.add("grid-2col");
+  }else if(columns === 3){
+    landingActions.classList.add("grid-3col");
+  }else if(columns === 4){
+    landingActions.classList.add("grid-4col");
+  }else if(columns >= 5){
+    landingActions.classList.add("grid-5col");
+  }
+
+  /*
+    On the last partially-filled row, let the final button use
+    the remaining width when this produces a cleaner layout.
+  */
+  buttons.forEach(
+    button=>{
+      button.style.gridColumn = "";
+    }
+  );
+
+  const remainder =
+    count % columns;
+
+  if(
+    columns === 2 &&
+    remainder === 1 &&
+    count > 1
+  ){
+    buttons[count - 1].style.gridColumn =
+      "1 / -1";
+  }
+}
+
+function createLandingProductButton(product,pageId){
+
+  const button =
+    document.createElement("button");
+
+  button.className =
+    "product-launch dynamic-product dynamic-home-button";
+
+  button.dataset.openPage =
+    pageId;
+
+  button.innerHTML = `
+    <span class="small">
+      ${escapeHtml(product.category || "Instructions")}
+      ${
+        product.subcategory
+          ? `<span class="button-subcategory">${escapeHtml(product.subcategory)}</span>`
+          : ""
+      }
+    </span>
+
+    <span class="big">
+      ${escapeHtml(product.name)}
+    </span>
+
+    <span class="desc">
+      ${
+        escapeHtml(
+          product.description ||
+          "Open this product's instructions and videos."
+        )
+      }
+    </span>
+  `;
+
+  return button;
+}
+
+
+function updateFixedHomeButton(pageId,product){
+
+  const button =
+    document.querySelector(
+      `.product-launch[data-open-page="${pageId}"]`
+    );
+
+  if(!button){
+    return;
+  }
+
+  const small =
+    button.querySelector(".small");
+
+  const big =
+    button.querySelector(".big");
+
+  const desc =
+    button.querySelector(".desc");
+
+  if(small){
+
+    small.innerHTML = `
+      ${escapeHtml(product.category || "Instructions")}
+      ${
+        product.subcategory
+          ? `<span class="button-subcategory">${escapeHtml(product.subcategory)}</span>`
+          : ""
+      }
+    `;
+
+  }
+
+  if(big){
+    big.textContent =
+      product.name || "";
+  }
+
+  if(desc){
+
+    desc.textContent =
+      product.description ||
+      "Open this product's instructions and videos.";
+
+  }
+}
+
+
+function renderProducts(products){
+
+  /*
+    Remove only buttons/pages generated from additional
+    Developer Console products. The two original Home buttons
+    remain untouched.
+  */
+  document
+    .querySelectorAll(".dynamic-home-button")
+    .forEach(element => element.remove());
+
+  dynamicPages.innerHTML = "";
+
+  let roboticsLoaded = false;
+  let mandalaLoaded = false;
+
+  products.forEach(product => {
+
+    const slug =
+      product.slug ||
+      slugify(product.name);
+
+    const fixedPage =
+      product.fixedPage || "";
+
+    /*
+      These two projects use the two permanent Home buttons.
+      Their page contents still come entirely from JSON.
+    */
+    if(fixedPage === "robotics"){
+
+      const holder =
+        document.getElementById("roboticsContent");
+
+      if(holder){
+        holder.className = "";
+        holder.innerHTML =
+          productContentMarkup(product);
+      }
+
+      updateFixedHomeButton(
+        "robotics",
+        product
+      );
+
+      roboticsLoaded = true;
+      return;
+    }
+
+    if(fixedPage === "mandala"){
+
+      const holder =
+        document.getElementById("mandalaContent");
+
+      if(holder){
+        holder.className = "";
+        holder.innerHTML =
+          productContentMarkup(product);
+      }
+
+      updateFixedHomeButton(
+        "mandala",
+        product
+      );
+
+      mandalaLoaded = true;
+      return;
+    }
+
+    /*
+      Every new Developer Console product gets:
+      1. its own page, and
+      2. a Home-page button next to the carousel.
+    */
+    const pageId =
+      `product-${slug}`;
+
+    landingActions.appendChild(
+      createLandingProductButton(
+        product,
+        pageId
+      )
+    );
+
+    const section =
+      document.createElement("section");
+
+    section.id =
+      pageId;
+
+    section.className =
+      "page";
+
+    section.innerHTML = `
+      <div class="back-row">
+        <button
+          class="back-btn"
+          data-open-page="home"
+        >
+          ← Back to Home
+        </button>
+      </div>
+
+      ${productContentMarkup(product)}
+    `;
+
+    dynamicPages.appendChild(section);
+  });
+
+  /*
+    Recalculate equal button heights after all JSON products
+    have been loaded.
+  */
+  balanceLandingButtons();
+
+  requestAnimationFrame(
+    alignHomeLayoutToEdges
+  );
+
+  if(!roboticsLoaded){
+
+    const holder =
+      document.getElementById("roboticsContent");
+
+    if(holder){
+      holder.className = "notice";
+      holder.textContent =
+        "DIY Robotic & Electronic Kit content could not be loaded.";
+    }
+  }
+
+  if(!mandalaLoaded){
+
+    const holder =
+      document.getElementById("mandalaContent");
+
+    if(holder){
+      holder.className = "notice";
+      holder.textContent =
+        "Mandala Coaster Art content could not be loaded.";
+    }
+  }
+}
+
+
+async function loadProducts(){
+
+  try{
+
+    const response =
+      await fetch(
+        `products/index.json?ts=${Date.now()}`,
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(
+      !response.ok
+    ){
+
+      if(
+        response.status === 404
+      ){
+
+        renderProducts([]);
+
+        return;
+      }
+
+
+      throw new Error(
+        `Could not load product index (${response.status})`
+      );
+
+    }
+
+
+    const manifest =
+      await response.json();
+
+
+    const entries =
+      Array.isArray(manifest.products)
+        ? manifest.products
+        : [];
+
+
+    const products =
+      await Promise.all(
+
+        entries.map(
+          async item=>{
+
+            try{
+
+              const fileResponse =
+                await fetch(
+                  `${item.file}?ts=${Date.now()}`,
+                  {
+                    cache:"no-store"
+                  }
+                );
+
+
+              if(
+                !fileResponse.ok
+              ){
+
+                return null;
+              }
+
+
+              const product =
+                await fileResponse.json();
+
+
+              return {
+                ...product,
+                slug:item.slug,
+                fixedPage:item.fixedPage || product.fixedPage || "",
+                file:item.file
+              };
+
+
+            }catch{
+
+              return null;
+
+            }
+
+          }
+        )
+
+      );
+
+
+    renderProducts(
+      products.filter(Boolean)
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    loadNotice.style.display =
+      "block";
+
+
+    loadNotice.textContent =
+      "Additional product pages could not be loaded right now.";
+
+  }
+
+}
+
+
+
+
+/* ============================================================
+   VIDEO OPENING BEHAVIOUR
+
+   Video previews are non-interactive. Each video card contains a
+   normal WATCH VIDEO link with target="_blank".
+
+   Desktop browsers normally open this in a separate tab/window.
+   Mobile browsers may open a new browser tab or their native video
+   viewer, depending on the browser and operating system.
+   ============================================================ */
+
+
+
+/* ============================================================
+   START
+   ============================================================ */
+
+document
+  .getElementById("year")
+  .textContent =
+    new Date().getFullYear();
+
+
+loadHomeTextCarousel();
+
+loadCarouselPictures();
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
