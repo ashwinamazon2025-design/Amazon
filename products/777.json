@@ -1,0 +1,25 @@
+{
+  "name": "777",
+  "pageTitle": "777",
+  "category": "Robotics",
+  "targetAge": "",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Instruction Video 1",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 2",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 3",
+      "src": ""
+    }
+  ],
+  "slug": "777",
+  "updatedAt": "2026-09-22T07:04:13.024Z"
+}
