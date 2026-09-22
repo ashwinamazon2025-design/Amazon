@@ -1,6 +1,6 @@
 {
-  "name": "aa",
-  "pageTitle": "AAAAAAAAa",
+  "name": "Automation",
+  "pageTitle": "Ashwin's Automation",
   "category": "Electronics",
   "targetAge": "1",
   "description": "",
@@ -9,9 +9,9 @@
   "videos": [
     {
       "title": "Instruction Video 1",
-      "src": ""
+      "src": "videos/c.mp4"
     }
   ],
   "slug": "aa",
-  "updatedAt": "2026-09-21T17:29:36.888Z"
+  "updatedAt": "2026-09-22T05:06:17.688Z"
 }
