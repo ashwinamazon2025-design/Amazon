@@ -1,0 +1,25 @@
+{
+  "name": "444",
+  "pageTitle": "444",
+  "category": "Robotics",
+  "targetAge": "",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Instruction Video 1",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 2",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 3",
+      "src": ""
+    }
+  ],
+  "slug": "444",
+  "updatedAt": "2026-09-22T06:58:07.996Z"
+}
