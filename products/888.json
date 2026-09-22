@@ -1,0 +1,25 @@
+{
+  "name": "888",
+  "pageTitle": "888",
+  "category": "Robotics",
+  "targetAge": "",
+  "description": "",
+  "extraNotes": "",
+  "layout": "grid",
+  "videos": [
+    {
+      "title": "Instruction Video 1",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 2",
+      "src": ""
+    },
+    {
+      "title": "Instruction Video 3",
+      "src": ""
+    }
+  ],
+  "slug": "888",
+  "updatedAt": "2026-09-22T07:07:09.860Z"
+}
