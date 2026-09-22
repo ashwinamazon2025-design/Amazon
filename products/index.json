@@ -13,6 +13,11 @@
       "fixedPage": "mandala"
     },
     {
+      "slug": "23",
+      "name": "23",
+      "file": "products/23.json"
+    },
+    {
       "slug": "aa",
       "name": "Automation",
       "file": "products/aa.json"
