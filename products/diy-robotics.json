@@ -1,7 +1,8 @@
 {
   "name": "DIY Robotic & Electronic Kit",
   "pageTitle": "DIY Robotic & Electronic Kit",
-  "category": "",
+  "category": "Robotics",
+  "subcategory": "Ashwin Testing",
   "targetAge": "",
   "description": "Step-by-step instructional videos for assembling, connecting and testing robotics and electronics projects.",
   "extraNotes": "",
@@ -22,5 +23,5 @@
   ],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-20T16:55:22.399Z"
+  "updatedAt": "2026-09-22T10:30:45.201Z"
 }
