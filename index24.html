@@ -2493,21 +2493,16 @@ function makeVideoCard(video,index){
     `Instruction Video ${index+1}`;
 
   /*
-    Open local videos inside our own relative player page rather
-    than exposing the raw MP4 as the browser page. This lets the
-    player page use the same browser-side content deterrents.
+    The direct source URL is used in a normal <a target="_blank">
+    link. This works much more reliably on mobile browsers than
+    attempting to create a popup window with JavaScript.
   */
-  const watchUrl =
-    src
-      ? `video-player.html?src=${encodeURIComponent(src)}&title=${encodeURIComponent(title)}`
-      : "";
-
   const watchLink =
-    watchUrl
+    src
       ? `
         <a
           class="watch-video-btn"
-          href="${escapeHtml(watchUrl)}"
+          href="${escapeHtml(src)}"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -3098,11 +3093,12 @@ async function loadProducts(){
 /* ============================================================
    VIDEO OPENING BEHAVIOUR
 
-   Video previews are non-interactive. Each WATCH VIDEO link opens
-   the relative video-player.html page in a separate tab/window.
+   Video previews are non-interactive. Each video card contains a
+   normal WATCH VIDEO link with target="_blank".
 
-   That player page blocks normal right-click and common developer
-   shortcuts and prevents the browser from opening the raw MP4 page.
+   Desktop browsers normally open this in a separate tab/window.
+   Mobile browsers may open a new browser tab or their native video
+   viewer, depending on the browser and operating system.
    ============================================================ */
 
 
