@@ -10,18 +10,22 @@
   "videos": [
     {
       "title": "Instruction Video 1",
-      "src": "videos/Build_Your_Chassis_Step_by_Step_Soft_Piano-Final.mp4"
+      "src": ""
     },
     {
       "title": "Instruction Video 2",
-      "src": "videos/Caster_Wheel_Chassis_Step_by_Step_Soft_Guitar-Final.mp4"
+      "src": ""
     },
     {
       "title": "Instruction Video 3",
-      "src": "videos/c.mp4"
+      "src": ""
+    },
+    {
+      "title": "Connecting 3-pin JST to LDR Sensor",
+      "src": "videos/LDR_JST_Step_by_Step_Instruction_Piano.mp4"
     }
   ],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-22T10:30:45.201Z"
+  "updatedAt": "2026-09-24T16:55:07.000Z"
 }
