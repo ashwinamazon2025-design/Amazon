@@ -18,7 +18,7 @@
     },
     {
       "title": "Instruction Video 3",
-      "src": ""
+      "src": "videos/c.mp4"
     },
     {
       "title": "Connecting 3-pin JST to LDR Sensor",
@@ -27,5 +27,5 @@
   ],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-24T16:55:07.000Z"
+  "updatedAt": "2026-09-24T17:04:54.817Z"
 }
