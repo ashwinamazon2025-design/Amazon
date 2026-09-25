@@ -892,82 +892,6 @@
        VIDEO CARDS
        ======================================================== */
 
-    /* ========================================================
-       PRODUCT MANUAL + VIDEO LAYOUT
-       ======================================================== */
-
-    .product-instruction-layout{
-      display:grid;
-      grid-template-columns:230px minmax(0,1fr);
-      gap:22px;
-      align-items:start;
-    }
-
-    .manual-panel{
-      position:sticky;
-      top:122px;
-      padding:18px;
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-    }
-
-    .manual-panel .manual-label{
-      margin:0 0 7px;
-      color:var(--accent);
-      font-size:.72rem;
-      font-weight:900;
-      letter-spacing:.11em;
-      text-transform:uppercase;
-    }
-
-    .manual-panel h3{
-      margin:0 0 8px;
-      font-size:1.05rem;
-    }
-
-    .manual-panel p{
-      margin:0 0 14px;
-      font-size:.82rem;
-      line-height:1.45;
-    }
-
-    .manual-download-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      width:100%;
-      padding:12px 13px;
-      border:1px solid rgba(0,212,255,.65);
-      border-radius:12px;
-      background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(0,212,255,.07));
-      color:var(--accent);
-      text-decoration:none;
-      text-align:center;
-      font-size:.78rem;
-      font-weight:900;
-      letter-spacing:.04em;
-      line-height:1.25;
-      transition:transform .18s ease,border-color .18s ease,background .18s ease;
-    }
-
-    .manual-download-btn:hover{
-      transform:translateY(-1px);
-      border-color:var(--accent);
-      background:linear-gradient(135deg,rgba(0,212,255,.27),rgba(0,212,255,.11));
-    }
-
-    .manual-download-btn:focus-visible{
-      outline:2px solid var(--accent);
-      outline-offset:3px;
-    }
-
-    .product-video-area{
-      min-width:0;
-    }
-
     .video-grid{
       display:grid;
 
@@ -1204,14 +1128,6 @@
 
 
     @media(max-width:900px){
-
-      .product-instruction-layout{
-        grid-template-columns:1fr;
-      }
-
-      .manual-panel{
-        position:static;
-      }
 
       .landing-layout{
         grid-template-columns:1fr;
@@ -2741,31 +2657,6 @@ function productContentMarkup(product){
     ? 'style="display:grid;gap:18px;max-width:900px"'
     : "";
 
-  /*
-    PDF source priority:
-      1. pdf
-      2. manualPdf
-      3. instructionManual
-      4. pdfUrl
-      5. automatic fallback: manuals/<product-slug>.pdf
-
-    This lets existing and future product JSON files opt into an
-    explicit PDF path, while still giving every product a predictable
-    default manual location.
-  */
-  const productSlug =
-    product.slug ||
-    slugify(product.name);
-
-  const manualPdf =
-    String(
-      product.pdf ||
-      product.manualPdf ||
-      product.instructionManual ||
-      product.pdfUrl ||
-      `manuals/${productSlug}.pdf`
-    ).trim();
-
   return `
     <div class="hero">
       <div class="eyebrow">${escapeHtml(product.category || "Instruction Page")}</div>
@@ -2780,27 +2671,8 @@ function productContentMarkup(product){
       ${product.extraNotes ? `<p><strong>Additional notes:</strong> ${escapeHtml(product.extraNotes)}</p>` : ""}
     </div>
 
-    <div class="product-instruction-layout">
-      <aside class="manual-panel">
-        <div class="manual-label">Instruction Manual</div>
-        <h3>PDF Manual</h3>
-        <p>Download the complete instruction manual for this product.</p>
-        <a
-          class="manual-download-btn"
-          href="${escapeHtml(manualPdf)}"
-          download
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ↓ DOWNLOAD PDF
-        </a>
-      </aside>
-
-      <div class="product-video-area">
-        <div class="${gridClass}" ${singleStyle}>
-          ${videos.map(makeVideoCard).join("")}
-        </div>
-      </div>
+    <div class="${gridClass}" ${singleStyle}>
+      ${videos.map(makeVideoCard).join("")}
     </div>
   `;
 }
