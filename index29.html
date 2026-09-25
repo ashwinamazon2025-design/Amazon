@@ -953,24 +953,6 @@
       transition:transform .18s ease,border-color .18s ease,background .18s ease;
     }
 
-    .manual-download-list{
-      display:grid;
-      gap:10px;
-    }
-
-    .manual-download-item{
-      display:grid;
-      gap:6px;
-    }
-
-    .manual-download-title{
-      color:#ddd;
-      font-size:.78rem;
-      font-weight:800;
-      line-height:1.35;
-      overflow-wrap:anywhere;
-    }
-
     .manual-download-btn:hover{
       transform:translateY(-1px);
       border-color:var(--accent);
@@ -2759,98 +2741,30 @@ function productContentMarkup(product){
     ? 'style="display:grid;gap:18px;max-width:900px"'
     : "";
 
+  /*
+    PDF source priority:
+      1. pdf
+      2. manualPdf
+      3. instructionManual
+      4. pdfUrl
+      5. automatic fallback: manuals/<product-slug>.pdf
+
+    This lets existing and future product JSON files opt into an
+    explicit PDF path, while still giving every product a predictable
+    default manual location.
+  */
   const productSlug =
     product.slug ||
     slugify(product.name);
 
-  /*
-    Preferred format from the Developer Console:
-
-    "pdfs": [
-      {"title":"Complete Instruction Manual","src":"manuals/example.pdf"},
-      {"title":"Quick Start Guide","src":"manuals/quick-start.pdf"}
-    ]
-
-    Older single-PDF product files remain supported.
-  */
-  let manuals =
-    Array.isArray(product.pdfs)
-      ? product.pdfs
-          .map((pdf,index)=>{
-            if(typeof pdf === "string"){
-              return {
-                title:`Instruction Manual ${index + 1}`,
-                src:pdf.trim()
-              };
-            }
-
-            if(!pdf || typeof pdf !== "object"){
-              return null;
-            }
-
-            const src =
-              String(
-                pdf.src ||
-                pdf.url ||
-                pdf.file ||
-                ""
-              ).trim();
-
-            if(!src){
-              return null;
-            }
-
-            return {
-              title:
-                String(
-                  pdf.title ||
-                  pdf.name ||
-                  `Instruction Manual ${index + 1}`
-                ).trim(),
-              src
-            };
-          })
-          .filter(Boolean)
-      : [];
-
-  /* Backward compatibility with the earlier single-PDF fields. */
-  if(!manuals.length){
-    const legacyManual =
-      String(
-        product.pdf ||
-        product.manualPdf ||
-        product.instructionManual ||
-        product.pdfUrl ||
-        `manuals/${productSlug}.pdf`
-      ).trim();
-
-    if(legacyManual){
-      manuals = [{
-        title:"Complete Instruction Manual",
-        src:legacyManual
-      }];
-    }
-  }
-
-  const manualButtons =
-    manuals
-      .map((manual,index)=>`
-        <div class="manual-download-item">
-          <div class="manual-download-title">
-            ${escapeHtml(manual.title || `Instruction Manual ${index + 1}`)}
-          </div>
-          <a
-            class="manual-download-btn"
-            href="${escapeHtml(manual.src)}"
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ↓ DOWNLOAD PDF
-          </a>
-        </div>
-      `)
-      .join("");
+  const manualPdf =
+    String(
+      product.pdf ||
+      product.manualPdf ||
+      product.instructionManual ||
+      product.pdfUrl ||
+      `manuals/${productSlug}.pdf`
+    ).trim();
 
   return `
     <div class="hero">
@@ -2868,12 +2782,18 @@ function productContentMarkup(product){
 
     <div class="product-instruction-layout">
       <aside class="manual-panel">
-        <div class="manual-label">Instruction Manuals</div>
-        <h3>PDF Downloads</h3>
-        <p>Download the instruction PDF you need for this product.</p>
-        <div class="manual-download-list">
-          ${manualButtons}
-        </div>
+        <div class="manual-label">Instruction Manual</div>
+        <h3>PDF Manual</h3>
+        <p>Download the complete instruction manual for this product.</p>
+        <a
+          class="manual-download-btn"
+          href="${escapeHtml(manualPdf)}"
+          download
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ↓ DOWNLOAD PDF
+        </a>
       </aside>
 
       <div class="product-video-area">
