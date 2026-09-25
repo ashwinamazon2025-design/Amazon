@@ -9,12 +9,12 @@
   "layout": "grid",
   "videos": [
     {
-      "title": "How to make the Chassis",
-      "src": "videos/Motor_to_Chassis_Step_by_Step_Instruction_With_Items_and_Velcro.mp4"
+      "title": "How to assemble the Caster Wheel",
+      "src": "videos/Caster_Wheel_Assembly_Step_by_Step.mp4"
     },
     {
-      "title": "Instruction Video 2",
-      "src": ""
+      "title": "How to assemble the Chassis",
+      "src": "videos/Motor_to_Chassis_Step_by_Step_Instruction_With_Items_and_Velcro.mp4"
     },
     {
       "title": "Connecting 3-pin JST to IR Sensor",
@@ -27,5 +27,5 @@
   ],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-25T10:17:22.819Z"
+  "updatedAt": "2026-09-25T10:26:38.329Z"
 }
