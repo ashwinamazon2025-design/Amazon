@@ -14,20 +14,6 @@
       "storage": "",
       "assetId": "",
       "assetName": ""
-    },
-    {
-      "title": "Create the Pattern",
-      "src": "videos/mandala-step-2.mp4",
-      "storage": "",
-      "assetId": "",
-      "assetName": ""
-    },
-    {
-      "title": "Finish the Coaster",
-      "src": "videos/mandala-step-3.mp4",
-      "storage": "",
-      "assetId": "",
-      "assetName": ""
     }
   ],
   "pdfs": [
@@ -41,5 +27,5 @@
   ],
   "slug": "mandala-coaster-art",
   "fixedPage": "mandala",
-  "updatedAt": "2026-09-26T05:16:03.493Z"
+  "updatedAt": "2026-09-26T05:17:21.123Z"
 }
