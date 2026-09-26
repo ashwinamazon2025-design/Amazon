@@ -1285,15 +1285,6 @@
 
     @media(max-width:650px){
 
-      /*
-        MOBILE HEADER / LOGO OVERLAP FIX
-      */
-      main{
-        padding-top:72px;
-      }
-
-
-
       .product-media-layout{
         grid-template-columns:1fr;
         gap:16px;
@@ -1421,7 +1412,7 @@
 
     <div class="brand-wrap">
 
-      <!-- Logo now lives in its own repository folder -->
+      <!-- Logo now lives in its own GitHub folder -->
       <img
         class="site-logo"
         src="assets/logo/nilda-logo.png"
@@ -1535,7 +1526,7 @@
 
             <br><br>
 
-            Images uploaded to the repository
+            Images uploaded to the GitHub
             <code>pictures/</code> folder will appear here automatically.
 
           </div>
@@ -1695,15 +1686,24 @@
 <script>
 
 /* ============================================================
-   PUBLIC CONTENT PATHS
+   PUBLIC GITHUB REPOSITORY SETTINGS
 
-   Videos and PDFs use relative repository paths saved in the
-   product JSON files, for example:
-     videos/example.mp4
-     pdfs/instruction-manual.pdf
+   The carousel needs the repository identity so it can list
+   files inside /pictures automatically.
 
-   Carousel pictures are listed by pictures.json.
+   If this website runs at:
+   https://USERNAME.github.io/REPOSITORY/
+
+   the script will normally detect the username and repository.
+
+   IMPORTANT:
+   If you use a CUSTOM DOMAIN (for example your GoDaddy domain),
+   enter the GitHub owner and repository name below.
    ============================================================ */
+
+const GITHUB_OWNER = "ashwinamazon2025-design";
+const GITHUB_REPOSITORY = "Amazon";
+const GITHUB_BRANCH = "main";
 
 
 /* ============================================================
@@ -1714,45 +1714,6 @@ const nav = document.getElementById("mainNav");
 const dynamicPages = document.getElementById("dynamicPages");
 const loadNotice = document.getElementById("loadNotice");
 const landingActions = document.getElementById("landingActions");
-
-
-/*
-  Best-effort interface protection.
-  This removes the normal right-click menu and common developer-tool shortcuts.
-*/
-document.addEventListener(
-  "contextmenu",
-  event=>event.preventDefault()
-);
-
-document.addEventListener(
-  "keydown",
-  event=>{
-
-    const key =
-      String(event.key || "")
-        .toLowerCase();
-
-    const blocked =
-      event.key === "F12" ||
-      (
-        event.ctrlKey &&
-        event.shiftKey &&
-        ["i","j","c"].includes(key)
-      ) ||
-      (
-        event.ctrlKey &&
-        ["u","s"].includes(key)
-      );
-
-    if(blocked){
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-  },
-  true
-);
 
 
 function showPage(id){
@@ -2174,7 +2135,7 @@ async function loadHomeTextCarousel(){
 
     If home-text-carousel.json is missing or empty,
     the page automatically lists the content folder
-    in the Amazon repository repository and uses each
+    in the Amazon GitHub repository and uses each
     text/markdown file as one small-carousel slide.
 
     Example:
@@ -2190,7 +2151,7 @@ async function loadHomeTextCarousel(){
     try{
 
       const repo =
-        detectrepositoryRepository();
+        detectGitHubRepository();
 
       if(!repo.owner || !repo.repo){
 
@@ -2201,14 +2162,14 @@ async function loadHomeTextCarousel(){
       }
 
       const apiUrl =
-        `https://api.repository.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/content?ref=${encodeURIComponent(repo.branch)}`;
+        `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/content?ref=${encodeURIComponent(repo.branch)}`;
 
       const listResponse =
         await fetch(
           apiUrl,
           {
             headers:{
-              "Accept":"application/vnd.repository+json"
+              "Accept":"application/vnd.github+json"
             },
             cache:"no-store"
           }
@@ -2452,111 +2413,194 @@ textCarouselNext.addEventListener(
 
 
 
-function normalizePictureEntry(entry,index){
+function detectGitHubRepository(){
 
-  if(typeof entry === "string"){
+  let owner =
+    GITHUB_OWNER.trim();
 
-    const value =
-      entry.trim();
+  let repo =
+    GITHUB_REPOSITORY.trim();
 
-    if(!value){
-      return null;
-    }
 
-    return {
-      name:
-        value.split("/").pop() ||
-        `Picture ${index + 1}`,
-      download_url:
-        value.includes("/")
-          ? value
-          : `pictures/${value}`
-    };
-  }
+  /*
+    Automatic detection for standard GitHub Pages project URLs:
+    https://username.github.io/repository/
+  */
 
   if(
-    entry &&
-    typeof entry === "object"
+    (!owner || !repo) &&
+    location.hostname.endsWith(".github.io")
   ){
 
-    const raw =
-      String(
-        entry.src ||
-        entry.url ||
-        entry.path ||
-        entry.file ||
-        entry.download_url ||
-        ""
-      ).trim();
+    owner =
+      location.hostname
+        .replace(".github.io","");
 
-    const name =
-      String(
-        entry.name ||
-        raw.split("/").pop() ||
-        `Picture ${index + 1}`
-      ).trim();
 
-    if(!raw && !name){
-      return null;
+    const pathParts =
+      location.pathname
+        .split("/")
+        .filter(Boolean);
+
+
+    /*
+      username.github.io repository sites use the first
+      path segment as the repository name.
+
+      For a user-site repository (username.github.io),
+      use username.github.io as the repository name.
+    */
+
+    if(pathParts.length){
+
+      repo = pathParts[0];
+
+    }else{
+
+      repo =
+        owner + ".github.io";
+
     }
 
-    return {
-      name,
-      download_url:
-        raw
-          ? (
-              raw.includes("/")
-                ? raw
-                : `pictures/${raw}`
-            )
-          : `pictures/${name}`
-    };
   }
 
-  return null;
+
+  return {
+    owner,
+    repo,
+    branch:GITHUB_BRANCH || "main"
+  };
+
 }
+
+
+
+function isImageFile(name){
+
+  return /\.(jpg|jpeg|png|webp|gif)$/i
+    .test(name || "");
+
+}
+
 
 
 async function loadCarouselPictures(){
 
+  const config =
+    detectGitHubRepository();
+
+
+  if(
+    !config.owner ||
+    !config.repo
+  ){
+
+    carouselStage.innerHTML = `
+
+      <div class="carousel-empty">
+
+        <strong>
+          Carousel repository needs to be configured.
+        </strong>
+
+        <br><br>
+
+        If this site uses a custom domain,
+        edit the three GitHub repository settings
+        near the top of the JavaScript section
+        in <code>index.html</code>.
+
+      </div>
+    `;
+
+
+    carouselNotice.style.display =
+      "block";
+
+
+    carouselNotice.innerHTML = `
+
+      For automatic carousel updates on a custom domain,
+      set <code>GITHUB_OWNER</code> and
+      <code>GITHUB_REPOSITORY</code> once in this file.
+
+    `;
+
+
+    hideCarouselControls();
+
+    return;
+  }
+
+
   try{
+
+    /*
+      GitHub Contents API:
+      Lists every file in the pictures folder.
+      No token is required for a public repository.
+    */
+
+    const apiUrl =
+      `https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repo)}/contents/pictures?ref=${encodeURIComponent(config.branch)}`;
+
 
     const response =
       await fetch(
-        `pictures.json?ts=${Date.now()}`,
+        apiUrl,
         {
-          cache:"no-store"
+          headers:{
+            "Accept":"application/vnd.github+json"
+          }
         }
       );
+
 
     if(!response.ok){
 
       throw new Error(
-        `pictures.json returned ${response.status}`
+        `GitHub returned ${response.status}`
       );
 
     }
 
-    const data =
+
+    const files =
       await response.json();
 
-    const entries =
-      Array.isArray(data)
-        ? data
-        : (
-            Array.isArray(data.pictures)
-              ? data.pictures
-              : (
-                  Array.isArray(data.images)
-                    ? data.images
-                    : []
-                )
-          );
 
     carouselImages =
-      entries
-        .map(normalizePictureEntry)
-        .filter(Boolean);
+      (Array.isArray(files) ? files : [])
+
+        .filter(file =>
+          file.type === "file" &&
+          isImageFile(file.name)
+        )
+
+        .sort((a,b) =>
+          a.name.localeCompare(
+            b.name,
+            undefined,
+            {
+              numeric:true,
+              sensitivity:"base"
+            }
+          )
+        )
+
+        .map(file => ({
+
+          name:file.name,
+
+          /*
+            download_url points directly to the image file
+            in the public repository.
+          */
+
+          url:file.download_url
+
+        }));
+
 
     if(!carouselImages.length){
 
@@ -2570,15 +2614,22 @@ async function loadCarouselPictures(){
 
           <br><br>
 
-          Add image paths to <code>pictures.json</code>.
+          Upload JPG, JPEG, PNG, WEBP or GIF files
+          to the GitHub <code>pictures/</code> folder.
+
+          <br><br>
+
+          They will appear here automatically.
 
         </div>
       `;
+
 
       hideCarouselControls();
 
       return;
     }
+
 
     carouselIndex =
       normalizedCarouselIndex(
@@ -2590,9 +2641,14 @@ async function loadCarouselPictures(){
 
     restartSynchronizedCarouselTimer();
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Carousel error:",
+      error
+    );
+
 
     carouselStage.innerHTML = `
 
@@ -2604,16 +2660,52 @@ async function loadCarouselPictures(){
 
         <br><br>
 
-        Check <code>pictures.json</code>.
+        Check the GitHub repository settings and make
+        sure the repository is public and contains a
+        <code>pictures</code> folder.
 
       </div>
     `;
+
+
+    carouselNotice.style.display =
+      "block";
+
+
+    carouselNotice.textContent =
+      "The rest of the website will continue to work even if the carousel cannot load.";
+
 
     hideCarouselControls();
 
   }
 
 }
+
+
+
+function hideCarouselControls(){
+
+  document
+    .getElementById("carouselPrev")
+    .style.display = "none";
+
+
+  document
+    .getElementById("carouselNext")
+    .style.display = "none";
+
+
+  carouselCounter.style.display =
+    "none";
+
+
+  carouselDots.innerHTML =
+    "";
+
+}
+
+
 
 function renderCarousel(){
 
