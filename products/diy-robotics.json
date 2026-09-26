@@ -2,7 +2,7 @@
   "name": "DIY Robotic & Electronic Kit",
   "pageTitle": "DIY Robotic & Electronic Kit",
   "category": "Robotics",
-  "subcategory": "Ashwin Testing",
+  "subcategory": "Robotic Kit for Kids",
   "targetAge": "",
   "description": "Step-by-step instructional videos for assembling, connecting and testing robotics and electronics projects.",
   "extraNotes": "",
@@ -28,34 +28,22 @@
   "pdfs": [
     {
       "title": "Instruction Manual - 1",
-      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.1F.pdf",
-      "storage": "release-asset",
-      "assetId": "589953550",
-      "assetName": "Page.1F.pdf"
+      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.1F.pdf"
     },
     {
       "title": "Instruction Manual - 2",
-      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.2F.pdf",
-      "storage": "release-asset",
-      "assetId": "589954508",
-      "assetName": "Page.2F.pdf"
+      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.2F.pdf"
     },
     {
       "title": "Instruction Manual - 3",
-      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.3.pdf",
-      "storage": "release-asset",
-      "assetId": "589955090",
-      "assetName": "Page.3.pdf"
+      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.3.pdf"
     },
     {
       "title": "Instruction Manual - 4",
-      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.4.pdf",
-      "storage": "release-asset",
-      "assetId": "589955657",
-      "assetName": "Page.4.pdf"
+      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Page.4.pdf"
     }
   ],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-26T04:57:21.647Z"
+  "updatedAt": "2026-09-26T06:19:22.925Z"
 }
