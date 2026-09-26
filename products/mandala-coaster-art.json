@@ -1,9 +1,8 @@
 {
-  "slug": "mandala-coaster-art",
-  "fixedPage": "mandala",
   "name": "Mandala Coaster Art",
   "pageTitle": "Mandala Coaster Art",
   "category": "Art Instruction Videos",
+  "subcategory": "",
   "targetAge": "",
   "description": "Follow the videos to create Mandala coaster artwork step by step.",
   "extraNotes": "",
@@ -11,15 +10,36 @@
   "videos": [
     {
       "title": "Getting Started",
-      "src": "videos/mandala-step-1.mp4"
+      "src": "videos/mandala-step-1.mp4",
+      "storage": "",
+      "assetId": "",
+      "assetName": ""
     },
     {
       "title": "Create the Pattern",
-      "src": "videos/mandala-step-2.mp4"
+      "src": "videos/mandala-step-2.mp4",
+      "storage": "",
+      "assetId": "",
+      "assetName": ""
     },
     {
       "title": "Finish the Coaster",
-      "src": "videos/mandala-step-3.mp4"
+      "src": "videos/mandala-step-3.mp4",
+      "storage": "",
+      "assetId": "",
+      "assetName": ""
     }
-  ]
+  ],
+  "pdfs": [
+    {
+      "title": "Instruction Manual",
+      "src": "https://github.com/ashwinamazon2025-design/Amazon/releases/download/instruction-manuals/Instruction.Manual_4.5x4.5.pdf",
+      "storage": "release-asset",
+      "assetId": "589984653",
+      "assetName": "Instruction.Manual_4.5x4.5.pdf"
+    }
+  ],
+  "slug": "mandala-coaster-art",
+  "fixedPage": "mandala",
+  "updatedAt": "2026-09-26T05:16:03.493Z"
 }
