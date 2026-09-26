@@ -892,103 +892,94 @@
        VIDEO CARDS
        ======================================================== */
 
+    /* ========================================================
+       PRODUCT MANUAL + VIDEO LAYOUT
+       ======================================================== */
 
-    .product-media-layout{
+    .product-instruction-layout{
       display:grid;
-      grid-template-columns:minmax(220px,300px) minmax(0,1fr);
+      grid-template-columns:230px minmax(0,1fr);
       gap:22px;
       align-items:start;
     }
 
     .manual-panel{
       position:sticky;
-      top:126px;
-
+      top:122px;
       padding:18px;
-
+      background:var(--panel);
       border:1px solid var(--line);
       border-radius:18px;
-
-      background:
-        linear-gradient(135deg,#0d0d0d,#141414);
-
       box-shadow:var(--shadow);
     }
 
-    .manual-panel h2{
+    .manual-panel .manual-label{
       margin:0 0 7px;
-      font-size:1.1rem;
+      color:var(--accent);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+
+    .manual-panel h3{
+      margin:0 0 8px;
+      font-size:1.05rem;
     }
 
     .manual-panel p{
       margin:0 0 14px;
-      font-size:.84rem;
-      line-height:1.5;
+      font-size:.82rem;
+      line-height:1.45;
     }
 
-    .manual-list{
+    .manual-download-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      padding:12px 13px;
+      border:1px solid rgba(0,212,255,.65);
+      border-radius:12px;
+      background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(0,212,255,.07));
+      color:var(--accent);
+      text-decoration:none;
+      text-align:center;
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.04em;
+      line-height:1.25;
+      transition:transform .18s ease,border-color .18s ease,background .18s ease;
+    }
+
+    .manual-download-list{
       display:grid;
       gap:10px;
     }
 
-    .manual-download{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-
-      width:100%;
-
-      padding:12px 13px;
-
-      border:1px solid #343434;
-      border-radius:12px;
-
-      background:#080808;
-      color:#fff;
-
-      text-decoration:none;
-      font-weight:900;
-      line-height:1.25;
-
-      transition:
-        border-color .18s ease,
-        background .18s ease,
-        transform .18s ease;
+    .manual-download-item{
+      display:grid;
+      gap:6px;
     }
 
-    .manual-download:hover{
-      border-color:var(--accent);
-      background:#10191b;
-      transform:translateY(-1px);
-    }
-
-    .manual-download .manual-icon{
-      flex:0 0 auto;
-      color:var(--accent);
-      font-size:1.05rem;
-    }
-
-    .manual-download .manual-title{
-      min-width:0;
-      flex:1;
+    .manual-download-title{
+      color:#ddd;
+      font-size:.78rem;
+      font-weight:800;
+      line-height:1.35;
       overflow-wrap:anywhere;
     }
 
-    .manual-download .manual-action{
-      flex:0 0 auto;
-      color:#91a6ac;
-      font-size:.68rem;
-      letter-spacing:.08em;
-      text-transform:uppercase;
+    .manual-download-btn:hover{
+      transform:translateY(-1px);
+      border-color:var(--accent);
+      background:linear-gradient(135deg,rgba(0,212,255,.27),rgba(0,212,255,.11));
     }
 
-    .manual-panel-empty{
-      display:none;
-    }
-
-    .product-media-layout.no-manuals{
-      grid-template-columns:1fr;
+    .manual-download-btn:focus-visible{
+      outline:2px solid var(--accent);
+      outline-offset:3px;
     }
 
     .product-video-area{
@@ -1232,6 +1223,14 @@
 
     @media(max-width:900px){
 
+      .product-instruction-layout{
+        grid-template-columns:1fr;
+      }
+
+      .manual-panel{
+        position:static;
+      }
+
       .landing-layout{
         grid-template-columns:1fr;
       }
@@ -1285,16 +1284,13 @@
 
     @media(max-width:650px){
 
-      .product-media-layout{
-        grid-template-columns:1fr;
-        gap:16px;
+      /* On mobile, let the header scroll naturally with the page. */
+      header{
+        position:relative;
+        top:auto;
       }
 
-      .manual-panel{
-        position:static;
-      }
-
-
+      /* Mobile header and logo reduced by 50% from the previous mobile size. */
 
       .explore-title{
         font-size:clamp(1.35rem,7vw,2rem);
@@ -1309,43 +1305,51 @@
 
 
       header::before{
-        left:154px;
+        left:58px;
       }
 
       .topbar{
-        height:82px;
-        min-height:82px;
+        height:31px;
+        min-height:31px;
 
-        padding:8px 10px 8px 4px;
+        padding:3px 4px 3px 2px;
+        gap:9px;
 
         overflow:visible;
       }
 
       .brand-wrap{
-        gap:10px;
+        gap:4px;
         max-width:100%;
 
-        padding-left:150px;
-        min-height:60px;
+        padding-left:57px;
+        min-height:23px;
       }
 
       .site-logo{
-        width:145px;
-        height:145px;
+        width:55px;
+        height:55px;
 
-        left:4px;
+        left:2px;
         top:0;
       }
 
       .brand{
-        /*
-          Mobile header height is 82px, so this stays close to
-          half of the header height.
-        */
-        font-size:41px;
+        /* Mobile brand text reduced proportionally with the header. */
+        font-size:16px;
         line-height:1;
         letter-spacing:.02em;
         white-space:normal;
+      }
+
+      nav{
+        gap:4px;
+      }
+
+      .tab-btn{
+        padding:5px 7px;
+        border-radius:6px;
+        font-size:.55rem;
       }
 
       .landing-actions{
@@ -1401,6 +1405,23 @@
 
     }
 
+
+    /* ========================================================
+       BASIC BROWSER-SIDE CONTENT DETERRENTS
+       These discourage casual copying but are not a security boundary.
+       ======================================================== */
+    html,
+    body,
+    body *{
+      -webkit-user-select:none;
+      user-select:none;
+    }
+
+    img{
+      -webkit-user-drag:none;
+      user-drag:none;
+    }
+
   </style>
 </head>
 
@@ -1412,7 +1433,7 @@
 
     <div class="brand-wrap">
 
-      <!-- Logo now lives in its own GitHub folder -->
+      <!-- Logo uses a relative site path -->
       <img
         class="site-logo"
         src="assets/logo/nilda-logo.png"
@@ -1526,8 +1547,7 @@
 
             <br><br>
 
-            Images uploaded to the GitHub
-            <code>pictures/</code> folder will appear here automatically.
+            Images listed in <code>content/pictures.json</code> will appear here automatically.
 
           </div>
 
@@ -1686,24 +1706,17 @@
 <script>
 
 /* ============================================================
-   PUBLIC GITHUB REPOSITORY SETTINGS
-
-   The carousel needs the repository identity so it can list
-   files inside /pictures automatically.
-
-   If this website runs at:
-   https://USERNAME.github.io/REPOSITORY/
-
-   the script will normally detect the username and repository.
-
-   IMPORTANT:
-   If you use a CUSTOM DOMAIN (for example your GoDaddy domain),
-   enter the GitHub owner and repository name below.
+   RELATIVE SITE PATHS
+   Local site assets are loaded through relative URLs so the page
+   does not need a repository owner, repository name, or Git host.
    ============================================================ */
 
-const GITHUB_OWNER = "ashwinamazon2025-design";
-const GITHUB_REPOSITORY = "Amazon";
-const GITHUB_BRANCH = "main";
+const HOME_TEXT_URL = "content/home-text-carousel.json";
+const PRODUCTS_INDEX_URL = "products/index.json";
+const PICTURE_MANIFEST_URLS = [
+  "content/pictures.json",
+  "pictures/index.json"
+];
 
 
 /* ============================================================
@@ -1714,6 +1727,36 @@ const nav = document.getElementById("mainNav");
 const dynamicPages = document.getElementById("dynamicPages");
 const loadNotice = document.getElementById("loadNotice");
 const landingActions = document.getElementById("landingActions");
+
+
+/* ============================================================
+   BASIC BROWSER-SIDE CONTENT DETERRENTS
+   ============================================================ */
+
+document.addEventListener("contextmenu", event => {
+  event.preventDefault();
+});
+
+document.addEventListener("dragstart", event => {
+  if(event.target.closest?.("img")){
+    event.preventDefault();
+  }
+});
+
+document.addEventListener("keydown", event => {
+  const key = String(event.key || "").toLowerCase();
+  const modifier = event.ctrlKey || event.metaKey;
+
+  const blocked =
+    event.key === "F12" ||
+    (modifier && key === "u") ||
+    (modifier && event.shiftKey && ["i","j","c"].includes(key));
+
+  if(blocked){
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}, true);
 
 
 function showPage(id){
@@ -2085,17 +2128,11 @@ async function loadHomeTextCarousel(){
 
   homeTextSlides = [];
 
-  /*
-    Preferred source:
-    content/home-text-carousel.json
-
-    This is the file managed by the Developer Console.
-  */
   try{
 
     const response =
       await fetch(
-        `content/home-text-carousel.json?ts=${Date.now()}`,
+        `${HOME_TEXT_URL}?ts=${Date.now()}`,
         {
           cache:"no-store"
         }
@@ -2122,174 +2159,12 @@ async function loadHomeTextCarousel(){
   }catch(error){
 
     console.warn(
-      "Could not load home-text-carousel.json:",
+      "Could not load the home text carousel:",
       error
     );
 
   }
 
-
-  /*
-    Alternative source:
-    simple .txt or .md files inside content/
-
-    If home-text-carousel.json is missing or empty,
-    the page automatically lists the content folder
-    in the Amazon GitHub repository and uses each
-    text/markdown file as one small-carousel slide.
-
-    Example:
-      content/01-welcome.txt
-      content/02-robotics.txt
-      content/03-mandala.txt
-
-    First non-empty line = slide heading.
-    Remaining non-empty lines = slide message.
-  */
-  if(!homeTextSlides.length){
-
-    try{
-
-      const repo =
-        detectGitHubRepository();
-
-      if(!repo.owner || !repo.repo){
-
-        throw new Error(
-          "Content repository is not configured."
-        );
-
-      }
-
-      const apiUrl =
-        `https://api.github.com/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.repo)}/contents/content?ref=${encodeURIComponent(repo.branch)}`;
-
-      const listResponse =
-        await fetch(
-          apiUrl,
-          {
-            headers:{
-              "Accept":"application/vnd.github+json"
-            },
-            cache:"no-store"
-          }
-        );
-
-      if(!listResponse.ok){
-
-        throw new Error(
-          `Content folder returned ${listResponse.status}`
-        );
-
-      }
-
-      const files =
-        await listResponse.json();
-
-      const textFiles =
-        Array.isArray(files)
-          ? files
-              .filter(
-                item =>
-                  item.type === "file" &&
-                  /\.(txt|md)$/i.test(item.name)
-              )
-              .sort(
-                (a,b)=>
-                  a.name.localeCompare(
-                    b.name,
-                    undefined,
-                    {
-                      numeric:true,
-                      sensitivity:"base"
-                    }
-                  )
-              )
-          : [];
-
-      const loadedSlides = [];
-
-      for(const file of textFiles){
-
-        try{
-
-          const fileResponse =
-            await fetch(
-              `${file.download_url}?ts=${Date.now()}`,
-              {
-                cache:"no-store"
-              }
-            );
-
-          if(!fileResponse.ok){
-            continue;
-          }
-
-          const rawText =
-            (await fileResponse.text()).trim();
-
-          if(!rawText){
-            continue;
-          }
-
-          const lines =
-            rawText
-              .split(/\r?\n/)
-              .map(line=>line.trim());
-
-          const firstNonEmpty =
-            lines.findIndex(Boolean);
-
-          if(firstNonEmpty === -1){
-            continue;
-          }
-
-          const title =
-            lines[firstNonEmpty]
-              .replace(/^#+\s*/, "")
-              .trim();
-
-          const message =
-            lines
-              .slice(firstNonEmpty + 1)
-              .filter(Boolean)
-              .join(" ")
-              .trim();
-
-          loadedSlides.push({
-            title,
-            text:message
-          });
-
-        }catch(fileError){
-
-          console.warn(
-            `Could not load ${file.name}:`,
-            fileError
-          );
-
-        }
-
-      }
-
-      homeTextSlides =
-        loadedSlides;
-
-    }catch(error){
-
-      console.warn(
-        "Could not load text files from content folder:",
-        error
-      );
-
-    }
-
-  }
-
-
-  /*
-    Final fallback so the small carousel never appears empty.
-  */
   if(!homeTextSlides.length){
 
     homeTextSlides = [
@@ -2413,68 +2288,6 @@ textCarouselNext.addEventListener(
 
 
 
-function detectGitHubRepository(){
-
-  let owner =
-    GITHUB_OWNER.trim();
-
-  let repo =
-    GITHUB_REPOSITORY.trim();
-
-
-  /*
-    Automatic detection for standard GitHub Pages project URLs:
-    https://username.github.io/repository/
-  */
-
-  if(
-    (!owner || !repo) &&
-    location.hostname.endsWith(".github.io")
-  ){
-
-    owner =
-      location.hostname
-        .replace(".github.io","");
-
-
-    const pathParts =
-      location.pathname
-        .split("/")
-        .filter(Boolean);
-
-
-    /*
-      username.github.io repository sites use the first
-      path segment as the repository name.
-
-      For a user-site repository (username.github.io),
-      use username.github.io as the repository name.
-    */
-
-    if(pathParts.length){
-
-      repo = pathParts[0];
-
-    }else{
-
-      repo =
-        owner + ".github.io";
-
-    }
-
-  }
-
-
-  return {
-    owner,
-    repo,
-    branch:GITHUB_BRANCH || "main"
-  };
-
-}
-
-
-
 function isImageFile(name){
 
   return /\.(jpg|jpeg|png|webp|gif)$/i
@@ -2483,203 +2296,133 @@ function isImageFile(name){
 }
 
 
+function normalizeRelativePictureEntry(entry){
+
+  let src = "";
+  let name = "";
+
+  if(typeof entry === "string"){
+    src = entry.trim();
+    name = src.split("/").pop() || src;
+  }else if(entry && typeof entry === "object"){
+    src = String(entry.src || entry.url || entry.file || "").trim();
+    name = String(entry.name || "").trim() || src.split("/").pop() || src;
+  }
+
+  if(!src){
+    return null;
+  }
+
+  /* Only allow local/relative picture paths for this carousel. */
+  if(
+    /^[a-z][a-z0-9+.-]*:/i.test(src) ||
+    src.startsWith("//")
+  ){
+    return null;
+  }
+
+  src = src.replace(/^\/+/, "");
+
+  if(!src.includes("/")){
+    src = `pictures/${src}`;
+  }
+
+  if(!isImageFile(src)){
+    return null;
+  }
+
+  return {
+    name,
+    url:src
+  };
+}
+
+
 
 async function loadCarouselPictures(){
 
-  const config =
-    detectGitHubRepository();
+  carouselImages = [];
+  carouselNotice.style.display = "none";
 
+  let manifest = null;
 
-  if(
-    !config.owner ||
-    !config.repo
-  ){
+  for(const manifestUrl of PICTURE_MANIFEST_URLS){
+
+    try{
+
+      const response =
+        await fetch(
+          `${manifestUrl}?ts=${Date.now()}`,
+          {
+            cache:"no-store"
+          }
+        );
+
+      if(response.ok){
+        manifest = await response.json();
+        break;
+      }
+
+    }catch(error){
+      console.warn(
+        `Could not load ${manifestUrl}:`,
+        error
+      );
+    }
+
+  }
+
+  const entries =
+    Array.isArray(manifest)
+      ? manifest
+      : Array.isArray(manifest?.pictures)
+        ? manifest.pictures
+        : Array.isArray(manifest?.images)
+          ? manifest.images
+          : [];
+
+  carouselImages =
+    entries
+      .map(normalizeRelativePictureEntry)
+      .filter(Boolean)
+      .sort((a,b) =>
+        a.name.localeCompare(
+          b.name,
+          undefined,
+          {
+            numeric:true,
+            sensitivity:"base"
+          }
+        )
+      );
+
+  if(!carouselImages.length){
 
     carouselStage.innerHTML = `
-
       <div class="carousel-empty">
-
-        <strong>
-          Carousel repository needs to be configured.
-        </strong>
-
+        <strong>No carousel pictures are listed yet.</strong>
         <br><br>
-
-        If this site uses a custom domain,
-        edit the three GitHub repository settings
-        near the top of the JavaScript section
-        in <code>index.html</code>.
-
+        Add the picture filenames to
+        <code>content/pictures.json</code> using relative paths.
       </div>
     `;
 
-
-    carouselNotice.style.display =
-      "block";
-
-
-    carouselNotice.innerHTML = `
-
-      For automatic carousel updates on a custom domain,
-      set <code>GITHUB_OWNER</code> and
-      <code>GITHUB_REPOSITORY</code> once in this file.
-
-    `;
-
+    carouselNotice.style.display = "block";
+    carouselNotice.innerHTML =
+      'Example: <code>{"pictures":["pictures/01.jpg","pictures/02.jpg"]}</code>';
 
     hideCarouselControls();
-
     return;
   }
 
-
-  try{
-
-    /*
-      GitHub Contents API:
-      Lists every file in the pictures folder.
-      No token is required for a public repository.
-    */
-
-    const apiUrl =
-      `https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repo)}/contents/pictures?ref=${encodeURIComponent(config.branch)}`;
-
-
-    const response =
-      await fetch(
-        apiUrl,
-        {
-          headers:{
-            "Accept":"application/vnd.github+json"
-          }
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        `GitHub returned ${response.status}`
-      );
-
-    }
-
-
-    const files =
-      await response.json();
-
-
-    carouselImages =
-      (Array.isArray(files) ? files : [])
-
-        .filter(file =>
-          file.type === "file" &&
-          isImageFile(file.name)
-        )
-
-        .sort((a,b) =>
-          a.name.localeCompare(
-            b.name,
-            undefined,
-            {
-              numeric:true,
-              sensitivity:"base"
-            }
-          )
-        )
-
-        .map(file => ({
-
-          name:file.name,
-
-          /*
-            download_url points directly to the image file
-            in the public repository.
-          */
-
-          url:file.download_url
-
-        }));
-
-
-    if(!carouselImages.length){
-
-      carouselStage.innerHTML = `
-
-        <div class="carousel-empty">
-
-          <strong>
-            No pictures have been added yet.
-          </strong>
-
-          <br><br>
-
-          Upload JPG, JPEG, PNG, WEBP or GIF files
-          to the GitHub <code>pictures/</code> folder.
-
-          <br><br>
-
-          They will appear here automatically.
-
-        </div>
-      `;
-
-
-      hideCarouselControls();
-
-      return;
-    }
-
-
-    carouselIndex =
-      normalizedCarouselIndex(
-        synchronizedCarouselPosition,
-        carouselImages.length
-      );
-
-    renderCarousel();
-
-    restartSynchronizedCarouselTimer();
-
-
-  }catch(error){
-
-    console.error(
-      "Carousel error:",
-      error
+  carouselIndex =
+    normalizedCarouselIndex(
+      synchronizedCarouselPosition,
+      carouselImages.length
     );
 
-
-    carouselStage.innerHTML = `
-
-      <div class="carousel-empty">
-
-        <strong>
-          Pictures could not be loaded.
-        </strong>
-
-        <br><br>
-
-        Check the GitHub repository settings and make
-        sure the repository is public and contains a
-        <code>pictures</code> folder.
-
-      </div>
-    `;
-
-
-    carouselNotice.style.display =
-      "block";
-
-
-    carouselNotice.textContent =
-      "The rest of the website will continue to work even if the carousel cannot load.";
-
-
-    hideCarouselControls();
-
-  }
-
+  renderCarousel();
+  restartSynchronizedCarouselTimer();
 }
 
 
@@ -2868,16 +2611,21 @@ function makeVideoCard(video,index){
     `Instruction Video ${index+1}`;
 
   /*
-    The direct source URL is used in a normal <a target="_blank">
-    link. This works much more reliably on mobile browsers than
-    attempting to create a popup window with JavaScript.
+    Open local videos inside our own relative player page rather
+    than exposing the raw MP4 as the browser page. This lets the
+    player page use the same browser-side content deterrents.
   */
-  const watchLink =
+  const watchUrl =
     src
+      ? `video-player.html?src=${encodeURIComponent(src)}&title=${encodeURIComponent(title)}`
+      : "";
+
+  const watchLink =
+    watchUrl
       ? `
         <a
           class="watch-video-btn"
-          href="${escapeHtml(src)}"
+          href="${escapeHtml(watchUrl)}"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -3003,129 +2751,136 @@ function makeVideoCard(video,index){
 
 
 
-function makeManualButton(pdf,index){
-
-  const src =
-    pdf?.src || "";
-
-  if(!src){
-    return "";
-  }
-
-  const title =
-    pdf?.title ||
-    `Instruction Manual ${index + 1}`;
-
-  return `
-    <a
-      class="manual-download"
-      href="${escapeHtml(src)}"
-      target="_blank"
-      rel="noopener noreferrer"
-      download
-    >
-      <span class="manual-icon">PDF</span>
-
-      <span class="manual-title">
-        ${escapeHtml(title)}
-      </span>
-
-      <span class="manual-action">
-        Download
-      </span>
-    </a>
-  `;
-}
-
-
-
 function productContentMarkup(product){
 
-  const videos =
-    Array.isArray(product.videos)
-      ? product.videos
-      : [];
+  const videos = Array.isArray(product.videos) ? product.videos : [];
+  const gridClass = product.layout === "single" ? "" : "video-grid";
+  const singleStyle = product.layout === "single"
+    ? 'style="display:grid;gap:18px;max-width:900px"'
+    : "";
 
-  const pdfs =
+  const productSlug =
+    product.slug ||
+    slugify(product.name);
+
+  /*
+    Preferred format from the Developer Console:
+
+    "pdfs": [
+      {"title":"Complete Instruction Manual","src":"manuals/example.pdf"},
+      {"title":"Quick Start Guide","src":"manuals/quick-start.pdf"}
+    ]
+
+    Older single-PDF product files remain supported.
+  */
+  let manuals =
     Array.isArray(product.pdfs)
       ? product.pdfs
-      : (
-          Array.isArray(product.manuals)
-            ? product.manuals
-            : []
-        );
+          .map((pdf,index)=>{
+            if(typeof pdf === "string"){
+              return {
+                title:`Instruction Manual ${index + 1}`,
+                src:pdf.trim()
+              };
+            }
 
-  const gridClass =
-    product.layout === "single"
-      ? ""
-      : "video-grid";
+            if(!pdf || typeof pdf !== "object"){
+              return null;
+            }
 
-  const singleStyle =
-    product.layout === "single"
-      ? 'style="display:grid;gap:18px;max-width:900px"'
-      : "";
+            const src =
+              String(
+                pdf.src ||
+                pdf.url ||
+                pdf.file ||
+                ""
+              ).trim();
 
-  const manualsMarkup =
-    pdfs
-      .map(makeManualButton)
+            if(!src){
+              return null;
+            }
+
+            return {
+              title:
+                String(
+                  pdf.title ||
+                  pdf.name ||
+                  `Instruction Manual ${index + 1}`
+                ).trim(),
+              src
+            };
+          })
+          .filter(Boolean)
+      : [];
+
+  /* Backward compatibility with the earlier single-PDF fields. */
+  if(!manuals.length){
+    const legacyManual =
+      String(
+        product.pdf ||
+        product.manualPdf ||
+        product.instructionManual ||
+        product.pdfUrl ||
+        `manuals/${productSlug}.pdf`
+      ).trim();
+
+    if(legacyManual){
+      manuals = [{
+        title:"Complete Instruction Manual",
+        src:legacyManual
+      }];
+    }
+  }
+
+  const manualButtons =
+    manuals
+      .map((manual,index)=>`
+        <div class="manual-download-item">
+          <div class="manual-download-title">
+            ${escapeHtml(manual.title || `Instruction Manual ${index + 1}`)}
+          </div>
+          <a
+            class="manual-download-btn"
+            href="${escapeHtml(manual.src)}"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ↓ DOWNLOAD PDF
+          </a>
+        </div>
+      `)
       .join("");
 
   return `
     <div class="hero">
       <div class="eyebrow">${escapeHtml(product.category || "Instruction Page")}</div>
-
       ${
         product.subcategory
           ? `<div class="product-subcategory">${escapeHtml(product.subcategory)}</div>`
           : ""
       }
-
       <h1>${escapeHtml(product.pageTitle || product.name)}</h1>
-
-      ${
-        product.description
-          ? `<p>${escapeHtml(product.description)}</p>`
-          : ""
-      }
-
-      ${
-        product.targetAge
-          ? `<p><strong>Suggested age:</strong> ${escapeHtml(product.targetAge)}</p>`
-          : ""
-      }
-
-      ${
-        product.extraNotes
-          ? `<p><strong>Additional notes:</strong> ${escapeHtml(product.extraNotes)}</p>`
-          : ""
-      }
+      ${product.description ? `<p>${escapeHtml(product.description)}</p>` : ""}
+      ${product.targetAge ? `<p><strong>Suggested age:</strong> ${escapeHtml(product.targetAge)}</p>` : ""}
+      ${product.extraNotes ? `<p><strong>Additional notes:</strong> ${escapeHtml(product.extraNotes)}</p>` : ""}
     </div>
 
-    <div class="product-media-layout ${pdfs.length ? "" : "no-manuals"}">
-
-      ${
-        pdfs.length
-          ? `
-            <aside class="manual-panel">
-              <h2>Instruction Manuals</h2>
-              <p>Download the PDF instructions for this product.</p>
-
-              <div class="manual-list">
-                ${manualsMarkup}
-              </div>
-            </aside>
-          `
-          : `
-            <aside class="manual-panel manual-panel-empty" aria-hidden="true"></aside>
-          `
-      }
+    <div class="product-instruction-layout">
+      <aside class="manual-panel">
+        <div class="manual-label">Instruction Manuals</div>
+        <h3>PDF Downloads</h3>
+        <p>Download the instruction PDF you need for this product.</p>
+        <div class="manual-download-list">
+          ${manualButtons}
+        </div>
+      </aside>
 
       <div class="product-video-area">
         <div class="${gridClass}" ${singleStyle}>
           ${videos.map(makeVideoCard).join("")}
         </div>
       </div>
-
     </div>
   `;
 }
@@ -3453,7 +3208,7 @@ async function loadProducts(){
 
     const response =
       await fetch(
-        `products/index.json?ts=${Date.now()}`,
+        `${PRODUCTS_INDEX_URL}?ts=${Date.now()}`,
         {
           cache:"no-store"
         }
@@ -3567,12 +3322,11 @@ async function loadProducts(){
 /* ============================================================
    VIDEO OPENING BEHAVIOUR
 
-   Video previews are non-interactive. Each video card contains a
-   normal WATCH VIDEO link with target="_blank".
+   Video previews are non-interactive. Each WATCH VIDEO link opens
+   the relative video-player.html page in a separate tab/window.
 
-   Desktop browsers normally open this in a separate tab/window.
-   Mobile browsers may open a new browser tab or their native video
-   viewer, depending on the browser and operating system.
+   That player page blocks normal right-click and common developer
+   shortcuts and prevents the browser from opening the raw MP4 page.
    ============================================================ */
 
 
