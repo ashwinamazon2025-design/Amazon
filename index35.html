@@ -3038,79 +3038,6 @@ document
 let nildaVideoPlayers = [];
 
 
-/*
-  Normalize video sources saved in product JSON.
-
-  Accepted examples:
-    videos/example.mp4
-    ./videos/example.mp4
-    /videos/example.mp4
-    example.mp4
-    videos\example.mp4
-
-  A bare filename is automatically treated as a file inside /videos/.
-  Full external URLs are left unchanged.
-*/
-function normalizeVideoSource(value){
-
-  let src =
-    String(value || "")
-      .trim();
-
-  if(!src){
-    return "";
-  }
-
-
-  /*
-    External/streaming URLs are already complete.
-  */
-  if(
-    /^(https?:|blob:|data:)/i.test(src) ||
-    src.startsWith("//")
-  ){
-    return src;
-  }
-
-
-  /*
-    Convert Windows-style paths copied from Explorer.
-  */
-  src =
-    src.replace(
-      /\\/g,
-      "/"
-    );
-
-
-  /*
-    Keep local media relative to index.html.
-    This works on both a custom domain and a GitHub Pages
-    project subdirectory.
-  */
-  src =
-    src
-      .replace(/^\.\/+/, "")
-      .replace(/^\/+/, "");
-
-
-  /*
-    If only a filename was entered in the Developer Console,
-    automatically look for it inside the repository /videos/ folder.
-  */
-  if(
-    !src.includes("/") &&
-    /\.(mp4|webm|ogv|ogg|m3u8)(?:[?#].*)?$/i.test(src)
-  ){
-    src =
-      `videos/${src}`;
-  }
-
-
-  return src;
-}
-
-
 function inferVideoMimeType(src){
 
   const clean =
@@ -3215,30 +3142,6 @@ function initVideoJsPlayers(){
 
 
       /*
-        If a source cannot be loaded, report the exact URL/path
-        being requested. This makes repository path problems easy
-        to identify without changing the visible page layout.
-      */
-      player.on(
-        "error",
-        ()=>{
-
-          const source =
-            player.currentSource?.() ||
-            element.querySelector("source")?.getAttribute("src") ||
-            "";
-
-          console.error(
-            "NILDA video could not be loaded:",
-            source,
-            player.error?.()
-          );
-
-        }
-      );
-
-
-      /*
         Only one instruction video plays at a time.
       */
       player.on(
@@ -3273,18 +3176,16 @@ function initVideoJsPlayers(){
 function makeVideoCard(video,index){
 
   const src =
-    normalizeVideoSource(
-      video?.src
-    );
+    video?.src || "";
 
   const title =
     video?.title ||
     `Instruction Video ${index+1}`;
 
   /*
-    The normalized source is used by both Video.js and the
-    WATCH VIDEO fallback link. Local filenames resolve from the
-    repository's videos/ folder.
+    The direct source URL is used in a normal <a target="_blank">
+    link. This works much more reliably on mobile browsers than
+    attempting to create a popup window with JavaScript.
   */
   const watchLink =
     src
