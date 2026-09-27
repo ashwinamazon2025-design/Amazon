@@ -1,2 +1,1 @@
-videos/*.mp4 filter=lfs diff=lfs
-pdfs/*.pdf filter=lfs diff=lfs
+
