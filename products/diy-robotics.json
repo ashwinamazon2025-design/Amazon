@@ -10,7 +10,7 @@
   "videos": [
     {
       "title": "Tip:  How to connect JST connector to LDR Sensor",
-      "src": "videos/Caster_Wheel_Assembly_Step_by_Step.mp4"
+      "src": "videos/LDR_JST_Step_by_Step_Instruction_Piano.mp4"
     },
     {
       "title": "Tip:  How to connect JST connector to LDR Sensor",
@@ -68,5 +68,5 @@
   "pdfs": [],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-27T08:26:44.074Z"
+  "updatedAt": "2026-09-27T16:58:08.426Z"
 }
