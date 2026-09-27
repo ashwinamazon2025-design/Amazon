@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://vjs.zencdn.net/8.24.1/video-js.min.css" rel="stylesheet">
 
   <style>
 
@@ -1069,146 +1068,13 @@
     }
 
     /*
-      VIDEO.JS 8
-      The player is embedded directly inside each instruction card.
-      The WATCH VIDEO link remains below as a simple fallback.
+      Video previews are intentionally non-interactive.
+      Users open the actual video with the WATCH VIDEO link below.
+      This is much more reliable on mobile browsers than window.open().
     */
-    .video-frame{
-      position:relative;
-      display:block;
-    }
-
-    .video-frame iframe,
-    .video-frame .video-js{
-      width:100% !important;
-      height:100% !important;
-    }
-
-    .video-frame .video-js{
-      position:absolute;
-      inset:0;
-
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-
-      background:#000;
-
-      border-radius:13px;
-
-      overflow:hidden;
-    }
-
-    .video-js .vjs-tech{
-      object-fit:contain;
-    }
-
-    .video-js .vjs-big-play-button{
-      top:50%;
-      left:50%;
-
-      width:3.25em;
-      height:3.25em;
-
-      margin:0;
-
-      transform:translate(-50%,-50%);
-
-      border:2px solid #e3bf69;
-      border-radius:999px;
-
-      background:rgba(0,0,0,.76);
-
-      color:#e3bf69;
-
-      line-height:3.05em;
-
-      box-shadow:
-        0 10px 30px rgba(0,0,0,.45);
-
-      transition:
-        background .18s ease,
-        color .18s ease,
-        transform .18s ease;
-    }
-
-    .video-js:hover .vjs-big-play-button,
-    .video-js .vjs-big-play-button:focus{
-      background:#e3bf69;
-      color:#080808;
-
-      transform:
-        translate(-50%,-50%)
-        scale(1.04);
-    }
-
-    .video-js .vjs-control-bar{
-      height:3.5em;
-
-      background:
-        linear-gradient(
-          to top,
-          rgba(0,0,0,.94),
-          rgba(0,0,0,.70)
-        );
-    }
-
-    .video-js .vjs-control{
-      color:#f6f6f6;
-    }
-
-    .video-js .vjs-control:hover,
-    .video-js .vjs-control:focus{
-      color:#e3bf69;
-    }
-
-    .video-js .vjs-play-progress,
-    .video-js .vjs-volume-level{
-      background:#e3bf69;
-    }
-
-    .video-js .vjs-play-progress::before{
-      color:#e3bf69;
-    }
-
-    .video-js .vjs-slider{
-      background-color:rgba(255,255,255,.24);
-    }
-
-    .video-js .vjs-load-progress{
-      background:rgba(255,255,255,.22);
-    }
-
-    .video-js .vjs-load-progress div{
-      background:rgba(255,255,255,.16);
-    }
-
-    .video-js .vjs-menu-button-popup
-    .vjs-menu
-    .vjs-menu-content{
-      background:rgba(8,8,8,.97);
-
-      border:1px solid #343434;
-      border-radius:10px;
-
-      overflow:hidden;
-    }
-
-    .video-js .vjs-menu li.vjs-selected{
-      background:#e3bf69;
-      color:#080808;
-    }
-
-    .video-js .vjs-control:focus-visible,
-    .video-js .vjs-big-play-button:focus-visible{
-      outline:2px solid #e3bf69;
-      outline-offset:-2px;
-    }
-
-    .video-js.vjs-error .vjs-error-display{
-      background:rgba(0,0,0,.88);
-    }
-
-    .video-js .vjs-error-display::before{
-      color:#e3bf69;
+    .video-frame video,
+    .video-frame iframe{
+      pointer-events:none;
     }
 
     .watch-video-btn{
@@ -1877,8 +1743,6 @@
 </footer>
 
 
-
-<script src="https://vjs.zencdn.net/8.24.1/video.min.js"></script>
 
 <script>
 
@@ -3035,144 +2899,6 @@ document
    DYNAMIC PRODUCT PAGES
    ============================================================ */
 
-let nildaVideoPlayers = [];
-
-
-function inferVideoMimeType(src){
-
-  const clean =
-    String(src || "")
-      .split("?")[0]
-      .split("#")[0]
-      .toLowerCase();
-
-  if(clean.endsWith(".m3u8")){
-    return "application/x-mpegURL";
-  }
-
-  if(clean.endsWith(".webm")){
-    return "video/webm";
-  }
-
-  if(clean.endsWith(".ogv") || clean.endsWith(".ogg")){
-    return "video/ogg";
-  }
-
-  return "video/mp4";
-}
-
-
-function disposeVideoJsPlayers(){
-
-  nildaVideoPlayers
-    .forEach(player=>{
-
-      try{
-
-        if(
-          player &&
-          typeof player.dispose === "function" &&
-          !player.isDisposed?.()
-        ){
-          player.dispose();
-        }
-
-      }catch(error){
-        console.warn(
-          "Could not dispose a Video.js player:",
-          error
-        );
-      }
-
-    });
-
-  nildaVideoPlayers = [];
-}
-
-
-function initVideoJsPlayers(){
-
-  /*
-    If the CDN ever fails to load, the native HTML5 <video>
-    controls remain usable instead of breaking the page.
-  */
-  if(typeof window.videojs !== "function"){
-    console.warn(
-      "Video.js 8 is unavailable; native video controls will be used."
-    );
-    return;
-  }
-
-
-  document
-    .querySelectorAll("video.nilda-video-js")
-    .forEach(element=>{
-
-      if(element.dataset.nildaPlayerReady === "true"){
-        return;
-      }
-
-
-      const player =
-        window.videojs(
-          element,
-          {
-            controls:true,
-            autoplay:false,
-            preload:"metadata",
-            responsive:true,
-
-            playbackRates:[
-              0.75,
-              1,
-              1.25,
-              1.5,
-              2
-            ],
-
-            controlBar:{
-              pictureInPictureToggle:false
-            }
-          }
-        );
-
-
-      element.dataset.nildaPlayerReady =
-        "true";
-
-
-      /*
-        Only one instruction video plays at a time.
-      */
-      player.on(
-        "play",
-        ()=>{
-
-          nildaVideoPlayers
-            .forEach(other=>{
-
-              if(
-                other !== player &&
-                typeof other.pause === "function" &&
-                !other.paused()
-              ){
-                other.pause();
-              }
-
-            });
-
-        }
-      );
-
-
-      nildaVideoPlayers.push(
-        player
-      );
-
-    });
-}
-
-
 function makeVideoCard(video,index){
 
   const src =
@@ -3272,22 +2998,16 @@ function makeVideoCard(video,index){
       player = `
 
         <video
-          class="video-js vjs-default-skin nilda-video-js"
-          controls
           preload="metadata"
+          muted
           playsinline
-          controlsList="nodownload"
-          disablePictureInPicture
+          aria-hidden="true"
         >
 
           <source
             src="${escapeHtml(src)}"
-            type="${escapeHtml(inferVideoMimeType(src))}"
+            type="video/mp4"
           >
-
-          <p class="vjs-no-js">
-            Please enable JavaScript or open the video using the button below.
-          </p>
 
         </video>
 
@@ -3626,12 +3346,6 @@ function updateFixedHomeButton(pageId,product){
 function renderProducts(products){
 
   /*
-    Dispose existing Video.js instances before replacing
-    dynamically generated product markup.
-  */
-  disposeVideoJsPlayers();
-
-  /*
     Remove only buttons/pages generated from additional
     Developer Console products. The two original Home buttons
     remain untouched.
@@ -3771,15 +3485,6 @@ function renderProducts(products){
         "Mandala Coaster Art content could not be loaded.";
     }
   }
-
-
-  /*
-    Product pages are now present in the DOM, so Video.js can
-    upgrade every normal HTML5 video into the NILDA player.
-  */
-  requestAnimationFrame(
-    initVideoJsPlayers
-  );
 }
 
 
@@ -3901,13 +3606,14 @@ async function loadProducts(){
 
 
 /* ============================================================
-   VIDEO PLAYBACK
+   VIDEO OPENING BEHAVIOUR
 
-   Normal MP4/HLS/WebM sources are played directly in the page
-   using Video.js 8. The WATCH VIDEO link is retained as a fallback
-   for opening the original source in a separate tab/window.
+   Video previews are non-interactive. Each video card contains a
+   normal WATCH VIDEO link with target="_blank".
 
-   YouTube links continue to use their normal iframe player.
+   Desktop browsers normally open this in a separate tab/window.
+   Mobile browsers may open a new browser tab or their native video
+   viewer, depending on the browser and operating system.
    ============================================================ */
 
 
