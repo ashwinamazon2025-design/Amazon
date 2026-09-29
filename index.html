@@ -2008,8 +2008,11 @@
 
 const PICTURE_MANIFEST_URLS = [
   "content/pictures.json",
+  "/content/pictures.json",
   "pictures/index.json",
-  "pictures.json"
+  "/pictures/index.json",
+  "pictures.json",
+  "/pictures.json"
 ];
 
 
@@ -3105,15 +3108,76 @@ function renderCarousel(){
     carouselImages[carouselIndex];
 
 
-  carouselStage.innerHTML = `
+  /*
+    Try the stored relative path first. If the site is being
+    served from a different base path, retry from the site root.
+    This keeps the carousel working without hard-coding a host.
+  */
+  const candidates =
+    [
+      image.url,
+      image.url.startsWith("/")
+        ? image.url
+        : `/${image.url}`
+    ]
+      .filter(
+        (value,index,array)=>
+          value &&
+          array.indexOf(value) === index
+      );
 
-    <img
-      class="carousel-image"
-      src="${escapeHtml(image.url)}"
-      alt="${escapeHtml(image.name)}"
-    >
 
-  `;
+  const img =
+    document.createElement("img");
+
+
+  img.className =
+    "carousel-image";
+
+  img.alt =
+    image.name;
+
+
+  let candidateIndex =
+    0;
+
+
+  img.addEventListener(
+    "error",
+    ()=>{
+
+      candidateIndex +=
+        1;
+
+
+      if(
+        candidateIndex <
+        candidates.length
+      ){
+
+        img.src =
+          candidates[candidateIndex];
+
+        return;
+      }
+
+
+      console.warn(
+        "Could not load carousel image:",
+        image.url
+      );
+
+    }
+  );
+
+
+  img.src =
+    candidates[0];
+
+
+  carouselStage.replaceChildren(
+    img
+  );
 
 
   carouselDots.innerHTML =
@@ -3188,7 +3252,6 @@ function renderCarousel(){
       showArrows ? "grid" : "none";
 
 }
-
 
 
 function previousCarouselImage(){
