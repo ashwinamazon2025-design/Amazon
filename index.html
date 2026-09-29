@@ -1014,15 +1014,34 @@
     .manual-download .manual-title{
       min-width:0;
       flex:1;
+
+      /*
+        The title size is set automatically from the title length
+        and still scales slightly with the available button width.
+      */
+      font-size:
+        clamp(
+          .56rem,
+          var(--manual-title-size,.72rem),
+          .78rem
+        );
+
+      line-height:1.16;
+
+      white-space:normal;
       overflow-wrap:anywhere;
-      word-break:break-word;
+      word-break:normal;
+      hyphens:auto;
     }
 
     .manual-download .manual-action{
       flex:0 0 auto;
       color:#91a6ac;
-      font-size:.56rem;
-      letter-spacing:.04em;
+
+      font-size:
+        clamp(.48rem,.5vw,.56rem);
+
+      letter-spacing:.025em;
       text-transform:uppercase;
     }
 
@@ -1177,6 +1196,14 @@
     .video-js .vjs-control:hover,
     .video-js .vjs-control:focus{
       color:#e3bf69;
+    }
+
+    /*
+      Never expose Video.js/browser native fullscreen.
+      NILDA uses the custom full-window control instead.
+    */
+    .video-js .vjs-fullscreen-control{
+      display:none !important;
     }
 
     .video-js .vjs-play-progress,
@@ -3365,6 +3392,10 @@ function initVideoJsPlayers(){
             controlBar:{
               pictureInPictureToggle:false,
               fullscreenToggle:false
+            },
+
+            userActions:{
+              doubleClick:false
             }
           }
         );
@@ -3502,6 +3533,20 @@ function initVideoJsPlayers(){
 
       player.el()?.addEventListener(
         "contextmenu",
+        event=>{
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        },
+        true
+      );
+
+      /*
+        Prevent Video.js or the browser from interpreting a
+        double-click as a native fullscreen request.
+      */
+      player.el()?.addEventListener(
+        "dblclick",
         event=>{
           event.preventDefault();
           event.stopPropagation();
@@ -3732,12 +3777,31 @@ function makeManualButton(pdf,index){
     pdf?.title ||
     `Instruction Manual ${index + 1}`;
 
+  /*
+    Longer manual names automatically use a slightly smaller
+    font while short names remain larger and easier to read.
+  */
+  const titleLength =
+    String(title).length;
+
+  const titleSize =
+    titleLength >= 38
+      ? ".56rem"
+      : titleLength >= 30
+        ? ".60rem"
+        : titleLength >= 24
+          ? ".65rem"
+          : titleLength >= 18
+            ? ".69rem"
+            : ".74rem";
+
   return `
     <button
       type="button"
       class="manual-download"
       data-manual-source="${escapeHtml(src)}"
       data-manual-title="${escapeHtml(title)}"
+      style="--manual-title-size:${titleSize}"
     >
       <span class="manual-icon">PDF</span>
 
