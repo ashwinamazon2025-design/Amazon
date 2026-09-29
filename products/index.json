@@ -66,6 +66,11 @@
       "slug": "hadriel",
       "name": "Hadriel",
       "file": "products/hadriel.json"
+    },
+    {
+      "slug": "testing-123",
+      "name": "Testing 123",
+      "file": "products/testing-123.json"
     }
   ]
 }
