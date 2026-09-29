@@ -1214,6 +1214,19 @@
       display:none !important;
     }
 
+    /*
+      Prevent the browser's own HTML5 video fullscreen button from
+      appearing. Full-window viewing is handled only by NILDA's
+      in-page expand control.
+    */
+    video::-webkit-media-controls-fullscreen-button{
+      display:none !important;
+    }
+
+    video::-webkit-media-controls-picture-in-picture-button{
+      display:none !important;
+    }
+
     .video-js .vjs-play-progress,
     .video-js .vjs-volume-level{
       background:#e3bf69;
@@ -3563,6 +3576,16 @@ function initVideoJsPlayers(){
         true
       );
 
+      element.addEventListener(
+        "dblclick",
+        event=>{
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        },
+        true
+      );
+
 
       /*
         If a source cannot be loaded, report the exact URL/path
@@ -3721,11 +3744,12 @@ function makeVideoCard(video,index){
 
         <video
           class="video-js vjs-default-skin nilda-video-js"
-          controls
           preload="metadata"
           playsinline
-          controlsList="nodownload"
+          webkit-playsinline
+          controlsList="nodownload nofullscreen noremoteplayback"
           disablePictureInPicture
+          disableRemotePlayback
         >
 
           <source
@@ -4375,6 +4399,45 @@ async function loadProducts(){
 
    YouTube links continue to use their normal iframe player.
    ============================================================ */
+
+
+
+/*
+  Native element fullscreen is deliberately disabled.
+  If a browser/plugin attempts it anyway, leave it immediately.
+  NILDA's full-window mode uses CSS and does not trigger this.
+*/
+function leaveUnexpectedNativeFullscreen(){
+
+  const nativeFullscreen =
+    document.fullscreenElement ||
+    document.webkitFullscreenElement;
+
+  if(!nativeFullscreen){
+    return;
+  }
+
+  try{
+
+    if(document.exitFullscreen){
+      document.exitFullscreen();
+    }else if(document.webkitExitFullscreen){
+      document.webkitExitFullscreen();
+    }
+
+  }catch{}
+
+}
+
+document.addEventListener(
+  "fullscreenchange",
+  leaveUnexpectedNativeFullscreen
+);
+
+document.addEventListener(
+  "webkitfullscreenchange",
+  leaveUnexpectedNativeFullscreen
+);
 
 
 
