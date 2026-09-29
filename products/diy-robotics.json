@@ -9,12 +9,60 @@
   "layout": "grid",
   "videos": [
     {
+      "title": "Tip:  How to connect JST connector to IR Sensor",
+      "src": "videos/IR_Sensor_JST_Step_by_Step_Instruction.mp4"
+    },
+    {
       "title": "Tip:  How to connect JST connector to LDR Sensor",
-      "src": "videos/Caster_Wheel_Assembly_Step_by_Step.mp4"
+      "src": "videos/LDR_JST_Step_by_Step_Instruction.mp4"
+    },
+    {
+      "title": "Chassis Assembly (Caster Wheel) - Part 1",
+      "src": "videos/Caster_Wheel_Assembly.mp4"
+    },
+    {
+      "title": "Chassis Assembly (Chassis) - Part 2",
+      "src": "videos/Motor_to_Chassis_Step_by_Step_Instruction.mp4"
+    },
+    {
+      "title": "Project 1 - Smart Street Light - Instruction Video",
+      "src": "videos/001 Smart_Street_Light.mp4"
+    },
+    {
+      "title": "Project 2 - Contactless Door Bell - Instruction Video",
+      "src": "videos/002 Contactless_Door_Bell.mp4"
+    },
+    {
+      "title": "Project 3 - Morning Alarm - Instruction Video",
+      "src": "videos/003 Morning_Alarm.mp4"
+    },
+    {
+      "title": "Project 4 - Automatic Hand Sanitizer - Instruction Video",
+      "src": "videos/004 Automatic_Hand_Sanitizer.mp4"
+    },
+    {
+      "title": "Project 5 - Pet Me Robot - Instruction Video",
+      "src": "videos/005 Pet_Me_Robot_Step_by_Step_Instruction0001.mp4"
+    },
+    {
+      "title": "Project 6 - Don't Pet Me Robot - Instruction Video",
+      "src": "videos/006 Dont Pet Me Robot.mp4"
+    },
+    {
+      "title": "Project 7 - Laser Security System - Instruction Video",
+      "src": "videos/007 Laser_Security_System.mp4"
+    },
+    {
+      "title": "Project 8 - Motion Detection Light - Instruction Video",
+      "src": "videos/008 Motion_Detection_Light.mp4"
+    },
+    {
+      "title": "Project 9 & 10 - Light Loving & Shade Loving Robot - Instruction Video",
+      "src": "videos/009 010 - Light_Loving_and_Shade_Loving_Robot.mp4"
     }
   ],
   "pdfs": [],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-28T04:54:30.094Z"
+  "updatedAt": "2026-09-29T02:58:18.141Z"
 }
