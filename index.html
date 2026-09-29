@@ -1116,8 +1116,8 @@
 
     /*
       VIDEO.JS 8
-      The player is embedded directly inside each instruction card.
-      The WATCH VIDEO link remains below as a simple fallback.
+      Instruction cards keep their previews.
+      Playing a video opens the separate NILDA player page.
     */
     .video-frame{
       position:relative;
@@ -2101,6 +2101,76 @@ function showPage(id){
 }
 
 
+
+/*
+  Keep the selected media out of the player page's address.
+  The new window receives it through same-origin session data/messages.
+*/
+const nildaVideoSessionKey = "nilda-instruction-video";
+let nildaVideoWindow = null;
+let nildaSelectedVideo = null;
+
+function openInstructionVideo(card){
+
+  const video = card?.querySelector("video");
+  if(!video){ return; }
+
+  nildaSelectedVideo = {
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+    src: card.dataset.videoSource || "",
+    title: card.querySelector("h3")?.textContent.trim() || "Instruction Video"
+  };
+
+  if(!nildaSelectedVideo.src){ return; }
+
+  nildaVideoPlayers.forEach(player => player.pause());
+
+  try{
+    sessionStorage.setItem(nildaVideoSessionKey, JSON.stringify(nildaSelectedVideo));
+  }catch{}
+
+  if(nildaVideoWindow && !nildaVideoWindow.closed){
+    nildaVideoWindow.postMessage(
+      {type:"nilda-load-video", video:nildaSelectedVideo},
+      window.location.origin
+    );
+    nildaVideoWindow.focus();
+    return;
+  }
+
+  const playerPage = new URL("video-player.html", document.baseURI).href;
+  let features = "";
+
+  if(!window.matchMedia("(max-width: 900px), (pointer: coarse)").matches){
+    const width = Math.min(1440, Math.max(640, screen.availWidth - 48));
+    const height = Math.min(960, Math.max(480, screen.availHeight - 64));
+    features = `popup=yes,width=${width},height=${height},resizable=yes,scrollbars=yes`;
+  }
+
+  nildaVideoWindow = window.open(playerPage, "nildaInstructionVideo", features);
+
+  if(nildaVideoWindow){
+    nildaVideoWindow.focus();
+  }else{
+    // A blocked popup still opens the large player in the current tab.
+    window.location.assign(playerPage);
+  }
+}
+
+window.addEventListener("message", event => {
+  if(
+    event.origin === window.location.origin &&
+    event.source === nildaVideoWindow &&
+    event.data?.type === "nilda-player-ready" &&
+    nildaSelectedVideo
+  ){
+    nildaVideoWindow.postMessage(
+      {type:"nilda-load-video", video:nildaSelectedVideo},
+      window.location.origin
+    );
+  }
+});
+
 document.addEventListener("click",event=>{
 
   const manualButton =
@@ -2149,46 +2219,12 @@ document.addEventListener("click",event=>{
   }
 
 
-  /* NILDA embedded video button */
+  /* Open the selected instruction in the large NILDA player. */
   const videoButton =
     event.target.closest("[data-play-embedded-video]");
 
   if(videoButton){
-
-    const card =
-      videoButton.closest(".video-card");
-
-    const videoElement =
-      card?.querySelector("video.nilda-video-js");
-
-    if(videoElement){
-
-      videoElement.addEventListener(
-        "contextmenu",
-        e=>{
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        },
-        true
-      );
-
-      if(typeof window.videojs === "function"){
-
-        const player =
-          window.videojs.getPlayer(videoElement) ||
-          window.videojs(videoElement);
-
-        player.play();
-
-      }else{
-
-        videoElement.play();
-
-      }
-
-    }
-
+    openInstructionVideo(videoButton.closest(".video-card"));
     return;
   }
 
@@ -3496,6 +3532,15 @@ function initVideoJsPlayers(){
       const playerRoot =
         player.el();
 
+      // Open directly from a user click so popup blockers allow the player.
+      playerRoot?.addEventListener("click", event => {
+        if(event.target.closest(".vjs-tech, .vjs-big-play-button, .vjs-play-control")){
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          openInstructionVideo(playerRoot.closest(".video-card"));
+        }
+      }, true);
+
       const controlBar =
         playerRoot?.querySelector(".vjs-control-bar");
 
@@ -3681,6 +3726,10 @@ function initVideoJsPlayers(){
         "play",
         ()=>{
 
+          // Also handle keyboard or programmatic starts.
+          player.pause();
+          openInstructionVideo(playerRoot.closest(".video-card"));
+
           nildaVideoPlayers
             .forEach(other=>{
 
@@ -3835,7 +3884,7 @@ function makeVideoCard(video,index){
 
   return `
 
-    <article class="video-card">
+    <article class="video-card" data-video-source="${escapeHtml(src)}">
 
       <div class="video-frame">
         ${player}
@@ -4456,9 +4505,8 @@ async function loadProducts(){
 /* ============================================================
    VIDEO PLAYBACK
 
-   Normal MP4/HLS/WebM sources are played directly in the page
-   using Video.js 8. The WATCH VIDEO link is retained as a fallback
-   for opening the original source in a separate tab/window.
+   Normal MP4/HLS/WebM sources open in the separate NILDA player
+   using Video.js 8. The media source is not placed in its URL.
 
    YouTube links continue to use their normal iframe player.
    ============================================================ */

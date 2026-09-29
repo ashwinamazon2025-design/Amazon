@@ -5,190 +5,231 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="same-origin">
   <title>NILDA™ Instruction Video</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://vjs.zencdn.net/8.24.1/video-js.min.css" rel="stylesheet">
   <style>
-    :root{
-      color-scheme:dark;
-      --bg:#070707;
-      --panel:#101010;
-      --line:#2b2b2b;
-      --text:#f2f2f2;
-      --muted:#9a9a9a;
-      --accent:#d8a94a;
-    }
-
-    *{
-      box-sizing:border-box;
-      -webkit-user-select:none;
-      user-select:none;
-    }
-
-    html,body{
-      margin:0;
-      min-height:100%;
-      background:var(--bg);
-      color:var(--text);
-      font-family:Arial,Helvetica,sans-serif;
-    }
-
-    body{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
-    header{
-      padding:16px 22px;
-      border-bottom:1px solid var(--line);
-      background:#090909;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-
-    .brand{
-      font-weight:900;
-      letter-spacing:.04em;
-    }
-
-    .brand span{
-      color:var(--accent);
-    }
-
-    #videoTitle{
-      color:var(--muted);
-      font-size:.95rem;
-      font-weight:700;
-      overflow-wrap:anywhere;
-    }
-
-    main{
-      width:min(1200px,100%);
-      margin:auto;
-      padding:24px;
-    }
-
-    .player-shell{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:18px;
-      overflow:hidden;
-    }
-
-    .video-wrap{
-      background:#000;
-      aspect-ratio:16/9;
-      display:grid;
-      place-items:center;
-    }
-
-    video{
-      display:block;
-      width:100%;
-      height:100%;
-      max-height:calc(100vh - 150px);
-      background:#000;
-      object-fit:contain;
-      -webkit-user-drag:none;
-      user-drag:none;
-    }
-
-    .message{
-      padding:24px;
-      color:var(--muted);
-      text-align:center;
-      line-height:1.5;
-    }
-
-    @media(max-width:650px){
-      header{padding:12px 14px;}
-      main{padding:12px;}
-      .player-shell{border-radius:12px;}
-      #videoTitle{font-size:.82rem;}
-    }
+    :root{color-scheme:dark;--bg:#050505;--panel:#111;--line:#2a2a2a;--text:#f5f5f5;--muted:#aaa;--gold:#d8a94a;--accent:#00d4ff;}
+    *{box-sizing:border-box;}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,rgba(0,212,255,.09),transparent 35%),radial-gradient(circle at top right,rgba(216,169,74,.07),transparent 30%),var(--bg);}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 24px;border-bottom:1px solid var(--line);background:rgba(5,5,5,.93);}
+    .brand{display:flex;align-items:center;gap:12px;font-size:clamp(1rem,2vw,1.5rem);font-weight:900;letter-spacing:.035em;}
+    .brand img{width:64px;height:64px;object-fit:contain;}
+    .brand span{color:var(--gold);}
+    .back{border:1px solid var(--line);border-radius:12px;padding:11px 14px;background:#0a0a0a;color:var(--text);text-decoration:none;font-size:.85rem;font-weight:800;white-space:nowrap;}
+    .back:hover,.back:focus-visible{border-color:var(--accent);color:var(--accent);}
+    main{width:min(1488px,100%);margin:auto;padding:20px 24px 24px;}
+    .eyebrow{color:var(--accent);font-size:.72rem;letter-spacing:.15em;font-weight:900;text-transform:uppercase;}
+    h1{font-size:clamp(1.1rem,2vw,1.6rem);line-height:1.35;margin:7px 0 16px;overflow-wrap:anywhere;}
+    .player-shell{position:relative;height:calc(100vh - 208px);height:calc(100dvh - 208px);min-height:240px;background:#000;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.45);}
+    .video-js{width:100% !important;height:100% !important;font-family:inherit;background:#000;}
+    .video-js .vjs-tech{object-fit:contain;}
+    .video-js .vjs-big-play-button{top:50%;left:50%;width:3.25em;height:3.25em;margin:0;transform:translate(-50%,-50%);border:2px solid #e3bf69;border-radius:50%;background:rgba(0,0,0,.76);color:#e3bf69;line-height:3.05em;}
+    .video-js:hover .vjs-big-play-button,.video-js .vjs-big-play-button:focus{background:#e3bf69;color:#080808;}
+    .video-js .vjs-control-bar{height:3.5em;background:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.70));}
+    .video-js .vjs-control:hover,.video-js .vjs-control:focus{color:#e3bf69;}
+    .video-js .vjs-play-progress,.video-js .vjs-volume-level{background:#e3bf69;}
+    .video-js .vjs-slider{background:rgba(255,255,255,.24);}
+    .video-js .vjs-menu-content{background:rgba(8,8,8,.97);border:1px solid #343434;border-radius:10px;}
+    .video-js .vjs-menu li.vjs-selected{background:#e3bf69;color:#080808;}
+    .video-js .vjs-fullscreen-control,video::-webkit-media-controls-fullscreen-button,video::-webkit-media-controls-picture-in-picture-button{display:none !important;}
+    .video-js .nilda-expand-toggle svg{width:20px;height:20px;vertical-align:middle;}
+    .video-js .vjs-control:focus-visible,.video-js .vjs-big-play-button:focus-visible{outline:2px solid #e3bf69;outline-offset:-2px;}
+    body.nilda-video-expanded{overflow:hidden;}
+    .player-shell.nilda-player-expanded{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;min-height:0;border:0;border-radius:0;z-index:2147483646;}
+    .message{position:absolute;inset:0 0 3.5em;display:grid;place-items:center;text-align:center;padding:28px;background:#101010;color:var(--muted);line-height:1.6;z-index:5;}
+    .video-js.vjs-error .vjs-control-bar{display:flex;visibility:visible;opacity:1;}
+    .message[hidden]{display:none;}
+    .tip{margin:12px 0 0;color:var(--muted);font-size:.78rem;line-height:1.5;text-align:center;}
+    @media(max-width:650px){header{padding:8px 12px;gap:8px;}.brand{gap:7px;font-size:.9rem;}.brand img{width:44px;height:44px;}.back{font-size:.72rem;padding:9px;}main{padding:16px 12px;}h1{font-size:1rem;}.player-shell{height:calc(100vh - 218px);height:calc(100dvh - 218px);border-radius:12px;min-height:210px;}.tip{font-size:.72rem;}}
+    @media(max-height:500px) and (orientation:landscape){header{padding:4px 12px;}.brand img{width:34px;height:34px;}main{padding:8px 12px;}.eyebrow,.tip{display:none;}h1{font-size:.9rem;margin:0 0 8px;}.player-shell{height:calc(100vh - 96px);height:calc(100dvh - 96px);min-height:0;}}
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">NILDA™ <span>Instruction Hub</span></div>
-    <div id="videoTitle">Instruction Video</div>
+    <div class="brand"><img src="assets/logo/nilda-logo.png" alt="NILDA logo"><div>NILDA™ <span>Instruction Hub</span></div></div>
+    <a class="back" id="backToInstructions" href="index.html">← Back to instructions</a>
   </header>
-
   <main>
-    <div class="player-shell">
-      <div id="videoWrap" class="video-wrap">
-        <video
-          id="instructionVideo"
-          controls
-          autoplay
-          playsinline
-          preload="metadata"
-          controlsList="nodownload noremoteplayback"
-          disablePictureInPicture
-          oncontextmenu="return false;"
-        ></video>
-      </div>
-      <div id="message" class="message" hidden></div>
+    <div class="eyebrow">Explore • Learn • Create</div>
+    <h1 id="videoTitle">Instruction Video</h1>
+    <div class="player-shell" id="playerShell">
+      <video id="instructionVideo" class="video-js vjs-default-skin" playsinline webkit-playsinline preload="metadata" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture disableRemotePlayback></video>
+      <div id="message" class="message" role="status">Choose a video from the instruction page to begin.</div>
     </div>
+    <p class="tip">Use the expand button or double-click the video to fill this window. Press Esc to return.</p>
   </main>
-
+  <script src="https://vjs.zencdn.net/8.24.1/video.min.js"></script>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const rawSrc = String(params.get("src") || "").trim();
-    const rawTitle = String(params.get("title") || "Instruction Video").trim();
-
-    const video = document.getElementById("instructionVideo");
-    const title = document.getElementById("videoTitle");
+    const sessionKey = "nilda-instruction-video";
+    const shell = document.getElementById("playerShell");
+    const heading = document.getElementById("videoTitle");
     const message = document.getElementById("message");
-    const videoWrap = document.getElementById("videoWrap");
+    const mediaElement = document.getElementById("instructionVideo");
+    let player = null;
+    let expandButton = null;
+    let currentSelectionId = null;
 
-    title.textContent = rawTitle || "Instruction Video";
-    document.title = `${rawTitle || "Instruction Video"} - NILDA™`;
-
-    function isSafeRelativeVideoPath(value){
-      if(!value) return false;
-      if(/^[a-z][a-z0-9+.-]*:/i.test(value)) return false;
-      if(value.startsWith("//")) return false;
-      if(value.includes("\\")) return false;
-      if(value.split("/").includes("..")) return false;
-      return /\.(mp4|webm|ogg)(?:[?#].*)?$/i.test(value);
+    function showMessage(text){
+      message.textContent = text;
+      message.hidden = false;
     }
 
-    if(isSafeRelativeVideoPath(rawSrc)){
-      video.src = rawSrc.replace(/^\/+/, "");
-    }else{
-      video.remove();
-      videoWrap.style.display = "none";
-      message.hidden = false;
-      message.textContent = "This video link is unavailable.";
+    function setFullWindow(expanded){
+      shell.classList.toggle("nilda-player-expanded", expanded);
+      document.body.classList.toggle("nilda-video-expanded", expanded);
+      if(expandButton){
+        const corners = expanded
+          ? "M4 9h5V4M15 4v5h5M20 15h-5v5M9 20v-5H4"
+          : "M9 4H4v5M20 9V4h-5M15 20h5v-5M4 15v5h5";
+        expandButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="${corners}"/></svg>`;
+        expandButton.title = expanded ? "Exit full window" : "Full window";
+        expandButton.setAttribute("aria-label", expandButton.title);
+        expandButton.setAttribute("aria-pressed", String(expanded));
+      }
+    }
+
+    function toggleFullWindow(){
+      setFullWindow(!shell.classList.contains("nilda-player-expanded"));
+    }
+
+    function videoType(src){
+      const path = new URL(src, document.baseURI).pathname.toLowerCase();
+      if(path.endsWith(".m3u8")) return "application/x-mpegURL";
+      if(path.endsWith(".webm")) return "video/webm";
+      if(/\.(ogg|ogv)$/.test(path)) return "video/ogg";
+      return "video/mp4";
+    }
+
+    function loadSelection(selection){
+      if(!selection || typeof selection.src !== "string" || !selection.src.trim()) return;
+      if(selection.id && selection.id === currentSelectionId) return;
+
+      let source;
+      try{
+        source = new URL(selection.src, document.baseURI);
+        if(!["https:", "http:", "blob:"].includes(source.protocol)) throw new Error();
+      }catch{
+        showMessage("This video is unavailable. Please choose another instruction video.");
+        return;
+      }
+
+      const suppliedTitle = String(selection.title || "Instruction Video").trim();
+      const safeTitle = /https?:\/\/|github|\.(mp4|webm|m3u8|ogg|ogv)(?:$|[?#])/i.test(suppliedTitle)
+        ? "Instruction Video" : suppliedTitle;
+      heading.textContent = safeTitle || "Instruction Video";
+      document.title = `${heading.textContent} — NILDA™`;
+
+      if(!player){
+        showMessage("The video player could not load. Please refresh this page and try again.");
+        return;
+      }
+
+      currentSelectionId = selection.id || null;
+      try{ sessionStorage.setItem(sessionKey, JSON.stringify(selection)); }catch{}
+      player.pause();
+      message.hidden = true;
+      player.src({src:source.href, type:videoType(source.href)});
+      // Browsers that disallow autoplay retain the large Video.js play button.
+      const playing = player.play();
+      if(playing && typeof playing.catch === "function") playing.catch(() => {});
+    }
+
+    if(typeof window.videojs === "function"){
+      player = window.videojs("instructionVideo", {
+        controls:true,
+        autoplay:false,
+        responsive:true,
+        playsinline:true,
+        preload:"metadata",
+        playbackRates:[0.75, 1, 1.25, 1.5, 2],
+        errorDisplay:false,
+        controlBar:{pictureInPictureToggle:false, fullscreenToggle:false},
+        userActions:{doubleClick:false},
+        html5:{nativeControlsForTouch:false}
+      });
+
+      expandButton = document.createElement("button");
+      expandButton.type = "button";
+      expandButton.className = "vjs-control vjs-button nilda-expand-toggle";
+      expandButton.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleFullWindow();
+      });
+      player.el().querySelector(".vjs-control-bar").appendChild(expandButton);
+      setFullWindow(false);
+
+      shell.addEventListener("dblclick", event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if(!event.target.closest(".vjs-control-bar")) toggleFullWindow();
+      }, true);
+
+      player.on("error", () => {
+        showMessage("This video could not be loaded. Please try again or choose another instruction video.");
+      });
+    }
+
+    // Only the same-origin instruction page can select a video for this window.
+    window.addEventListener("message", event => {
+      if(event.origin === window.location.origin && event.source === window.opener && event.data?.type === "nilda-load-video"){
+        loadSelection(event.data.video);
+      }
+    });
+
+    try{ loadSelection(JSON.parse(sessionStorage.getItem(sessionKey) || "null")); }catch{}
+    if(window.opener){
+      window.opener.postMessage({type:"nilda-player-ready"}, window.location.origin);
+    }
+
+    // Older player links are cleaned without displaying their source parameters.
+    if(window.location.search || window.location.hash){
+      history.replaceState(null, "", window.location.pathname);
     }
 
     document.addEventListener("contextmenu", event => {
       event.preventDefault();
+      event.stopImmediatePropagation();
     }, true);
 
-    document.addEventListener("dragstart", event => {
-      event.preventDefault();
-    }, true);
+    document.addEventListener("dragstart", event => event.preventDefault(), true);
 
     document.addEventListener("keydown", event => {
+      if(event.key === "Escape") setFullWindow(false);
       const key = String(event.key || "").toLowerCase();
       const modifier = event.ctrlKey || event.metaKey;
-      const blocked =
-        event.key === "F12" ||
-        (modifier && key === "u") ||
-        (modifier && event.shiftKey && ["i","j","c"].includes(key));
-
-      if(blocked){
+      if(event.key === "F12" || (modifier && ["u", "s"].includes(key)) || (modifier && event.shiftKey && ["i", "j", "c"].includes(key))){
         event.preventDefault();
         event.stopPropagation();
       }
     }, true);
 
-    video?.addEventListener("contextmenu", event => {
-      event.preventDefault();
+    function leaveNativeFullscreen(){
+      if(document.fullscreenElement || document.webkitFullscreenElement){
+        try{
+          const exiting = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen?.();
+          if(exiting && typeof exiting.catch === "function") exiting.catch(() => {});
+        }catch{}
+      }
+    }
+    document.addEventListener("fullscreenchange", leaveNativeFullscreen);
+    document.addEventListener("webkitfullscreenchange", leaveNativeFullscreen);
+    mediaElement.addEventListener("webkitbeginfullscreen", event => {
+      event.target.webkitExitFullscreen?.();
+      setFullWindow(true);
     });
+
+    document.getElementById("backToInstructions").addEventListener("click", event => {
+      player?.pause();
+      if(window.opener && !window.opener.closed){
+        event.preventDefault();
+        window.opener.focus();
+        window.close();
+      }
+    });
+    window.addEventListener("pagehide", () => player?.pause());
   </script>
 </body>
 </html>
