@@ -61,8 +61,65 @@
       "src": "videos/009 010 - Light_Loving_and_Shade_Loving_Robot.mp4"
     }
   ],
-  "pdfs": [],
+  "pdfs": [
+    {
+      "title": "WARNINGS!!",
+      "src": "pdfs/01 Warning.pdf"
+    },
+    {
+      "title": "IR Sensor - Information",
+      "src": "pdfs/02 IR Sensor - Information.pdf"
+    },
+    {
+      "title": "LDR Sensor - Information",
+      "src": "pdfs/03 LDR Sensor - Information.pdf"
+    },
+    {
+      "title": "Trouble Shooting Guide",
+      "src": "pdfs/04 Trouble Shooting Guide.pdf"
+    },
+    {
+      "title": "Steps to Assemble Chassis",
+      "src": "pdfs/05 Steps to Assemble Chassis.pdf"
+    },
+    {
+      "title": "Smart Street Light",
+      "src": "pdfs/06 Smart Street Light.pdf"
+    },
+    {
+      "title": "Contactless Door Bell",
+      "src": "pdfs/07 Contactless Door Bell.pdf"
+    },
+    {
+      "title": "Morning Alarm",
+      "src": "pdfs/08 Morning Alarm.pdf"
+    },
+    {
+      "title": "Automatic Hand Sanitizer",
+      "src": "pdfs/09 Automatic Hand Sanitizer.pdf"
+    },
+    {
+      "title": "Pet Me Robot",
+      "src": "pdfs/10 Pet Me Robot.pdf"
+    },
+    {
+      "title": "Don't Pet Me Robot",
+      "src": "pdfs/11 Dont Pet Me Robot.pdf"
+    },
+    {
+      "title": "Laser Security System",
+      "src": "pdfs/12 Laser Security System.pdf"
+    },
+    {
+      "title": "Motion Detection Light",
+      "src": "pdfs/13 Motion Detection Light.pdf"
+    },
+    {
+      "title": "Light Loving & Shade Loving Robot",
+      "src": "pdfs/14 Light Loving and Shade Loving Robot.pdf"
+    }
+  ],
   "slug": "diy-robotics",
   "fixedPage": "robotics",
-  "updatedAt": "2026-09-29T02:58:18.141Z"
+  "updatedAt": "2026-09-29T06:39:04.974Z"
 }
