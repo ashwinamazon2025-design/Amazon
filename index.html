@@ -953,6 +953,12 @@
     }
 
     .manual-download{
+      appearance:none;
+      -webkit-appearance:none;
+      font-family:inherit;
+      text-align:left;
+      cursor:pointer;
+
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -1202,6 +1208,46 @@
       outline:2px solid #e3bf69;
       outline-offset:-2px;
     }
+
+    /*
+      NILDA full-window mode.
+      This deliberately does not use the browser Fullscreen API, so the
+      browser does not display its own origin / Escape notification.
+    */
+    body.nilda-video-expanded{
+      overflow:hidden !important;
+    }
+
+    .video-frame.nilda-frame-expanded{
+      overflow:visible !important;
+      z-index:2147483645;
+    }
+
+    .video-js.nilda-player-expanded{
+      position:fixed !important;
+      inset:0 !important;
+      width:100vw !important;
+      height:100vh !important;
+      height:100dvh !important;
+      max-width:none !important;
+      max-height:none !important;
+      border-radius:0 !important;
+      z-index:2147483646 !important;
+      background:#000 !important;
+    }
+
+    .video-js .nilda-expand-toggle .vjs-icon-placeholder::before{
+      content:"⛶";
+      font-family:Arial,sans-serif;
+      font-size:1.55em;
+      line-height:1.75;
+    }
+
+    .video-js.nilda-player-expanded .nilda-expand-toggle .vjs-icon-placeholder::before{
+      content:"↙";
+      font-size:1.35em;
+    }
+
 
     .video-js.vjs-error .vjs-error-display{
       background:rgba(0,0,0,.88);
@@ -1992,6 +2038,52 @@ function showPage(id){
 
 
 document.addEventListener("click",event=>{
+
+  const manualButton =
+    event.target.closest(
+      "[data-manual-source]"
+    );
+
+  if(manualButton){
+
+    const src =
+      manualButton.dataset.manualSource ||
+      "";
+
+    if(src){
+
+      const temporaryLink =
+        document.createElement("a");
+
+      temporaryLink.href =
+        src;
+
+      temporaryLink.target =
+        "_blank";
+
+      temporaryLink.rel =
+        "noopener noreferrer";
+
+      temporaryLink.download =
+        manualButton.dataset.manualTitle ||
+        "";
+
+      temporaryLink.style.display =
+        "none";
+
+      document.body.appendChild(
+        temporaryLink
+      );
+
+      temporaryLink.click();
+
+      temporaryLink.remove();
+
+    }
+
+    return;
+  }
+
 
   /* NILDA embedded video button */
   const videoButton =
@@ -3258,7 +3350,8 @@ function initVideoJsPlayers(){
             ],
 
             controlBar:{
-              pictureInPictureToggle:false
+              pictureInPictureToggle:false,
+              fullscreenToggle:false
             }
           }
         );
@@ -3266,6 +3359,119 @@ function initVideoJsPlayers(){
 
       element.dataset.nildaPlayerReady =
         "true";
+
+
+      /*
+        Use a page-level full-window view instead of the browser Fullscreen API.
+        This avoids browser-generated origin / Escape overlays.
+      */
+      const playerRoot =
+        player.el();
+
+      const controlBar =
+        playerRoot?.querySelector(".vjs-control-bar");
+
+      if(
+        controlBar &&
+        !controlBar.querySelector(".nilda-expand-toggle")
+      ){
+
+        const expandButton =
+          document.createElement("button");
+
+        expandButton.type =
+          "button";
+
+        expandButton.className =
+          "vjs-control vjs-button nilda-expand-toggle";
+
+        expandButton.title =
+          "Full screen";
+
+        expandButton.setAttribute(
+          "aria-label",
+          "Full screen"
+        );
+
+        expandButton.innerHTML =
+          '<span class="vjs-icon-placeholder" aria-hidden="true"></span><span class="vjs-control-text">Full screen</span>';
+
+        expandButton.addEventListener(
+          "click",
+          event=>{
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const frame =
+              playerRoot.closest(".video-frame");
+
+            const expanding =
+              !playerRoot.classList.contains(
+                "nilda-player-expanded"
+              );
+
+            document
+              .querySelectorAll(".video-js.nilda-player-expanded")
+              .forEach(other=>{
+
+                if(other !== playerRoot){
+                  other.classList.remove(
+                    "nilda-player-expanded"
+                  );
+
+                  other
+                    .closest(".video-frame")
+                    ?.classList.remove(
+                      "nilda-frame-expanded"
+                    );
+                }
+
+              });
+
+            playerRoot.classList.toggle(
+              "nilda-player-expanded",
+              expanding
+            );
+
+            frame?.classList.toggle(
+              "nilda-frame-expanded",
+              expanding
+            );
+
+            document.body.classList.toggle(
+              "nilda-video-expanded",
+              expanding
+            );
+
+            expandButton.title =
+              expanding
+                ? "Exit full screen"
+                : "Full screen";
+
+            expandButton.setAttribute(
+              "aria-label",
+              expandButton.title
+            );
+
+            const text =
+              expandButton.querySelector(
+                ".vjs-control-text"
+              );
+
+            if(text){
+              text.textContent =
+                expandButton.title;
+            }
+
+          }
+        );
+
+        controlBar.appendChild(
+          expandButton
+        );
+
+      }
 
 
       /*
@@ -3514,12 +3720,11 @@ function makeManualButton(pdf,index){
     `Instruction Manual ${index + 1}`;
 
   return `
-    <a
+    <button
+      type="button"
       class="manual-download"
-      href="${escapeHtml(src)}"
-      target="_blank"
-      rel="noopener noreferrer"
-      download
+      data-manual-source="${escapeHtml(src)}"
+      data-manual-title="${escapeHtml(title)}"
     >
       <span class="manual-icon">PDF</span>
 
@@ -3530,7 +3735,7 @@ function makeManualButton(pdf,index){
       <span class="manual-action">
         Download
       </span>
-    </a>
+    </button>
   `;
 }
 
