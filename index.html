@@ -1212,6 +1212,11 @@
     }
 
     .watch-video-btn{
+      appearance:none;
+      -webkit-appearance:none;
+      font-family:inherit;
+      cursor:pointer;
+
       display:flex;
       align-items:center;
       justify-content:center;
@@ -1917,7 +1922,13 @@ const landingActions = document.getElementById("landingActions");
 */
 document.addEventListener(
   "contextmenu",
-  event=>event.preventDefault()
+  event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    return false;
+  },
+  true
 );
 
 document.addEventListener(
@@ -1981,6 +1992,49 @@ function showPage(id){
 
 
 document.addEventListener("click",event=>{
+
+  /* NILDA embedded video button */
+  const videoButton =
+    event.target.closest("[data-play-embedded-video]");
+
+  if(videoButton){
+
+    const card =
+      videoButton.closest(".video-card");
+
+    const videoElement =
+      card?.querySelector("video.nilda-video-js");
+
+    if(videoElement){
+
+      videoElement.addEventListener(
+        "contextmenu",
+        e=>{
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        },
+        true
+      );
+
+      if(typeof window.videojs === "function"){
+
+        const player =
+          window.videojs.getPlayer(videoElement) ||
+          window.videojs(videoElement);
+
+        player.play();
+
+      }else{
+
+        videoElement.play();
+
+      }
+
+    }
+
+    return;
+  }
 
   const pageButton =
     event.target.closest("[data-open-page]");
@@ -3085,7 +3139,7 @@ function normalizeVideoSource(value){
 
   /*
     Keep local media relative to index.html.
-    This works on both a custom domain and a GitHub Pages
+    This works on both a custom domain and a the hosted site
     project subdirectory.
   */
   src =
@@ -3215,6 +3269,30 @@ function initVideoJsPlayers(){
 
 
       /*
+        Protect the actual video surface from the browser context menu.
+      */
+      element.addEventListener(
+        "contextmenu",
+        event=>{
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        },
+        true
+      );
+
+      player.el()?.addEventListener(
+        "contextmenu",
+        event=>{
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        },
+        true
+      );
+
+
+      /*
         If a source cannot be loaded, report the exact URL/path
         being requested. This makes repository path problems easy
         to identify without changing the visible page layout.
@@ -3289,14 +3367,13 @@ function makeVideoCard(video,index){
   const watchLink =
     src
       ? `
-        <a
+        <button
+          type="button"
           class="watch-video-btn"
-          href="${escapeHtml(src)}"
-          target="_blank"
-          rel="noopener noreferrer"
+          data-play-embedded-video
         >
           ▶ WATCH VIDEO
-        </a>
+        </button>
       `
       : "";
 
