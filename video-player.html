@@ -36,6 +36,9 @@
     .video-js .vjs-fullscreen-control,video::-webkit-media-controls-fullscreen-button,video::-webkit-media-controls-picture-in-picture-button{display:none !important;}
     .video-js .nilda-expand-toggle svg{width:20px;height:20px;vertical-align:middle;}
     .video-js .vjs-control:focus-visible,.video-js .vjs-big-play-button:focus-visible{outline:2px solid #e3bf69;outline-offset:-2px;}
+    .native-expand-toggle{position:absolute;right:16px;bottom:16px;z-index:6;width:42px;height:42px;border:1px solid rgba(227,191,105,.8);border-radius:50%;background:rgba(0,0,0,.78);color:#e3bf69;cursor:pointer;}
+    .native-expand-toggle:hover,.native-expand-toggle:focus-visible{background:#e3bf69;color:#080808;outline:none;}
+    .native-expand-toggle svg{width:20px;height:20px;vertical-align:middle;}
     body.nilda-video-expanded{overflow:hidden;}
     .player-shell.nilda-player-expanded{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;min-height:0;border:0;border-radius:0;z-index:2147483646;}
     .message{position:absolute;inset:0 0 3.5em;display:grid;place-items:center;text-align:center;padding:28px;background:#101010;color:var(--muted);line-height:1.6;z-index:5;}
@@ -57,6 +60,7 @@
     <div class="player-shell" id="playerShell">
       <video id="instructionVideo" class="video-js vjs-default-skin" playsinline webkit-playsinline preload="metadata" controlsList="nodownload nofullscreen noremoteplayback" disablePictureInPicture disableRemotePlayback></video>
       <div id="message" class="message" role="status">Choose a video from the instruction page to begin.</div>
+      <button id="nativeExpandToggle" class="native-expand-toggle" type="button" aria-label="Full window" title="Full window" hidden></button>
     </div>
     <p class="tip">Use the expand button or double-click the video to fill this window. Press Esc to return.</p>
   </main>
@@ -67,6 +71,7 @@
     const heading = document.getElementById("videoTitle");
     const message = document.getElementById("message");
     const mediaElement = document.getElementById("instructionVideo");
+    const nativeExpandToggle = document.getElementById("nativeExpandToggle");
     let player = null;
     let expandButton = null;
     let currentSelectionId = null;
@@ -79,14 +84,15 @@
     function setFullWindow(expanded){
       shell.classList.toggle("nilda-player-expanded", expanded);
       document.body.classList.toggle("nilda-video-expanded", expanded);
-      if(expandButton){
+      const activeExpandButton = expandButton || (nativeExpandToggle.hidden ? null : nativeExpandToggle);
+      if(activeExpandButton){
         const corners = expanded
           ? "M4 9h5V4M15 4v5h5M20 15h-5v5M9 20v-5H4"
           : "M9 4H4v5M20 9V4h-5M15 20h5v-5M4 15v5h5";
-        expandButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="${corners}"/></svg>`;
-        expandButton.title = expanded ? "Exit full window" : "Full window";
-        expandButton.setAttribute("aria-label", expandButton.title);
-        expandButton.setAttribute("aria-pressed", String(expanded));
+        activeExpandButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="${corners}"/></svg>`;
+        activeExpandButton.title = expanded ? "Exit full window" : "Full window";
+        activeExpandButton.setAttribute("aria-label", activeExpandButton.title);
+        activeExpandButton.setAttribute("aria-pressed", String(expanded));
       }
     }
 
@@ -121,18 +127,22 @@
       heading.textContent = safeTitle || "Instruction Video";
       document.title = `${heading.textContent} — NILDA™`;
 
-      if(!player){
-        showMessage("The video player could not load. Please refresh this page and try again.");
-        return;
-      }
-
       currentSelectionId = selection.id || null;
       try{ sessionStorage.setItem(sessionKey, JSON.stringify(selection)); }catch{}
-      player.pause();
       message.hidden = true;
-      player.src({src:source.href, type:videoType(source.href)});
-      // Browsers that disallow autoplay retain the large Video.js play button.
-      const playing = player.play();
+      player?.pause();
+      if(player){
+        player.src({src:source.href, type:videoType(source.href)});
+      }else{
+        // Keep the instruction available when the Video.js CDN is temporarily unavailable.
+        mediaElement.controls = true;
+        mediaElement.src = source.href;
+        mediaElement.load();
+        nativeExpandToggle.hidden = false;
+        setFullWindow(false);
+      }
+      // Browsers that disallow autoplay retain the play control.
+      const playing = player ? player.play() : mediaElement.play();
       if(playing && typeof playing.catch === "function") playing.catch(() => {});
     }
 
@@ -161,16 +171,26 @@
       player.el().querySelector(".vjs-control-bar").appendChild(expandButton);
       setFullWindow(false);
 
-      shell.addEventListener("dblclick", event => {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if(!event.target.closest(".vjs-control-bar")) toggleFullWindow();
-      }, true);
-
       player.on("error", () => {
         showMessage("This video could not be loaded. Please try again or choose another instruction video.");
       });
     }
+
+    nativeExpandToggle.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleFullWindow();
+    });
+
+    shell.addEventListener("dblclick", event => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if(!event.target.closest(".vjs-control-bar")) toggleFullWindow();
+    }, true);
+
+    mediaElement.addEventListener("error", () => {
+      if(!player) showMessage("This video could not be loaded. Please try again or choose another instruction video.");
+    });
 
     // Only the same-origin instruction page can select a video for this window.
     window.addEventListener("message", event => {
@@ -223,13 +243,14 @@
 
     document.getElementById("backToInstructions").addEventListener("click", event => {
       player?.pause();
+      mediaElement.pause();
       if(window.opener && !window.opener.closed){
         event.preventDefault();
         window.opener.focus();
         window.close();
       }
     });
-    window.addEventListener("pagehide", () => player?.pause());
+    window.addEventListener("pagehide", () => { player?.pause(); mediaElement.pause(); });
   </script>
 </body>
 </html>
